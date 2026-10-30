@@ -40,10 +40,12 @@ class AnalyticsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Analisis & Peringatan', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('Analisis & Peringatan',
+            style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 16),
+        padding:
+            EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -56,13 +58,16 @@ class AnalyticsScreen extends ConsumerWidget {
                   children: [
                     Text(
                       'Perbandingan Antar Bulan (Month-to-Month)',
-                      style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                      style: theme.textTheme.titleSmall
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 16),
-                    _buildMonthComparisonBarChart(availableMonths, allOverviews),
+                    _buildMonthComparisonBarChart(
+                        availableMonths, allOverviews),
                     const SizedBox(height: 16),
                     // Comparison Table
-                    _buildComparisonTable(context, availableMonths, allOverviews),
+                    _buildComparisonTable(
+                        context, availableMonths, allOverviews),
                   ],
                 ),
               ),
@@ -78,7 +83,8 @@ class AnalyticsScreen extends ConsumerWidget {
                   children: [
                     Text(
                       '5 Pengeluaran Terbesar Bulan Ini',
-                      style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                      style: theme.textTheme.titleSmall
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const Divider(),
                     ...topItems.map((item) {
@@ -93,18 +99,21 @@ class AnalyticsScreen extends ConsumerWidget {
                               flex: 3,
                               child: Text(
                                 item.name,
-                                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 13),
                               ),
                             ),
                             Expanded(
                               flex: 2,
                               child: Text(
                                 CurrencyFormatter.formatRupiah(item.actual),
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 13),
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 2),
                               decoration: BoxDecoration(
                                 color: Colors.teal.withOpacity(0.12),
                                 borderRadius: BorderRadius.circular(6),
@@ -137,11 +146,13 @@ class AnalyticsScreen extends ConsumerWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.shield_outlined, color: AppTheme.primaryGreen),
+                        const Icon(Icons.shield_outlined,
+                            color: AppTheme.primaryGreen),
                         const SizedBox(width: 8),
                         Text(
                           'Pemeriksaan Kualitas & Anomali Data',
-                          style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                          style: theme.textTheme.titleSmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -151,7 +162,8 @@ class AnalyticsScreen extends ConsumerWidget {
                         padding: EdgeInsets.symmetric(vertical: 8.0),
                         child: Row(
                           children: [
-                            Icon(Icons.check_circle, color: AppTheme.statusNormal, size: 20),
+                            Icon(Icons.check_circle,
+                                color: AppTheme.statusNormal, size: 20),
                             SizedBox(width: 8),
                             Text('Semua pos anggaran dalam batas aman.'),
                           ],
@@ -161,18 +173,24 @@ class AnalyticsScreen extends ConsumerWidget {
                       if (overBudgetItems.isNotEmpty) ...[
                         Text(
                           'Over Budget (${overBudgetItems.length}):',
-                          style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 6),
                         ...overBudgetItems.map((e) => Padding(
                               padding: const EdgeInsets.only(bottom: 4.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('• ${e.name}', style: const TextStyle(fontSize: 13)),
+                                  Text('• ${e.name}',
+                                      style: const TextStyle(fontSize: 13)),
                                   Text(
                                     '${CurrencyFormatter.formatRupiah(e.actual)} (Defisit: ${CurrencyFormatter.formatRupiah(e.remaining.abs())})',
-                                    style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 12),
+                                    style: const TextStyle(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
                                   ),
                                 ],
                               ),
@@ -182,18 +200,25 @@ class AnalyticsScreen extends ConsumerWidget {
                       if (nearLimitItems.isNotEmpty) ...[
                         Text(
                           'Mendekati Batas (${nearLimitItems.length}):',
-                          style: const TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 6),
                         ...nearLimitItems.map((e) => Padding(
                               padding: const EdgeInsets.only(bottom: 4.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('• ${e.name}', style: const TextStyle(fontSize: 13)),
+                                  Text('• ${e.name}',
+                                      style: const TextStyle(fontSize: 13)),
                                   Text(
                                     '${(e.utilizationRate * 100).toStringAsFixed(1)}% terpakai',
-                                    style: const TextStyle(color: Colors.orange, fontWeight: FontWeight.bold, fontSize: 12),
+                                    style: const TextStyle(
+                                        color: Colors.orange,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
                                   ),
                                 ],
                               ),
@@ -206,12 +231,15 @@ class AnalyticsScreen extends ConsumerWidget {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: isDark ? Colors.grey.shade800 : Colors.grey.shade100,
+                          color: isDark
+                              ? Colors.grey.shade800
+                              : Colors.grey.shade100,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.info_outline, size: 16, color: Colors.blue),
+                            const Icon(Icons.info_outline,
+                                size: 16, color: Colors.blue),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
@@ -242,7 +270,8 @@ class AnalyticsScreen extends ConsumerWidget {
     final maxVal = months.fold(0.0, (m, mo) {
       final ov = overviews[mo.sheetName];
       if (ov == null) return m;
-      final high = ov.totalBudget > ov.totalActual ? ov.totalBudget : ov.totalActual;
+      final high =
+          ov.totalBudget > ov.totalActual ? ov.totalBudget : ov.totalActual;
       return high > m ? high : m;
     });
 
@@ -253,8 +282,10 @@ class AnalyticsScreen extends ConsumerWidget {
           alignment: BarChartAlignment.spaceAround,
           maxY: maxVal * 1.15,
           titlesData: FlTitlesData(
-            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            topTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
@@ -275,7 +306,8 @@ class AnalyticsScreen extends ConsumerWidget {
                       padding: const EdgeInsets.only(top: 4.0),
                       child: Text(
                         months[i].displayName.split(' ').first,
-                        style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 10, fontWeight: FontWeight.bold),
                       ),
                     );
                   }
@@ -287,7 +319,8 @@ class AnalyticsScreen extends ConsumerWidget {
           gridData: FlGridData(
             show: true,
             drawVerticalLine: false,
-            getDrawingHorizontalLine: (v) => FlLine(color: Colors.grey.withOpacity(0.15)),
+            getDrawingHorizontalLine: (v) =>
+                FlLine(color: Colors.grey.withOpacity(0.15)),
           ),
           borderData: FlBorderData(show: false),
           barGroups: List.generate(months.length, (i) {
@@ -302,13 +335,15 @@ class AnalyticsScreen extends ConsumerWidget {
                   toY: budget,
                   color: AppTheme.accentIndigo.withOpacity(0.7),
                   width: 12,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(4)),
                 ),
                 BarChartRodData(
                   toY: actual,
                   color: AppTheme.primaryGreen,
                   width: 12,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(4)),
                 ),
               ],
             );
@@ -327,20 +362,31 @@ class AnalyticsScreen extends ConsumerWidget {
       scrollDirection: Axis.horizontal,
       child: DataTable(
         columns: const [
-          DataColumn(label: Text('Bulan', style: TextStyle(fontWeight: FontWeight.bold))),
-          DataColumn(label: Text('Budget', style: TextStyle(fontWeight: FontWeight.bold))),
-          DataColumn(label: Text('Realisasi', style: TextStyle(fontWeight: FontWeight.bold))),
-          DataColumn(label: Text('Sisa', style: TextStyle(fontWeight: FontWeight.bold))),
+          DataColumn(
+              label:
+                  Text('Bulan', style: TextStyle(fontWeight: FontWeight.bold))),
+          DataColumn(
+              label: Text('Budget',
+                  style: TextStyle(fontWeight: FontWeight.bold))),
+          DataColumn(
+              label: Text('Realisasi',
+                  style: TextStyle(fontWeight: FontWeight.bold))),
+          DataColumn(
+              label:
+                  Text('Sisa', style: TextStyle(fontWeight: FontWeight.bold))),
         ],
         rows: months.map((m) {
           final ov = overviews[m.sheetName];
           return DataRow(
             cells: [
               DataCell(Text(m.displayName)),
-              DataCell(Text(CurrencyFormatter.formatRupiah(ov?.totalBudget, compact: true))),
-              DataCell(Text(CurrencyFormatter.formatRupiah(ov?.totalActual, compact: true))),
+              DataCell(Text(CurrencyFormatter.formatRupiah(ov?.totalBudget,
+                  compact: true))),
+              DataCell(Text(CurrencyFormatter.formatRupiah(ov?.totalActual,
+                  compact: true))),
               DataCell(Text(
-                CurrencyFormatter.formatRupiah(ov?.totalRemaining, compact: true),
+                CurrencyFormatter.formatRupiah(ov?.totalRemaining,
+                    compact: true),
                 style: TextStyle(
                   color: (ov?.totalRemaining ?? 0) < 0 ? Colors.red : null,
                   fontWeight: FontWeight.w600,
@@ -353,4 +399,3 @@ class AnalyticsScreen extends ConsumerWidget {
     );
   }
 }
-

@@ -64,7 +64,7 @@ def main():
         if not ok:
             print(f"Gagal upload budget_months: {res}")
             return
-        print(f"✓ Bulan {sname} tersimpan")
+        print(f"[OK] Bulan {sname} tersimpan")
 
         # 2. Income sources
         for inc in sheet.get("incomes", []):
@@ -75,7 +75,7 @@ def main():
                 "row_number": inc.get("row", 0)
             }
             post("income_sources", inc_record)
-        print(f"✓ {len(sheet.get('incomes', []))} Sumber pemasukan tersimpan")
+        print(f"[OK] {len(sheet.get('incomes', []))} Sumber pemasukan tersimpan")
 
         # 3. Budget items
         items_payload = []
@@ -95,7 +95,7 @@ def main():
             if not ok:
                 print(f"Gagal upload budget_items: {res}")
             else:
-                print(f"✓ {len(items_payload)} Pos anggaran tersimpan")
+                print(f"[OK] {len(items_payload)} Pos anggaran tersimpan")
 
         # 4. Daily expenses
         txs_payload = []
@@ -115,9 +115,9 @@ def main():
             for i in range(0, len(txs_payload), 50):
                 chunk = txs_payload[i:i+50]
                 post("daily_expenses", chunk)
-            print(f"✓ {len(txs_payload)} Transaksi tersimpan")
+            print(f"[OK] {len(txs_payload)} Transaksi tersimpan")
 
-    print("\n🎉 SEMUA DATA EXCEL BERHASIL DI-MIGRASI KE SUPABASE!")
+    print("\n[SUCCESS] SEMUA DATA EXCEL BERHASIL DI-MIGRASI KE SUPABASE!")
 
 if __name__ == "__main__":
     main()
