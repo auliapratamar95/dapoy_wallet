@@ -177,7 +177,8 @@ class _InfographicPieChartState extends State<InfographicPieChart>
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: isDark ? 0.4 : 0.12),
+                            color: Colors.black
+                                .withValues(alpha: isDark ? 0.4 : 0.12),
                             blurRadius: 16,
                             offset: const Offset(0, 4),
                           ),
@@ -193,7 +194,8 @@ class _InfographicPieChartState extends State<InfographicPieChart>
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 1.0,
-                                color: _getColor(selectedIndex, selectedItem.category),
+                                color: _getColor(
+                                    selectedIndex, selectedItem.category),
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -202,13 +204,18 @@ class _InfographicPieChartState extends State<InfographicPieChart>
                             FittedBox(
                               fit: BoxFit.scaleDown,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 6.0),
                                 child: Text(
-                                  CurrencyFormatter.formatRupiah(selectedItem.actual, compact: true),
+                                  CurrencyFormatter.formatRupiah(
+                                      selectedItem.actual,
+                                      compact: true),
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
-                                    color: isDark ? Colors.white : const Color(0xFF0F172A),
+                                    color: isDark
+                                        ? Colors.white
+                                        : const Color(0xFF0F172A),
                                   ),
                                 ),
                               ),
@@ -218,7 +225,9 @@ class _InfographicPieChartState extends State<InfographicPieChart>
                               style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.bold,
-                                color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                color: isDark
+                                    ? Colors.grey.shade400
+                                    : Colors.grey.shade600,
                               ),
                             ),
                           ] else ...[
@@ -228,20 +237,26 @@ class _InfographicPieChartState extends State<InfographicPieChart>
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 1.2,
-                                color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                color: isDark
+                                    ? Colors.grey.shade400
+                                    : Colors.grey.shade600,
                               ),
                             ),
                             const SizedBox(height: 2),
                             FittedBox(
                               fit: BoxFit.scaleDown,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 6.0),
                                 child: Text(
-                                  CurrencyFormatter.formatRupiah(totalSpent, compact: true),
+                                  CurrencyFormatter.formatRupiah(totalSpent,
+                                      compact: true),
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
-                                    color: isDark ? Colors.white : const Color(0xFF0F172A),
+                                    color: isDark
+                                        ? Colors.white
+                                        : const Color(0xFF0F172A),
                                   ),
                                 ),
                               ),
@@ -250,7 +265,9 @@ class _InfographicPieChartState extends State<InfographicPieChart>
                               'Pengeluaran',
                               style: TextStyle(
                                 fontSize: 10,
-                                color: isDark ? Colors.grey.shade500 : Colors.grey.shade500,
+                                color: isDark
+                                    ? Colors.grey.shade500
+                                    : Colors.grey.shade500,
                               ),
                             ),
                           ],
@@ -287,11 +304,14 @@ class _InfographicPieChartState extends State<InfographicPieChart>
                 },
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
                     color: isSelected
                         ? color.withValues(alpha: 0.18)
-                        : (isDark ? Colors.grey.shade800 : Colors.grey.shade100),
+                        : (isDark
+                            ? Colors.grey.shade800
+                            : Colors.grey.shade100),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: isSelected ? color : Colors.transparent,
@@ -307,14 +327,16 @@ class _InfographicPieChartState extends State<InfographicPieChart>
                           color: color,
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(_getIcon(s.category), size: 12, color: Colors.white),
+                        child: Icon(_getIcon(s.category),
+                            size: 12, color: Colors.white),
                       ),
                       const SizedBox(width: 6),
                       Text(
                         s.category,
                         style: TextStyle(
                           fontSize: 12,
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.w600,
                         ),
                       ),
                       const SizedBox(width: 4),
@@ -349,7 +371,9 @@ class _InfographicPieChartState extends State<InfographicPieChart>
 
     final innerRadius = chartSize * 0.22;
     final baseOuter = chartSize * 0.40;
-    final maxRatio = valid.fold<double>(0.0, (m, s) => s.actual > m ? s.actual : m) / totalSpent;
+    final maxRatio =
+        valid.fold<double>(0.0, (m, s) => s.actual > m ? s.actual : m) /
+            totalSpent;
 
     for (int i = 0; i < valid.length; i++) {
       final s = valid[i];
@@ -359,7 +383,8 @@ class _InfographicPieChartState extends State<InfographicPieChart>
 
       // Outer radius step calculation
       final extraRadius = ((ratio / (maxRatio > 0 ? maxRatio : 1)) * 24.0);
-      final outerRadius = baseOuter + extraRadius + (selectedIndex == i ? 10.0 : 0.0);
+      final outerRadius =
+          baseOuter + extraRadius + (selectedIndex == i ? 10.0 : 0.0);
       final labelRadius = innerRadius + (outerRadius - innerRadius) * 0.58;
 
       final lx = center + labelRadius * math.cos(midAngle);
@@ -437,7 +462,9 @@ class _InfographicPainter extends CustomPainter {
     final baseOuter = size.width * 0.40;
 
     double currentAngle = -math.pi / 2;
-    final maxRatio = summaries.fold<double>(0.0, (m, s) => s.actual > m ? s.actual : m) / totalSpent;
+    final maxRatio =
+        summaries.fold<double>(0.0, (m, s) => s.actual > m ? s.actual : m) /
+            totalSpent;
 
     final sliceSpacing = 0.035; // radians space between slices
 
@@ -445,7 +472,8 @@ class _InfographicPainter extends CustomPainter {
       final s = summaries[i];
       final ratio = s.actual / totalSpent;
       final fullSweep = ratio * 2 * math.pi;
-      final sweepAngle = (fullSweep - sliceSpacing).clamp(0.01, 2 * math.pi) * progress;
+      final sweepAngle =
+          (fullSweep - sliceSpacing).clamp(0.01, 2 * math.pi) * progress;
 
       final isSelected = selectedIndex == i;
       final color = getColor(i, s.category);
@@ -516,4 +544,3 @@ class _InfographicPainter extends CustomPainter {
         oldDelegate.totalSpent != totalSpent;
   }
 }
-
