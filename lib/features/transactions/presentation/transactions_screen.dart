@@ -111,9 +111,12 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
-                    color: isDark ? const Color(0xFF1E293B) : Colors.teal.shade50,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.teal.shade200),
+                    color: isDark ? const Color(0xFF260D15) : const Color(0xFFFFF1F2),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: AppTheme.dangerNeon.withValues(alpha: isDark ? 0.45 : 0.35),
+                      width: 1.5,
+                    ),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,24 +124,47 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Total Pengeluaran Tercatat',
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                          Row(
+                            children: [
+                              const Icon(Icons.local_fire_department, size: 14, color: AppTheme.dangerNeon),
+                              const SizedBox(width: 4),
+                              Text(
+                                'TOTAL DANA TERBAKAR / KELUAR',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 0.5,
+                                  color: AppTheme.dangerNeon,
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 2),
                           Text(
                             CurrencyFormatter.formatRupiah(totalFilteredSpending),
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: isDark ? Colors.white : Colors.teal.shade900,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w900,
+                              color: AppTheme.dangerNeon,
                             ),
                           ),
                         ],
                       ),
-                      Text(
-                        '${filtered.length} Transaksi',
-                        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: AppTheme.dangerNeon.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: AppTheme.dangerNeon.withValues(alpha: 0.3)),
+                        ),
+                        child: Text(
+                          '${filtered.length} Transaksi',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                            color: AppTheme.dangerNeon,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -222,26 +248,19 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                                 return ListTile(
                                   leading: CircleAvatar(
                                     radius: 16,
-                                    backgroundColor: Colors.teal.withOpacity(0.12),
-                                    child: Text(
-                                      '${tx.entryNumber}',
-                                      style: const TextStyle(
-                                        color: AppTheme.primaryGreen,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                      ),
-                                    ),
+                                    backgroundColor: AppTheme.dangerPrimary.withValues(alpha: 0.15),
+                                    child: const Icon(Icons.outbox_rounded, size: 16, color: AppTheme.dangerNeon),
                                   ),
                                   title: Text(
                                     tx.description,
-                                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                                   ),
                                   subtitle: tx.linkedBudgetItem != null
                                       ? Text(
                                           tx.linkedBudgetItem!,
                                           style: TextStyle(
                                             fontSize: 11,
-                                            color: Colors.grey.shade600,
+                                            color: Colors.grey.shade500,
                                           ),
                                         )
                                       : null,
@@ -249,10 +268,11 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        CurrencyFormatter.formatRupiah(tx.amount),
+                                        '- ${CurrencyFormatter.formatRupiah(tx.amount)}',
                                         style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w900,
                                           fontSize: 13,
+                                          color: AppTheme.dangerNeon,
                                         ),
                                       ),
                                       IconButton(

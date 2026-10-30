@@ -127,10 +127,36 @@ class _MainNavigationShellState extends ConsumerState<MainNavigationShell> {
                 child: FloatingActionButton(
                   elevation: 0,
                   onPressed: _openQuickAdd,
-                  backgroundColor: AppTheme.primaryGreen,
+                  backgroundColor: AppTheme.dangerNeon,
                   foregroundColor: Colors.white,
                   tooltip: 'Catat Pengeluaran',
                   child: const Icon(Icons.add),
+                ),
+              ),
+              trailing: Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 24.0),
+                    child: IconButton(
+                      tooltip: ref.watch(themeModeProvider) == ThemeMode.dark
+                          ? 'Ganti ke Mode Terang'
+                          : 'Ganti ke Mode Gelap',
+                      icon: Icon(
+                        ref.watch(themeModeProvider) == ThemeMode.dark
+                            ? Icons.light_mode_rounded
+                            : Icons.dark_mode_rounded,
+                        color: ref.watch(themeModeProvider) == ThemeMode.dark
+                            ? Colors.amber
+                            : Colors.grey.shade700,
+                      ),
+                      onPressed: () {
+                        final current = ref.read(themeModeProvider);
+                        ref.read(themeModeProvider.notifier).state =
+                            current == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+                      },
+                    ),
+                  ),
                 ),
               ),
               destinations: const [

@@ -155,21 +155,28 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
 
   Widget _buildBudgetItemCard(BuildContext context, BudgetItem item, MonthlyOverview overview) {
     final pct = item.budget > 0 ? (item.actual / item.budget) : 0.0;
-    Color statusColor = AppTheme.statusNormal;
-    if (item.status == BudgetStatus.overBudget) {
-      statusColor = AppTheme.statusOverBudget;
-    } else if (item.status == BudgetStatus.nearLimit) {
-      statusColor = AppTheme.statusNearLimit;
-    } else if (item.status == BudgetStatus.approachingLimit) {
-      statusColor = AppTheme.statusApproaching;
-    }
+    final dangerColor = AppTheme.getDangerColor(pct);
+    final dangerLabel = AppTheme.getDangerLabel(pct);
+    final isCritical = pct > 0.95;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Card(
-      margin: const EdgeInsets.only(bottom: 10),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: isCritical
+            ? AppTheme.dangerPrimary.withValues(alpha: isDark ? 0.16 : 0.06)
+            : (isDark ? const Color(0xFF131B2E) : Colors.white),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isCritical
+              ? AppTheme.dangerNeon.withValues(alpha: 0.6)
+              : (isDark ? const Color(0xFF1E293B) : Colors.grey.shade200),
+          width: isCritical ? 1.5 : 1.0,
+        ),
+      ),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () {
-          // Open detail
           final related = overview.transactions
               .where((t) => t.linkedBudgetItem == item.name)
               .toList();
@@ -201,20 +208,41 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: AppTheme.getCategoryColor(item.category).withOpacity(0.12),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      item.category,
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: AppTheme.getCategoryColor(item.category),
-                        fontWeight: FontWeight.w600,
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: dangerColor.withValues(alpha: 0.16),
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(color: dangerColor.withValues(alpha: 0.4)),
+                        ),
+                        child: Text(
+                          dangerLabel,
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: dangerColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                    ),
+                      const SizedBox(width: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: AppTheme.getCategoryColor(item.category).withValues(alpha: 0.14),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          item.category,
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: AppTheme.getCategoryColor(item.category),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -223,11 +251,15 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _colText('Anggaran', CurrencyFormatter.formatRupiah(item.budget)),
-                  _colText('Realisasi', CurrencyFormatter.formatRupiah(item.actual)),
                   _colText(
-                    'Sisa',
-                    CurrencyFormatter.formatRupiah(item.remaining),
-                    color: item.remaining < 0 ? Colors.red : null,
+                    'Realisasi',
+                    CurrencyFormatter.formatRupiah(item.actual),
+                    color: isCritical ? AppTheme.dangerNeon : null,
+                  ),
+                  _colText(
+                    item.remaining < 0 ? 'DEFISIT' : 'Sisa',
+                    CurrencyFormatter.formatRupiah(item.remaining.abs()),
+                    color: item.remaining < 0 ? AppTheme.dangerNeon : AppTheme.safeGreen,
                   ),
                 ],
               ),
@@ -239,8 +271,8 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
                       borderRadius: BorderRadius.circular(4),
                       child: LinearProgressIndicator(
                         value: pct.clamp(0.0, 1.0),
-                        backgroundColor: Colors.grey.withOpacity(0.15),
-                        valueColor: AlwaysStoppedAnimation<Color>(statusColor),
+                        backgroundColor: isDark ? Colors.grey.shade800 : Colors.grey.shade200,
+                        valueColor: AlwaysStoppedAnimation<Color>(dangerColor),
                         minHeight: 6,
                       ),
                     ),
@@ -251,7 +283,7 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
-                      color: statusColor,
+                      color: dangerColor,
                     ),
                   ),
                 ],

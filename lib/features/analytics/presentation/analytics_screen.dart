@@ -333,17 +333,17 @@ class AnalyticsScreen extends ConsumerWidget {
               barRods: [
                 BarChartRodData(
                   toY: budget,
-                  color: AppTheme.accentIndigo.withOpacity(0.7),
-                  width: 12,
+                  color: AppTheme.safeCyan.withValues(alpha: 0.7),
+                  width: 14,
                   borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(4)),
+                      const BorderRadius.vertical(top: Radius.circular(6)),
                 ),
                 BarChartRodData(
                   toY: actual,
-                  color: AppTheme.primaryGreen,
-                  width: 12,
+                  color: AppTheme.dangerNeon,
+                  width: 14,
                   borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(4)),
+                      const BorderRadius.vertical(top: Radius.circular(6)),
                 ),
               ],
             );

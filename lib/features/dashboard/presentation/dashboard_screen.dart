@@ -67,7 +67,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     final screenType = ResponsiveLayout.getDeviceType(context);
     final horizontalPadding = ResponsiveLayout.horizontalPadding(context);
 
-    // Over-budget or near limit items
+    // Over-budget or near limit items (Danger items)
     final alertItems = overview.budgetItems.where((i) =>
         i.status == BudgetStatus.overBudget || i.status == BudgetStatus.nearLimit).toList();
 
@@ -76,36 +76,47 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Dapoy Wallet',
-              style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+            Row(
+              children: [
+                const Icon(Icons.account_balance_wallet_rounded, size: 20, color: AppTheme.dangerNeon),
+                const SizedBox(width: 8),
+                Text(
+                  'Dapoy Wallet',
+                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
+                ),
+              ],
             ),
             Text(
               overview.title,
-              style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                fontSize: 11,
+              ),
             ),
           ],
         ),
         actions: [
           // Month Selector
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
-              color: isDark ? Colors.grey.shade800 : Colors.grey.shade100,
+              color: isDark ? const Color(0xFF1E293B) : Colors.grey.shade100,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.shade300),
+              border: Border.all(
+                color: isDark ? const Color(0xFF334155) : Colors.grey.shade300,
+              ),
             ),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<MonthIdentifier>(
                 value: budgetState.selectedMonth,
-                icon: const Icon(Icons.keyboard_arrow_down, size: 20),
+                icon: const Icon(Icons.keyboard_arrow_down, size: 18),
                 items: budgetState.availableMonths.map((m) {
                   return DropdownMenuItem(
                     value: m,
                     child: Text(
                       m.displayName,
-                      style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                     ),
                   );
                 }).toList(),
@@ -117,13 +128,92 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
             ),
           ),
-          IconButton(
-            tooltip: isDark ? 'Mode Terang' : 'Mode Gelap',
-            icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
-            onPressed: () {
-              ref.read(themeModeProvider.notifier).state =
-                  isDark ? ThemeMode.light : ThemeMode.dark;
-            },
+
+          // Prominent LIGHT / DARK Mode Switcher Pill
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              color: isDark ? const Color(0xFF1E293B) : Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: isDark ? const Color(0xFF334155) : Colors.grey.shade300,
+              ),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                InkWell(
+                  onTap: () => ref.read(themeModeProvider.notifier).state = ThemeMode.light,
+                  borderRadius: BorderRadius.circular(16),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: !isDark ? Colors.white : Colors.transparent,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: !isDark
+                          ? [const BoxShadow(color: Colors.black12, blurRadius: 4)]
+                          : null,
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.light_mode_rounded,
+                          size: 13,
+                          color: !isDark ? Colors.amber.shade700 : Colors.grey,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          'LIGHT',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: !isDark ? FontWeight.bold : FontWeight.w500,
+                            color: !isDark ? Colors.black87 : Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () => ref.read(themeModeProvider.notifier).state = ThemeMode.dark,
+                  borderRadius: BorderRadius.circular(16),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: isDark ? AppTheme.dangerPrimary : Colors.transparent,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: isDark
+                          ? [
+                              BoxShadow(
+                                color: AppTheme.dangerPrimary.withValues(alpha: 0.4),
+                                blurRadius: 6,
+                              ),
+                            ]
+                          : null,
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.dark_mode_rounded,
+                          size: 13,
+                          color: isDark ? Colors.white : Colors.grey,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          'DARK',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: isDark ? FontWeight.bold : FontWeight.w500,
+                            color: isDark ? Colors.white : Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -134,17 +224,17 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Secondary Status Banner (Bank & Reconciliation)
+              // Secondary Status Banner (Bank & Discrepancy)
               _buildStatusBanner(context, overview, isDark),
               const SizedBox(height: 16),
 
-              // KPI Cards Grid
+              // KPI Cards with Dangerous Alert Hierarchy
               _buildKpiGrid(context, overview, screenType),
               const SizedBox(height: 20),
 
-              // Alerts if any items are over-budget
+              // Critical Alerts Banner (Psychological Emergency Notice)
               if (alertItems.isNotEmpty) ...[
-                _buildAlertBanner(context, alertItems),
+                _buildAlertBanner(context, alertItems, isDark),
                 const SizedBox(height: 20),
               ],
 
@@ -154,7 +244,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 const SizedBox(height: 16),
                 _buildSpendingTrendCard(context, overview),
                 const SizedBox(height: 16),
-                _buildCategoryProgressList(context, overview),
+                _buildCategoryProgressList(context, overview, isDark),
               ] else ...[
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,7 +262,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     const SizedBox(width: 16),
                     Expanded(
                       flex: 6,
-                      child: _buildCategoryProgressList(context, overview),
+                      child: _buildCategoryProgressList(context, overview, isDark),
                     ),
                   ],
                 ),
@@ -195,9 +285,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1E293B) : Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.withOpacity(0.2)),
+        color: isDark ? const Color(0xFF131B2E) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isDark ? const Color(0xFF1E293B) : Colors.grey.shade200,
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,13 +300,13 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 width: 8,
                 height: 8,
                 decoration: const BoxDecoration(
-                  color: AppTheme.statusNormal,
+                  color: AppTheme.safeGreen,
                   shape: BoxShape.circle,
                 ),
               ),
               const SizedBox(width: 8),
               Text(
-                'Tersinkronisasi',
+                'Supabase Cloud Synced',
                 style: theme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
             ],
@@ -222,20 +314,27 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           if (overview.bankBalance != null)
             Row(
               children: [
-                Icon(Icons.account_balance, size: 16, color: Colors.grey.shade600),
+                Icon(Icons.account_balance, size: 15, color: Colors.grey.shade500),
                 const SizedBox(width: 6),
                 Text(
                   'Saldo: ${CurrencyFormatter.formatRupiah(overview.bankBalance, compact: true)}',
-                  style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
+                  style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700),
                 ),
                 if (overview.discrepancy != null && overview.discrepancy!.abs() > 1.0) ...[
-                  const SizedBox(width: 12),
-                  Text(
-                    'Selisih: ${CurrencyFormatter.formatRupiah(overview.discrepancy, compact: true)}',
-                    style: TextStyle(
-                      color: Colors.red.shade600,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
+                  const SizedBox(width: 10),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: AppTheme.dangerPrimary.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      'Selisih: ${CurrencyFormatter.formatRupiah(overview.discrepancy, compact: true)}',
+                      style: const TextStyle(
+                        color: AppTheme.dangerNeon,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 11,
+                      ),
                     ),
                   ),
                 ],
@@ -255,31 +354,32 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       KpiCard(
         title: 'Total Pemasukan',
         amount: overview.totalIncome,
-        icon: Icons.arrow_downward,
-        iconColor: AppTheme.statusNormal,
+        icon: Icons.south_west_rounded,
+        iconColor: AppTheme.safeGreen,
         subtitle: '${overview.incomes.length} Sumber Pendapatan',
       ),
       KpiCard(
-        title: 'Total Budget',
+        title: 'Batas Anggaran',
         amount: overview.totalBudget,
-        icon: Icons.account_balance_wallet,
-        iconColor: AppTheme.accentIndigo,
+        icon: Icons.security_rounded,
+        iconColor: AppTheme.safeCyan,
         subtitle: '${overview.budgetItems.length} Alokasi Pos Anggaran',
       ),
       KpiCard(
-        title: 'Total Pengeluaran',
+        title: 'TOTAL PENGELUARAN',
         amount: overview.totalActual,
-        icon: Icons.arrow_upward,
-        iconColor: AppTheme.statusApproaching,
-        subtitle: '${(overview.totalActual / (overview.totalBudget > 0 ? overview.totalBudget : 1) * 100).toStringAsFixed(1)}% dari Anggaran',
+        icon: Icons.local_fire_department,
+        iconColor: AppTheme.dangerNeon,
+        isExpense: true, // TRIGGERS DANGER PSYCHOLOGICAL ALERT
+        subtitle: '${(overview.totalActual / (overview.totalBudget > 0 ? overview.totalBudget : 1) * 100).toStringAsFixed(1)}% Terbakar / Terpakai',
       ),
       KpiCard(
-        title: 'Sisa Anggaran',
+        title: 'Sisa Dana Bertahan',
         amount: overview.totalRemaining,
-        icon: Icons.savings,
-        iconColor: overview.totalRemaining < 0 ? Colors.red : AppTheme.primaryLight,
+        icon: Icons.savings_rounded,
+        iconColor: overview.totalRemaining < 0 ? AppTheme.dangerNeon : AppTheme.safeGreen,
         isNegativeAlert: true,
-        subtitle: overview.totalRemaining >= 0 ? 'Tersedia' : 'Over Budget!',
+        subtitle: overview.totalRemaining >= 0 ? '🛡️ Aman Terkendali' : '🚨 OVER BUDGET!',
       ),
     ];
 
@@ -288,7 +388,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
-        childAspectRatio: 1.35,
+        childAspectRatio: 1.30,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         children: cards,
@@ -298,7 +398,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 4,
-        childAspectRatio: 1.5,
+        childAspectRatio: 1.45,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
         children: cards,
@@ -306,31 +406,82 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     }
   }
 
-  Widget _buildAlertBanner(BuildContext context, List<BudgetItem> alertItems) {
+  Widget _buildAlertBanner(BuildContext context, List<BudgetItem> alertItems, bool isDark) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.red.shade50,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.red.shade200),
+        color: isDark ? const Color(0xFF260D15) : const Color(0xFFFFF1F2),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppTheme.dangerNeon.withValues(alpha: 0.6), width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: AppTheme.dangerNeon.withValues(alpha: isDark ? 0.2 : 0.08),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.warning_amber_rounded, color: Colors.red, size: 24),
-          const SizedBox(width: 10),
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: AppTheme.dangerNeon.withValues(alpha: 0.15),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(Icons.crisis_alert_rounded, color: AppTheme.dangerNeon, size: 22),
+          ),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Perhatian: ${alertItems.length} Pos Anggaran Melebihi / Menjelang Batas',
-                  style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                const Text(
+                  '🚨 PERINGATAN DISIPLIN: POS ANGGARAN KRITIS!',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    color: AppTheme.dangerNeon,
+                    letterSpacing: 0.5,
+                    fontSize: 12,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  alertItems.map((e) => '${e.name} (${(e.utilizationRate * 100).toStringAsFixed(0)}%)').join(', '),
-                  style: TextStyle(color: Colors.red.shade900, fontSize: 12),
+                  'Rem pengeluaran Anda segera! ${alertItems.length} pos anggaran telah menembus batas kewajaran:',
+                  style: TextStyle(
+                    color: isDark ? Colors.grey.shade300 : const Color(0xFF881337),
+                    fontSize: 11,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 4,
+                  children: alertItems.map((e) {
+                    final isOver = e.status == BudgetStatus.overBudget;
+                    return Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: isOver
+                            ? AppTheme.dangerNeon.withValues(alpha: 0.2)
+                            : AppTheme.warningAmber.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(
+                          color: isOver ? AppTheme.dangerNeon : AppTheme.warningAmber,
+                          width: 1,
+                        ),
+                      ),
+                      child: Text(
+                        '${e.name}: ${(e.utilizationRate * 100).toStringAsFixed(0)}%',
+                        style: TextStyle(
+                          color: isOver ? AppTheme.dangerNeon : AppTheme.warningAmber,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11,
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 ),
               ],
             ),
@@ -368,7 +519,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 IconButton(
                   icon: Icon(
                     _useInfographic ? Icons.pie_chart_rounded : Icons.donut_large_rounded,
-                    color: AppTheme.primaryGreen,
+                    color: AppTheme.dangerNeon,
                   ),
                   tooltip: _useInfographic ? 'Ganti ke Donut Standar' : 'Ganti ke Infografis Modern',
                   onPressed: () => setState(() => _useInfographic = !_useInfographic),
@@ -393,17 +544,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Tren Pengeluaran Harian',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                const Icon(Icons.bar_chart, size: 20, color: Colors.grey),
-              ],
-            ),
-            const SizedBox(height: 16),
             SpendingTrendChart(transactions: overview.transactions),
           ],
         ),
@@ -411,7 +551,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  Widget _buildCategoryProgressList(BuildContext context, MonthlyOverview overview) {
+  Widget _buildCategoryProgressList(
+    BuildContext context,
+    MonthlyOverview overview,
+    bool isDark,
+  ) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -421,60 +565,140 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Realisasi per Kategori',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                Row(
+                  children: [
+                    const Icon(Icons.speed_rounded, size: 18, color: AppTheme.dangerFlame),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Radar Realisasi Kategori',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
                 if (widget.onNavigateToBudget != null)
                   TextButton(
                     onPressed: widget.onNavigateToBudget,
-                    child: const Text('Lihat Detail', style: TextStyle(fontSize: 12)),
+                    child: const Text('Semua Pos Anggaran', style: TextStyle(fontSize: 12)),
                   ),
               ],
             ),
             const Divider(),
             ...overview.categorySummaries.map((cat) {
               final pct = cat.budget > 0 ? (cat.actual / cat.budget) : 0.0;
-              Color progressColor = AppTheme.statusNormal;
-              if (pct > 1.0) {
-                progressColor = AppTheme.statusOverBudget;
-              } else if (pct >= 0.95) {
-                progressColor = AppTheme.statusNearLimit;
-              } else if (pct >= 0.75) {
-                progressColor = AppTheme.statusApproaching;
-              }
+              final dangerColor = AppTheme.getDangerColor(pct);
+              final dangerLabel = AppTheme.getDangerLabel(pct);
+              final isHighDanger = pct > 0.95;
 
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+              return Container(
+                margin: const EdgeInsets.symmetric(vertical: 6.0),
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: isHighDanger
+                      ? AppTheme.dangerPrimary.withValues(alpha: isDark ? 0.16 : 0.08)
+                      : (isDark ? Colors.white.withValues(alpha: 0.02) : Colors.grey.shade50),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: isHighDanger
+                        ? AppTheme.dangerNeon.withValues(alpha: 0.5)
+                        : (isDark ? Colors.grey.shade800 : Colors.grey.shade200),
+                    width: isHighDanger ? 1.4 : 1.0,
+                  ),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          cat.category,
-                          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+                        Row(
+                          children: [
+                            Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                color: dangerColor,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              cat.category,
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ],
                         ),
-                        Text(
-                          '${CurrencyFormatter.formatRupiah(cat.actual)} / ${CurrencyFormatter.formatRupiah(cat.budget, compact: true)}',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: progressColor,
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: dangerColor.withValues(alpha: 0.18),
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: dangerColor.withValues(alpha: 0.4)),
+                          ),
+                          child: Text(
+                            dangerLabel,
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: dangerColor,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 8),
+
+                    // Dangerous Capsule Progress Gauge
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: LinearProgressIndicator(
-                        value: pct.clamp(0.0, 1.0),
-                        backgroundColor: Colors.grey.withOpacity(0.15),
-                        valueColor: AlwaysStoppedAnimation<Color>(progressColor),
-                        minHeight: 8,
+                      borderRadius: BorderRadius.circular(6),
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 10,
+                            color: isDark ? Colors.grey.shade800 : Colors.grey.shade200,
+                          ),
+                          FractionallySizedBox(
+                            widthFactor: pct.clamp(0.0, 1.0),
+                            child: Container(
+                              height: 10,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    pct > 0.95
+                                        ? AppTheme.dangerFlame
+                                        : AppTheme.safeGreen,
+                                    dangerColor,
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
+                    const SizedBox(height: 6),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Terpakai: ${CurrencyFormatter.formatRupiah(cat.actual)}',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: isHighDanger ? AppTheme.dangerNeon : null,
+                          ),
+                        ),
+                        Text(
+                          cat.remaining >= 0
+                              ? 'Sisa: ${CurrencyFormatter.formatRupiah(cat.remaining)} (${(pct * 100).toStringAsFixed(0)}%)'
+                              : 'DEFISIT: ${CurrencyFormatter.formatRupiah(cat.remaining.abs())} (${(pct * 100).toStringAsFixed(0)}%)',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: cat.remaining < 0 ? AppTheme.dangerNeon : Colors.grey.shade500,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -498,14 +722,20 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Transaksi Terakhir',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                const Row(
+                  children: [
+                    Icon(Icons.history, size: 18, color: Colors.grey),
+                    SizedBox(width: 6),
+                    Text(
+                      'Log Pengeluaran Terbaru',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    ),
+                  ],
                 ),
                 if (widget.onNavigateToTransactions != null)
                   TextButton(
                     onPressed: widget.onNavigateToTransactions,
-                    child: const Text('Semua Transaksi', style: TextStyle(fontSize: 12)),
+                    child: const Text('Semua Log Transaksi', style: TextStyle(fontSize: 12)),
                   ),
               ],
             ),
@@ -529,10 +759,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     leading: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Colors.teal.shade50,
+                        color: AppTheme.dangerPrimary.withValues(alpha: 0.12),
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(Icons.receipt_long, size: 18, color: Colors.teal.shade700),
+                      child: const Icon(Icons.outbox_rounded, size: 18, color: AppTheme.dangerNeon),
                     ),
                     title: Text(tx.description, style: const TextStyle(fontWeight: FontWeight.w600)),
                     subtitle: Text(
@@ -541,7 +771,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     ),
                     trailing: Text(
                       CurrencyFormatter.formatRupiah(tx.amount),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w900,
+                        color: AppTheme.dangerNeon,
+                      ),
                     ),
                   );
                 },
