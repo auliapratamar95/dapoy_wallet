@@ -76,29 +76,47 @@ class MonthIdentifier implements Comparable<MonthIdentifier> {
 }
 
 class IncomeSource {
+  final String id;
   final String source;
   final double amount;
   final int row;
 
   const IncomeSource({
+    this.id = '',
     required this.source,
     required this.amount,
-    required this.row,
+    this.row = 0,
   });
 
   factory IncomeSource.fromJson(Map<String, dynamic> json) {
     return IncomeSource(
+      id: json['id'] as String? ?? '',
       source: json['source'] as String? ?? '',
       amount: (json['amount'] as num?)?.toDouble() ?? 0.0,
-      row: json['row'] as int? ?? 0,
+      row: json['row'] as int? ?? json['row_number'] as int? ?? 0,
     );
   }
 
   Map<String, dynamic> toJson() => {
+    'id': id,
     'source': source,
     'amount': amount,
     'row': row,
   };
+
+  IncomeSource copyWith({
+    String? id,
+    String? source,
+    double? amount,
+    int? row,
+  }) {
+    return IncomeSource(
+      id: id ?? this.id,
+      source: source ?? this.source,
+      amount: amount ?? this.amount,
+      row: row ?? this.row,
+    );
+  }
 }
 
 class BudgetItem {

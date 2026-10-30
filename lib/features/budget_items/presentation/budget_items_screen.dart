@@ -6,6 +6,7 @@ import '../../../../core/formatting/currency_formatter.dart';
 import '../../budget/data/budget_repository.dart';
 import '../../budget/domain/models.dart';
 import 'budget_item_detail_dialog.dart';
+import 'edit_budget_item_dialog.dart';
 
 class BudgetItemsScreen extends ConsumerStatefulWidget {
   final void Function(BudgetItem item)? onQuickAddForItem;
@@ -150,6 +151,20 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _openEditBudgetItem(context, null),
+        backgroundColor: AppTheme.safeGreen,
+        foregroundColor: Colors.white,
+        icon: const Icon(Icons.add),
+        label: const Text('Tambah Pos'),
+      ),
+    );
+  }
+
+  void _openEditBudgetItem(BuildContext context, BudgetItem? item) {
+    showDialog(
+      context: context,
+      builder: (ctx) => EditBudgetItemDialog(item: item),
     );
   }
 
@@ -191,6 +206,7 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
                   widget.onQuickAddForItem!(item);
                 }
               },
+              onEdit: () => _openEditBudgetItem(context, item),
             ),
           );
         },
@@ -241,6 +257,14 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
+                      ),
+                      const SizedBox(width: 4),
+                      IconButton(
+                        icon: const Icon(Icons.edit_outlined, size: 16),
+                        tooltip: 'Edit Pos Anggaran',
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        onPressed: () => _openEditBudgetItem(context, item),
                       ),
                     ],
                   ),

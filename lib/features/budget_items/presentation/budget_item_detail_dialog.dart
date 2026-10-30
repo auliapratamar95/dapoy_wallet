@@ -7,12 +7,14 @@ class BudgetItemDetailDialog extends StatelessWidget {
   final BudgetItem item;
   final List<DailyExpense> relatedTransactions;
   final VoidCallback onAddExpense;
+  final VoidCallback? onEdit;
 
   const BudgetItemDetailDialog({
     super.key,
     required this.item,
     required this.relatedTransactions,
     required this.onAddExpense,
+    this.onEdit,
   });
 
   @override
@@ -72,9 +74,22 @@ class BudgetItemDetailDialog extends StatelessWidget {
                       ],
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => Navigator.of(context).pop(),
+                  Row(
+                    children: [
+                      if (onEdit != null)
+                        IconButton(
+                          icon: const Icon(Icons.edit_outlined),
+                          tooltip: 'Edit Pos Anggaran',
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            onEdit!();
+                          },
+                        ),
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -177,15 +192,28 @@ class BudgetItemDetailDialog extends StatelessWidget {
                       child: const Text('Tutup'),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  if (onEdit != null) ...[
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          onEdit!();
+                        },
+                        icon: const Icon(Icons.edit_outlined, size: 16),
+                        label: const Text('Edit Pos'),
+                      ),
+                    ),
+                  ],
+                  const SizedBox(width: 8),
                   Expanded(
                     child: FilledButton.icon(
                       onPressed: () {
                         Navigator.of(context).pop();
                         onAddExpense();
                       },
-                      icon: const Icon(Icons.add),
-                      label: const Text('Tambah Pengeluaran'),
+                      icon: const Icon(Icons.add, size: 16),
+                      label: const Text('+ Transaksi'),
                     ),
                   ),
                 ],

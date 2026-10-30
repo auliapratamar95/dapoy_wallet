@@ -10,6 +10,8 @@ class KpiCard extends StatelessWidget {
   final String? subtitle;
   final bool isExpense;
   final bool isNegativeAlert;
+  final VoidCallback? onTap;
+  final bool showEditIndicator;
 
   const KpiCard({
     super.key,
@@ -20,6 +22,8 @@ class KpiCard extends StatelessWidget {
     this.subtitle,
     this.isExpense = false,
     this.isNegativeAlert = false,
+    this.onTap,
+    this.showEditIndicator = false,
   });
 
   @override
@@ -63,42 +67,61 @@ class KpiCard extends StatelessWidget {
               ]
             : null,
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (isExpense) ...[
-                  const Icon(Icons.local_fire_department, size: 13, color: AppTheme.dangerNeon),
-                  const SizedBox(width: 3),
-                ],
-                Expanded(
-                  child: Text(
-                    title,
-                    style: theme.textTheme.labelMedium?.copyWith(
-                      color: isExpense
-                          ? AppTheme.dangerNeon
-                          : (isDark ? Colors.grey.shade400 : Colors.grey.shade600),
-                      fontWeight: isExpense ? FontWeight.w800 : FontWeight.w600,
-                      fontSize: 11,
+                Row(
+                  children: [
+                    if (isExpense) ...[
+                      const Icon(Icons.local_fire_department, size: 13, color: AppTheme.dangerNeon),
+                      const SizedBox(width: 3),
+                    ],
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              title,
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                color: isExpense
+                                    ? AppTheme.dangerNeon
+                                    : (isDark ? Colors.grey.shade400 : Colors.grey.shade600),
+                                fontWeight: isExpense ? FontWeight.w800 : FontWeight.w600,
+                                fontSize: 11,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          if (showEditIndicator) ...[
+                            const SizedBox(width: 4),
+                            Icon(
+                              Icons.edit_outlined,
+                              size: 11,
+                              color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                            ),
+                          ],
+                        ],
+                      ),
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: iconColor.withValues(alpha: isDark ? 0.22 : 0.12),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Icon(icon, color: iconColor, size: 15),
+                    ),
+                  ],
                 ),
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: iconColor.withValues(alpha: isDark ? 0.22 : 0.12),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(icon, color: iconColor, size: 15),
-                ),
-              ],
-            ),
             const SizedBox(height: 6),
             FittedBox(
               fit: BoxFit.scaleDown,
@@ -145,6 +168,8 @@ class KpiCard extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),
+  ),
+);
   }
 }

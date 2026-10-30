@@ -82,6 +82,50 @@ void main() {
       );
       expect(itemOverBudget.status, BudgetStatus.overBudget);
     });
+
+    test('Budget editing recalculates remaining and status accurately', () {
+      final original = BudgetItem(
+        id: '1026_b_1',
+        name: 'Belanja',
+        budget: 500000,
+        category: 'Keluarga',
+        actual: 400000,
+        remaining: 100000,
+        row: 10,
+      );
+      expect(original.utilizationRate, 0.8);
+      expect(original.status, BudgetStatus.approachingLimit);
+
+      // User increases budget to 1.000.000
+      final edited = original.copyWith(
+        budget: 1000000,
+        remaining: 1000000 - original.actual,
+      );
+      expect(edited.budget, 1000000);
+      expect(edited.remaining, 600000);
+      expect(edited.utilizationRate, 0.4);
+      expect(edited.status, BudgetStatus.onTrack);
+    });
+  });
+
+  group('IncomeSource tests', () {
+    test('IncomeSource serialization and copyWith work seamlessly', () {
+      final inc = IncomeSource(id: 'inc_1', source: 'Gaji Abi', amount: 15000000);
+      expect(inc.id, 'inc_1');
+      expect(inc.source, 'Gaji Abi');
+      expect(inc.amount, 15000000);
+
+      final json = inc.toJson();
+      final fromJson = IncomeSource.fromJson(json);
+      expect(fromJson.id, 'inc_1');
+      expect(fromJson.source, 'Gaji Abi');
+      expect(fromJson.amount, 15000000);
+
+      final updated = inc.copyWith(amount: 18000000, source: 'Gaji Abi + Bonus');
+      expect(updated.amount, 18000000);
+      expect(updated.source, 'Gaji Abi + Bonus');
+      expect(updated.id, 'inc_1');
+    });
   });
 }
 

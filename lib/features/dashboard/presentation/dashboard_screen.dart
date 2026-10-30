@@ -10,6 +10,7 @@ import 'widgets/category_pie_chart.dart';
 import 'widgets/infographic_pie_chart.dart';
 import 'widgets/kpi_card.dart';
 import 'widgets/spending_trend_chart.dart';
+import '../../budget/presentation/manage_incomes_dialog.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   final VoidCallback? onNavigateToBudget;
@@ -381,6 +382,13 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
+  void _openManageIncomes(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => const ManageIncomesDialog(),
+    );
+  }
+
   Widget _buildKpiGrid(
     BuildContext context,
     MonthlyOverview overview,
@@ -392,14 +400,18 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         amount: overview.totalIncome,
         icon: Icons.south_west_rounded,
         iconColor: AppTheme.safeGreen,
-        subtitle: '${overview.incomes.length} Sumber Pendapatan',
+        subtitle: '${overview.incomes.length} Sumber • Ketuk edit',
+        onTap: () => _openManageIncomes(context),
+        showEditIndicator: true,
       ),
       KpiCard(
         title: 'Batas Anggaran',
         amount: overview.totalBudget,
         icon: Icons.security_rounded,
         iconColor: AppTheme.safeCyan,
-        subtitle: '${overview.budgetItems.length} Alokasi Pos Anggaran',
+        subtitle: '${overview.budgetItems.length} Pos • Kelola',
+        onTap: widget.onNavigateToBudget,
+        showEditIndicator: true,
       ),
       KpiCard(
         title: 'TOTAL PENGELUARAN',

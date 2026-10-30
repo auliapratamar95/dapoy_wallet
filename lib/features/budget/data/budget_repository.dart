@@ -88,6 +88,7 @@ class BudgetNotifier extends StateNotifier<BudgetState> {
             final txsRes = await client.from('daily_expenses').select().eq('month_id', sheetName).order('row_number');
 
             final incomes = incomesRes.map((e) => IncomeSource(
+              id: e['id']?.toString() ?? '',
               source: e['source'] as String? ?? '',
               amount: (e['amount'] as num?)?.toDouble() ?? 0.0,
               row: e['row_number'] as int? ?? 0,
@@ -394,6 +395,369 @@ class BudgetNotifier extends StateNotifier<BudgetState> {
     state = state.copyWith(
       currentOverview: updated,
       allOverviews: newOverviews,
+    );
+  }
+
+  // ==========================================
+  // INCOME MANAGEMENT (PEMASUKAN)
+  // ==========================================
+
+  Future<void> addIncomeSource({
+    required String source,
+    required double amount,
+  }) async {
+    final current = state.currentOverview;
+    if (current == null) return;
+
+    String id = '${current.month.sheetName}_inc_${DateTime.now().millisecondsSinceEpoch}';
+
+    final client = _supabase;
+    if (client != null && state.isUsingSupabase) {
+      try {
+        final res = await client.from('income_sources').insert({
+          'month_id': current.month.sheetName,
+          'source': source,
+          'amount': amount,
+          'row_number': current.incomes.length + 1,
+        }).select().maybeSingle();
+        if (res != null && res['id'] != null) {
+          id = res['id'].toString();
+        }
+      } catch (e) {
+        debugPrint('Supabase add income error: $e');
+      }
+    }
+
+    final newIncome = IncomeSource(
+      id: id,
+      source: source,
+      amount: amount,
+      row: current.incomes.length + 1,
+    );
+
+    final updatedIncomes = List<IncomeSource>.from(current.incomes)..add(newIncome);
+    final updated = _recalculateTotals(
+      current,
+      incomes: updatedIncomes,
+    );
+
+    final newOverviews = Map<String, MonthlyOverview>.from(state.allOverviews);
+    newOverviews[current.month.sheetName] = updated;
+
+    state = state.copyWith(
+      currentOverview: updated,
+      allOverviews: newOverviews,
+    );
+  }
+
+  Future<void> updateIncomeSource({
+    required String id,
+    required String source,
+    required double amount,
+    String? oldSource,
+  }) async {
+    final current = state.currentOverview;
+    if (current == null) return;
+
+    final updatedIncomes = current.incomes.map((i) {
+      if ((id.isNotEmpty && i.id == id) || (id.isEmpty && oldSource != null && i.source == oldSource)) {
+        return i.copyWith(
+          id: id.isNotEmpty ? id : i.id,
+          source: source,
+          amount: amount,
+        );
+      }
+      return i;
+    }).toList();
+
+    final updated = _recalculateTotals(
+      current,
+      incomes: updatedIncomes,
+    );
+
+    final client = _supabase;
+    if (client != null && state.isUsingSupabase) {
+      try {
+        if (id.isNotEmpty) {
+          await client.from('income_sources').update({
+            'source': source,
+            'amount': amount,
+          }).eq('id', id);
+        } else if (oldSource != null) {
+          await client.from('income_sources').update({
+            'source': source,
+            'amount': amount,
+          }).eq('month_id', current.month.sheetName).eq('source', oldSource);
+        }
+      } catch (e) {
+        debugPrint('Supabase update income error: $e');
+      }
+    }
+
+    final newOverviews = Map<String, MonthlyOverview>.from(state.allOverviews);
+    newOverviews[current.month.sheetName] = updated;
+
+    state = state.copyWith(
+      currentOverview: updated,
+      allOverviews: newOverviews,
+    );
+  }
+
+  Future<void> deleteIncomeSource({
+    required String id,
+    required String source,
+  }) async {
+    final current = state.currentOverview;
+    if (current == null) return;
+
+    final updatedIncomes = current.incomes.where((i) {
+      if (id.isNotEmpty) return i.id != id;
+      return i.source != source;
+    }).toList();
+
+    final updated = _recalculateTotals(
+      current,
+      incomes: updatedIncomes,
+    );
+
+    final client = _supabase;
+    if (client != null && state.isUsingSupabase) {
+      try {
+        if (id.isNotEmpty) {
+          await client.from('income_sources').delete().eq('id', id);
+        } else {
+          await client.from('income_sources').delete().eq('month_id', current.month.sheetName).eq('source', source);
+        }
+      } catch (e) {
+        debugPrint('Supabase delete income error: $e');
+      }
+    }
+
+    final newOverviews = Map<String, MonthlyOverview>.from(state.allOverviews);
+    newOverviews[current.month.sheetName] = updated;
+
+    state = state.copyWith(
+      currentOverview: updated,
+      allOverviews: newOverviews,
+    );
+  }
+
+  // ==========================================
+  // BUDGET MANAGEMENT (POS ANGGARAN)
+  // ==========================================
+
+  Future<void> addBudgetItem({
+    required String name,
+    required String category,
+    required double budget,
+  }) async {
+    final current = state.currentOverview;
+    if (current == null) return;
+
+    final newId = '${current.month.sheetName}_b_${DateTime.now().millisecondsSinceEpoch}';
+    final newItem = BudgetItem(
+      id: newId,
+      name: name,
+      category: category,
+      budget: budget,
+      actual: 0.0,
+      remaining: budget,
+      row: current.budgetItems.length + 1,
+    );
+
+    final updatedItems = List<BudgetItem>.from(current.budgetItems)..add(newItem);
+    final updated = _recalculateTotals(
+      current,
+      budgetItems: updatedItems,
+    );
+
+    final client = _supabase;
+    if (client != null && state.isUsingSupabase) {
+      try {
+        await client.from('budget_items').insert({
+          'id': newId,
+          'month_id': current.month.sheetName,
+          'name': name,
+          'category': category,
+          'budget': budget,
+          'actual': 0.0,
+          'remaining': budget,
+          'row_number': newItem.row,
+        });
+      } catch (e) {
+        debugPrint('Supabase add budget item error: $e');
+      }
+    }
+
+    final newOverviews = Map<String, MonthlyOverview>.from(state.allOverviews);
+    newOverviews[current.month.sheetName] = updated;
+
+    state = state.copyWith(
+      currentOverview: updated,
+      allOverviews: newOverviews,
+    );
+  }
+
+  Future<void> updateBudgetItem({
+    required String id,
+    required String name,
+    required String category,
+    required double budget,
+    String? oldName,
+  }) async {
+    final current = state.currentOverview;
+    if (current == null) return;
+
+    // Check if name changed; if so, update any transactions linked to oldName
+    var txs = current.transactions;
+    if (oldName != null && oldName.isNotEmpty && oldName != name) {
+      txs = txs.map((t) {
+        if (t.linkedBudgetItem == oldName) {
+          return t.copyWith(linkedBudgetItem: name);
+        }
+        return t;
+      }).toList();
+
+      final client = _supabase;
+      if (client != null && state.isUsingSupabase) {
+        try {
+          await client.from('daily_expenses').update({
+            'linked_budget_item': name,
+          }).eq('month_id', current.month.sheetName).eq('linked_budget_item', oldName);
+        } catch (e) {
+          debugPrint('Supabase rename tx error: $e');
+        }
+      }
+    }
+
+    final updatedItems = current.budgetItems.map((item) {
+      if (item.id == id) {
+        final actual = item.actual;
+        final remaining = budget - actual;
+        return item.copyWith(
+          name: name,
+          category: category,
+          budget: budget,
+          remaining: remaining,
+        );
+      }
+      return item;
+    }).toList();
+
+    final updated = _recalculateTotals(
+      current,
+      budgetItems: updatedItems,
+      transactions: txs,
+    );
+
+    final client = _supabase;
+    if (client != null && state.isUsingSupabase) {
+      try {
+        final matched = updated.budgetItems.firstWhere((b) => b.id == id);
+        await client.from('budget_items').update({
+          'name': name,
+          'category': category,
+          'budget': budget,
+          'remaining': matched.remaining,
+          'updated_at': DateTime.now().toIso8601String(),
+        }).eq('id', id);
+      } catch (e) {
+        debugPrint('Supabase update budget item error: $e');
+      }
+    }
+
+    final newOverviews = Map<String, MonthlyOverview>.from(state.allOverviews);
+    newOverviews[current.month.sheetName] = updated;
+
+    state = state.copyWith(
+      currentOverview: updated,
+      allOverviews: newOverviews,
+    );
+  }
+
+  Future<void> deleteBudgetItem(String id) async {
+    final current = state.currentOverview;
+    if (current == null) return;
+
+    final updatedItems = current.budgetItems.where((b) => b.id != id).toList();
+    final updated = _recalculateTotals(
+      current,
+      budgetItems: updatedItems,
+    );
+
+    final client = _supabase;
+    if (client != null && state.isUsingSupabase) {
+      try {
+        await client.from('budget_items').delete().eq('id', id);
+      } catch (e) {
+        debugPrint('Supabase delete budget item error: $e');
+      }
+    }
+
+    final newOverviews = Map<String, MonthlyOverview>.from(state.allOverviews);
+    newOverviews[current.month.sheetName] = updated;
+
+    state = state.copyWith(
+      currentOverview: updated,
+      allOverviews: newOverviews,
+    );
+  }
+
+  MonthlyOverview _recalculateTotals(
+    MonthlyOverview overview, {
+    List<IncomeSource>? incomes,
+    List<BudgetItem>? budgetItems,
+    List<DailyExpense>? transactions,
+  }) {
+    final finalIncomes = incomes ?? overview.incomes;
+    final finalTxs = transactions ?? overview.transactions;
+    var finalItems = budgetItems ?? overview.budgetItems;
+
+    // Recalculate spending per budget item from transactions
+    final Map<String, double> itemSpent = {};
+    for (final tx in finalTxs) {
+      if (tx.linkedBudgetItem != null && tx.linkedBudgetItem!.isNotEmpty) {
+        itemSpent[tx.linkedBudgetItem!] = (itemSpent[tx.linkedBudgetItem!] ?? 0.0) + tx.amount;
+      }
+    }
+
+    finalItems = finalItems.map((item) {
+      final actual = itemSpent.containsKey(item.name) ? itemSpent[item.name]! : item.actual;
+      final remaining = item.budget - actual;
+      return item.copyWith(actual: actual, remaining: remaining);
+    }).toList();
+
+    final Map<String, List<BudgetItem>> byCat = {};
+    for (final item in finalItems) {
+      byCat.putIfAbsent(item.category, () => []).add(item);
+    }
+
+    final categorySummaries = byCat.entries.map((entry) {
+      final b = entry.value.fold<double>(0.0, (s, i) => s + i.budget);
+      final a = entry.value.fold<double>(0.0, (s, i) => s + i.actual);
+      return CategorySummary(
+        category: entry.key,
+        budget: b,
+        actual: a,
+        remaining: b - a,
+      );
+    }).toList();
+
+    final totalIncome = finalIncomes.fold<double>(0.0, (s, i) => s + i.amount);
+    final totalBudget = finalItems.fold<double>(0.0, (s, b) => s + b.budget);
+    final totalActual = finalItems.fold<double>(0.0, (s, b) => s + b.actual);
+    final totalRemaining = totalBudget - totalActual;
+
+    return overview.copyWith(
+      incomes: finalIncomes,
+      budgetItems: finalItems,
+      categorySummaries: categorySummaries,
+      transactions: finalTxs,
+      totalIncome: totalIncome,
+      totalBudget: totalBudget,
+      totalActual: totalActual,
+      totalRemaining: totalRemaining,
+      lastUpdated: DateTime.now(),
     );
   }
 
