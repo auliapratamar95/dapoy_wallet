@@ -6,10 +6,11 @@ import '../../../../core/formatting/currency_formatter.dart';
 import '../../budget/data/budget_repository.dart';
 import '../../budget/domain/models.dart';
 import 'widgets/category_pie_chart.dart';
+import 'widgets/infographic_pie_chart.dart';
 import 'widgets/kpi_card.dart';
 import 'widgets/spending_trend_chart.dart';
 
-class DashboardScreen extends ConsumerWidget {
+class DashboardScreen extends ConsumerStatefulWidget {
   final VoidCallback? onNavigateToBudget;
   final VoidCallback? onNavigateToTransactions;
 
@@ -20,7 +21,14 @@ class DashboardScreen extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends ConsumerState<DashboardScreen> {
+  bool _useInfographic = true;
+
+  @override
+  Widget build(BuildContext context) {
     final budgetState = ref.watch(budgetProvider);
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
@@ -342,15 +350,36 @@ class DashboardScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Proporsi Pengeluaran Kategori',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Proporsi Pengeluaran Kategori',
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        _useInfographic ? 'Gaya Infografis (Tap sektor untuk detail)' : 'Gaya Donut Standar',
+                        style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+                      ),
+                    ],
+                  ),
                 ),
-                const Icon(Icons.pie_chart_outline, size: 20, color: Colors.grey),
+                IconButton(
+                  icon: Icon(
+                    _useInfographic ? Icons.pie_chart_rounded : Icons.donut_large_rounded,
+                    color: AppTheme.primaryGreen,
+                  ),
+                  tooltip: _useInfographic ? 'Ganti ke Donut Standar' : 'Ganti ke Infografis Modern',
+                  onPressed: () => setState(() => _useInfographic = !_useInfographic),
+                ),
               ],
             ),
             const SizedBox(height: 16),
-            CategoryPieChart(summaries: overview.categorySummaries),
+            if (_useInfographic)
+              Center(child: InfographicPieChart(summaries: overview.categorySummaries))
+            else
+              CategoryPieChart(summaries: overview.categorySummaries),
           ],
         ),
       ),
@@ -396,9 +425,9 @@ class DashboardScreen extends ConsumerWidget {
                   'Realisasi per Kategori',
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
                 ),
-                if (onNavigateToBudget != null)
+                if (widget.onNavigateToBudget != null)
                   TextButton(
-                    onPressed: onNavigateToBudget,
+                    onPressed: widget.onNavigateToBudget,
                     child: const Text('Lihat Detail', style: TextStyle(fontSize: 12)),
                   ),
               ],
@@ -473,9 +502,9 @@ class DashboardScreen extends ConsumerWidget {
                   'Transaksi Terakhir',
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
                 ),
-                if (onNavigateToTransactions != null)
+                if (widget.onNavigateToTransactions != null)
                   TextButton(
-                    onPressed: onNavigateToTransactions,
+                    onPressed: widget.onNavigateToTransactions,
                     child: const Text('Semua Transaksi', style: TextStyle(fontSize: 12)),
                   ),
               ],
