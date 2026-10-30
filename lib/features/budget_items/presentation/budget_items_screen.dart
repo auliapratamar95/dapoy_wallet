@@ -250,16 +250,22 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _colText('Anggaran', CurrencyFormatter.formatRupiah(item.budget)),
-                  _colText(
-                    'Realisasi',
-                    CurrencyFormatter.formatRupiah(item.actual),
-                    color: isCritical ? AppTheme.dangerNeon : null,
+                  Expanded(
+                    child: _colText('Anggaran', CurrencyFormatter.formatRupiah(item.budget, compact: true)),
                   ),
-                  _colText(
-                    item.remaining < 0 ? 'DEFISIT' : 'Sisa',
-                    CurrencyFormatter.formatRupiah(item.remaining.abs()),
-                    color: item.remaining < 0 ? AppTheme.dangerNeon : AppTheme.safeGreen,
+                  Expanded(
+                    child: _colText(
+                      'Realisasi',
+                      CurrencyFormatter.formatRupiah(item.actual, compact: true),
+                      color: isCritical ? AppTheme.dangerNeon : null,
+                    ),
+                  ),
+                  Expanded(
+                    child: _colText(
+                      item.remaining < 0 ? 'DEFISIT' : 'Sisa',
+                      CurrencyFormatter.formatRupiah(item.remaining.abs(), compact: true),
+                      color: item.remaining < 0 ? AppTheme.dangerNeon : AppTheme.safeGreen,
+                    ),
                   ),
                 ],
               ),
@@ -299,14 +305,18 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 11, color: Colors.grey)),
+        Text(label, style: const TextStyle(fontSize: 10, color: Colors.grey)),
         const SizedBox(height: 2),
-        Text(
-          value,
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 12,
-            color: color,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Text(
+            value,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+              color: color,
+            ),
           ),
         ),
       ],

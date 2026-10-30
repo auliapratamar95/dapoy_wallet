@@ -253,26 +253,37 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                                   ),
                                   title: Text(
                                     tx.description,
-                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                   subtitle: tx.linkedBudgetItem != null
                                       ? Text(
                                           tx.linkedBudgetItem!,
                                           style: TextStyle(
-                                            fontSize: 11,
+                                            fontSize: 10,
                                             color: Colors.grey.shade500,
                                           ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         )
                                       : null,
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Text(
-                                        '- ${CurrencyFormatter.formatRupiah(tx.amount)}',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 13,
-                                          color: AppTheme.dangerNeon,
+                                      ConstrainedBox(
+                                        constraints: const BoxConstraints(maxWidth: 105),
+                                        child: FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          alignment: Alignment.centerRight,
+                                          child: Text(
+                                            '- ${CurrencyFormatter.formatRupiah(tx.amount)}',
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w900,
+                                              fontSize: 13,
+                                              color: AppTheme.dangerNeon,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                       IconButton(

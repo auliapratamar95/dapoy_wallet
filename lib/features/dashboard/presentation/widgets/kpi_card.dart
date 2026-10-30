@@ -27,7 +27,6 @@ class KpiCard extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    // Dangerous theme styling for Expense or Overbudget
     final isCritical = isNegativeAlert && amount < 0;
     final isWarningState = isExpense || isCritical;
 
@@ -39,12 +38,12 @@ class KpiCard extends StatelessWidget {
 
     final cardBg = isDark
         ? (isExpense
-            ? const Color(0xFF1F111D) // Dark crimson-tinted obsidian
+            ? const Color(0xFF1F111D)
             : isCritical
                 ? const Color(0xFF260D14)
                 : const Color(0xFF131B2E))
         : (isExpense
-            ? const Color(0xFFFFF1F2) // Light warning rose
+            ? const Color(0xFFFFF1F2)
             : isCritical
                 ? const Color(0xFFFFE4E6)
                 : Colors.white);
@@ -52,66 +51,55 @@ class KpiCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: cardBg,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: borderColor, width: isWarningState ? 1.6 : 1.2),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: borderColor, width: isWarningState ? 1.5 : 1.0),
         boxShadow: isWarningState
             ? [
                 BoxShadow(
                   color: AppTheme.dangerPrimary.withValues(alpha: isDark ? 0.25 : 0.08),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
                 ),
               ]
             : null,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                if (isExpense) ...[
+                  const Icon(Icons.local_fire_department, size: 13, color: AppTheme.dangerNeon),
+                  const SizedBox(width: 3),
+                ],
                 Expanded(
-                  child: Row(
-                    children: [
-                      if (isExpense) ...[
-                        const Icon(Icons.local_fire_department, size: 14, color: AppTheme.dangerNeon),
-                        const SizedBox(width: 4),
-                      ],
-                      Expanded(
-                        child: Text(
-                          title,
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            color: isExpense
-                                ? AppTheme.dangerNeon
-                                : (isDark ? Colors.grey.shade400 : Colors.grey.shade600),
-                            fontWeight: isExpense ? FontWeight.w800 : FontWeight.w600,
-                            letterSpacing: isExpense ? 0.4 : 0.0,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
+                  child: Text(
+                    title,
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: isExpense
+                          ? AppTheme.dangerNeon
+                          : (isDark ? Colors.grey.shade400 : Colors.grey.shade600),
+                      fontWeight: isExpense ? FontWeight.w800 : FontWeight.w600,
+                      fontSize: 11,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     color: iconColor.withValues(alpha: isDark ? 0.22 : 0.12),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: iconColor.withValues(alpha: 0.3),
-                      width: 1,
-                    ),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(icon, color: iconColor, size: 18),
+                  child: Icon(icon, color: iconColor, size: 15),
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 6),
             FittedBox(
               fit: BoxFit.scaleDown,
               alignment: Alignment.centerLeft,
@@ -119,7 +107,7 @@ class KpiCard extends StatelessWidget {
                 CurrencyFormatter.formatRupiah(amount),
                 style: theme.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w900,
-                  fontSize: 20,
+                  fontSize: 17,
                   color: isCritical
                       ? AppTheme.dangerNeon
                       : isExpense
@@ -129,19 +117,19 @@ class KpiCard extends StatelessWidget {
               ),
             ),
             if (subtitle != null) ...[
-              const SizedBox(height: 4),
+              const SizedBox(height: 2),
               Row(
                 children: [
                   if (isExpense)
                     const Padding(
-                      padding: EdgeInsets.only(right: 4.0),
-                      child: Icon(Icons.warning_amber_rounded, size: 12, color: AppTheme.dangerFlame),
+                      padding: EdgeInsets.only(right: 3.0),
+                      child: Icon(Icons.warning_amber_rounded, size: 11, color: AppTheme.dangerFlame),
                     ),
                   Expanded(
                     child: Text(
                       subtitle!,
                       style: theme.textTheme.bodySmall?.copyWith(
-                        fontSize: 11,
+                        fontSize: 10,
                         fontWeight: isExpense ? FontWeight.w700 : FontWeight.normal,
                         color: isExpense
                             ? AppTheme.dangerFlame

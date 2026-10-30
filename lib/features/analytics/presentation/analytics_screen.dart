@@ -101,14 +101,20 @@ class AnalyticsScreen extends ConsumerWidget {
                                 item.name,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w600, fontSize: 13),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             Expanded(
                               flex: 2,
-                              child: Text(
-                                CurrencyFormatter.formatRupiah(item.actual),
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 13),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  CurrencyFormatter.formatRupiah(item.actual),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 13),
+                                ),
                               ),
                             ),
                             Container(
