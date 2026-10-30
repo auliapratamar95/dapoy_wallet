@@ -1,0 +1,3479 @@
+{
+  "sheets": {
+    "November 2024": {
+      "sheet_name": "November 2024",
+      "title": "2024 BUDGET",
+      "is_mmyy": false,
+      "month": null,
+      "year": null,
+      "incomes": [
+        {
+          "source": "ABI",
+          "amount": 14500000.0,
+          "row": 7
+        }
+      ],
+      "budget_items": [
+        {
+          "id": "November 2024_b_6",
+          "name": "BUDGET",
+          "budget": 0.0,
+          "category": "Lain-lain",
+          "actual": 0.0,
+          "remaining": 0.0,
+          "row": 6,
+          "formula_output": "PENGELUARAN"
+        },
+        {
+          "id": "November 2024_b_7",
+          "name": "PDAM PPS",
+          "budget": 100000.0,
+          "category": "Wajib",
+          "actual": 36050.0,
+          "remaining": 63950.0,
+          "row": 7,
+          "formula_output": "36050.0"
+        },
+        {
+          "id": "November 2024_b_8",
+          "name": "PLN PPS",
+          "budget": 500000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 500000.0,
+          "row": 8,
+          "formula_output": ""
+        },
+        {
+          "id": "November 2024_b_9",
+          "name": "WIFI FM",
+          "budget": 300000.0,
+          "category": "Wajib",
+          "actual": 284160.0,
+          "remaining": 15840.0,
+          "row": 9,
+          "formula_output": "284160.0"
+        },
+        {
+          "id": "November 2024_b_10",
+          "name": "TELKOMSEL ABI",
+          "budget": 155000.0,
+          "category": "Wajib",
+          "actual": 153200.0,
+          "remaining": 1800.0,
+          "row": 10,
+          "formula_output": "153200.0"
+        },
+        {
+          "id": "November 2024_b_11",
+          "name": "RUMAH PPS",
+          "budget": 3200000.0,
+          "category": "Wajib",
+          "actual": 3250000.0,
+          "remaining": -50000.0,
+          "row": 11,
+          "formula_output": "3250000.0"
+        },
+        {
+          "id": "November 2024_b_12",
+          "name": "IURAN PPS",
+          "budget": 90000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 90000.0,
+          "row": 12,
+          "formula_output": ""
+        },
+        {
+          "id": "November 2024_b_13",
+          "name": "WIFI MR",
+          "budget": 260000.0,
+          "category": "Keluarga",
+          "actual": 258600.0,
+          "remaining": 1400.0,
+          "row": 13,
+          "formula_output": "258600.0"
+        },
+        {
+          "id": "November 2024_b_14",
+          "name": "TELKOMSEL ONSEN",
+          "budget": 125000.0,
+          "category": "Keluarga",
+          "actual": 134590.0,
+          "remaining": -9590.0,
+          "row": 14,
+          "formula_output": "134590.0"
+        },
+        {
+          "id": "November 2024_b_15",
+          "name": "BPJS ONSEN",
+          "budget": 75000.0,
+          "category": "Keluarga",
+          "actual": 70000.0,
+          "remaining": 5000.0,
+          "row": 15,
+          "formula_output": "70000.0"
+        },
+        {
+          "id": "November 2024_b_16",
+          "name": "PLN ONSEN",
+          "budget": 530000.0,
+          "category": "Keluarga",
+          "actual": 556532.0,
+          "remaining": -26532.0,
+          "row": 16,
+          "formula_output": "=553032+3500"
+        },
+        {
+          "id": "November 2024_b_17",
+          "name": "POPOK",
+          "budget": 160000.0,
+          "category": "Anak",
+          "actual": 0.0,
+          "remaining": 160000.0,
+          "row": 17,
+          "formula_output": ""
+        },
+        {
+          "id": "November 2024_b_18",
+          "name": "SUSU",
+          "budget": 600000.0,
+          "category": "Anak",
+          "actual": 754900.0,
+          "remaining": -154900.0,
+          "row": 18,
+          "formula_output": "=260000+166900+328000"
+        },
+        {
+          "id": "November 2024_b_19",
+          "name": "SKINCARE",
+          "budget": 100000.0,
+          "category": "Anak",
+          "actual": 0.0,
+          "remaining": 100000.0,
+          "row": 19,
+          "formula_output": ""
+        },
+        {
+          "id": "November 2024_b_20",
+          "name": "BBM MOTOR",
+          "budget": 320000.0,
+          "category": "Transportasi",
+          "actual": 0.0,
+          "remaining": 320000.0,
+          "row": 20,
+          "formula_output": ""
+        },
+        {
+          "id": "November 2024_b_21",
+          "name": "BBM MOBIL",
+          "budget": 500000.0,
+          "category": "Transportasi",
+          "actual": 632000.0,
+          "remaining": -132000.0,
+          "row": 21,
+          "formula_output": "=232000+400000"
+        },
+        {
+          "id": "November 2024_b_22",
+          "name": "TOL",
+          "budget": 185000.0,
+          "category": "Transportasi",
+          "actual": 200000.0,
+          "remaining": -15000.0,
+          "row": 22,
+          "formula_output": "=100000+100000"
+        },
+        {
+          "id": "November 2024_b_23",
+          "name": "MAKANAN",
+          "budget": 3000000.0,
+          "category": "Rumah",
+          "actual": 3691500.0,
+          "remaining": -691500.0,
+          "row": 23,
+          "formula_output": "=sum(Q:Q)"
+        },
+        {
+          "id": "November 2024_b_24",
+          "name": "RUMAH",
+          "budget": 200000.0,
+          "category": "Rumah",
+          "actual": 89500.0,
+          "remaining": 110500.0,
+          "row": 24,
+          "formula_output": "=sum(R:R)"
+        },
+        {
+          "id": "November 2024_b_25",
+          "name": "TABUNGAN",
+          "budget": 3200000.0,
+          "category": "Tabungan",
+          "actual": 0.0,
+          "remaining": 3200000.0,
+          "row": 25,
+          "formula_output": ""
+        },
+        {
+          "id": "November 2024_b_26",
+          "name": "JALAN-JALAN",
+          "budget": 500000.0,
+          "category": "Lain-lain",
+          "actual": 224500.0,
+          "remaining": 275500.0,
+          "row": 26,
+          "formula_output": "=sum(S:S)"
+        },
+        {
+          "id": "November 2024_b_27",
+          "name": "SANGU",
+          "budget": 400000.0,
+          "category": "Lain-lain",
+          "actual": 400000.0,
+          "remaining": 0.0,
+          "row": 27,
+          "formula_output": "400000.0"
+        },
+        {
+          "id": "November 2024_b_28",
+          "name": "MAMA",
+          "budget": 1200000.0,
+          "category": "Keluarga",
+          "actual": 1000000.0,
+          "remaining": 200000.0,
+          "row": 28,
+          "formula_output": "1000000.0"
+        },
+        {
+          "id": "November 2024_b_29",
+          "name": "ARISAN PPS",
+          "budget": 70000.0,
+          "category": "Wajib",
+          "actual": 72500.0,
+          "remaining": -2500.0,
+          "row": 29,
+          "formula_output": "72500.0"
+        },
+        {
+          "id": "November 2024_b_30",
+          "name": "ARISAN PIK PG",
+          "budget": 50000.0,
+          "category": "Wajib",
+          "actual": 50000.0,
+          "remaining": 0.0,
+          "row": 30,
+          "formula_output": "50000.0"
+        },
+        {
+          "id": "November 2024_b_31",
+          "name": "TABUNGAN",
+          "budget": 4500000.0,
+          "category": "Tabungan",
+          "actual": 0.0,
+          "remaining": 4500000.0,
+          "row": 31,
+          "formula_output": ""
+        },
+        {
+          "id": "November 2024_b_32",
+          "name": "SKINCARE",
+          "budget": 280000.0,
+          "category": "Lain-lain",
+          "actual": 388500.0,
+          "remaining": -108500.0,
+          "row": 32,
+          "formula_output": "388500.0"
+        },
+        {
+          "id": "November 2024_b_33",
+          "name": "BELANJA",
+          "budget": 1000000.0,
+          "category": "Lain-lain",
+          "actual": 48000.0,
+          "remaining": 952000.0,
+          "row": 33,
+          "formula_output": "48000.0"
+        },
+        {
+          "id": "November 2024_b_34",
+          "name": "SANGU",
+          "budget": 400000.0,
+          "category": "Lain-lain",
+          "actual": 400000.0,
+          "remaining": 0.0,
+          "row": 34,
+          "formula_output": "400000.0"
+        }
+      ],
+      "kpis": {
+        "Total Pemasukan": 22000000.0,
+        "Total Budget": 22000000.0,
+        "Total Pengeluaran": 17207924.0
+      },
+      "category_summaries": [
+        {
+          "category": "Wajib",
+          "budget": 4465000.0,
+          "actual": 3845910.0,
+          "remaining": 619090.0
+        },
+        {
+          "category": "Keluarga",
+          "budget": 2190000.0,
+          "actual": 2019722.0,
+          "remaining": 170278.0
+        },
+        {
+          "category": "Anak",
+          "budget": 860000.0,
+          "actual": 754900.0,
+          "remaining": 105100.0
+        },
+        {
+          "category": "Transportasi",
+          "budget": 1005000.0,
+          "actual": 832000.0,
+          "remaining": 173000.0
+        },
+        {
+          "category": "Rumah",
+          "budget": 3200000.0,
+          "actual": 3781000.0,
+          "remaining": -581000.0
+        },
+        {
+          "category": "Tabungan",
+          "budget": 7700000.0,
+          "actual": 0.0,
+          "remaining": 7700000.0
+        },
+        {
+          "category": "Lain-lain",
+          "budget": 2580000.0,
+          "actual": 5974392.0,
+          "remaining": -3394392.0
+        }
+      ],
+      "bank_balance": null,
+      "discrepancy": null,
+      "transactions": []
+    },
+    "0926": {
+      "sheet_name": "0926",
+      "title": "2026 BUDGET",
+      "is_mmyy": true,
+      "month": 9,
+      "year": 2026,
+      "incomes": [
+        {
+          "source": "ABI",
+          "amount": 14700000.0,
+          "row": 5
+        },
+        {
+          "source": "MAMA",
+          "amount": 6350000.0,
+          "row": 6
+        },
+        {
+          "source": "LAPTOP",
+          "amount": 3800000.0,
+          "row": 7
+        }
+      ],
+      "budget_items": [
+        {
+          "id": "0926_b_5",
+          "name": "PDAM PPS",
+          "budget": 100000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 100000.0,
+          "row": 5,
+          "formula_output": ""
+        },
+        {
+          "id": "0926_b_6",
+          "name": "PLN PPS",
+          "budget": 500000.0,
+          "category": "Wajib",
+          "actual": 502600.0,
+          "remaining": -2600.0,
+          "row": 6,
+          "formula_output": "=M74"
+        },
+        {
+          "id": "0926_b_7",
+          "name": "WIFI (PPS) FM",
+          "budget": 300000.0,
+          "category": "Wajib",
+          "actual": 317460.0,
+          "remaining": -17460.0,
+          "row": 7,
+          "formula_output": "=M105"
+        },
+        {
+          "id": "0926_b_8",
+          "name": "TELPON ABI",
+          "budget": 75000.0,
+          "category": "Wajib",
+          "actual": 51200.0,
+          "remaining": 23800.0,
+          "row": 8,
+          "formula_output": "=M113"
+        },
+        {
+          "id": "0926_b_9",
+          "name": "TELPON MAMA",
+          "budget": 120000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 120000.0,
+          "row": 9,
+          "formula_output": ""
+        },
+        {
+          "id": "0926_b_10",
+          "name": "RUMAH PPS",
+          "budget": 3200000.0,
+          "category": "Wajib",
+          "actual": 3200000.0,
+          "remaining": 0.0,
+          "row": 10,
+          "formula_output": "=M44"
+        },
+        {
+          "id": "0926_b_11",
+          "name": "IURAN PPS",
+          "budget": 90000.0,
+          "category": "Wajib",
+          "actual": 90000.0,
+          "remaining": 0.0,
+          "row": 11,
+          "formula_output": "=M59"
+        },
+        {
+          "id": "0926_b_12",
+          "name": "ARISAN PPS",
+          "budget": 75000.0,
+          "category": "Wajib",
+          "actual": 75000.0,
+          "remaining": 0.0,
+          "row": 12,
+          "formula_output": "=M60"
+        },
+        {
+          "id": "0926_b_13",
+          "name": "WIFI ONSEN (MR)",
+          "budget": 260000.0,
+          "category": "Keluarga",
+          "actual": 234100.0,
+          "remaining": 25900.0,
+          "row": 13,
+          "formula_output": "=M42"
+        },
+        {
+          "id": "0926_b_14",
+          "name": "BPJS ONSEN",
+          "budget": 70000.0,
+          "category": "Keluarga",
+          "actual": 0.0,
+          "remaining": 70000.0,
+          "row": 14,
+          "formula_output": ""
+        },
+        {
+          "id": "0926_b_15",
+          "name": "PLN ONSEN",
+          "budget": 550000.0,
+          "category": "Keluarga",
+          "actual": 453235.0,
+          "remaining": 96765.0,
+          "row": 15,
+          "formula_output": "=M96"
+        },
+        {
+          "id": "0926_b_16",
+          "name": "NENEK AI",
+          "budget": 1000000.0,
+          "category": "Keluarga",
+          "actual": 1000000.0,
+          "remaining": 0.0,
+          "row": 16,
+          "formula_output": "=M56"
+        },
+        {
+          "id": "0926_b_17",
+          "name": "KEPERLUAN DAPI",
+          "budget": 1250000.0,
+          "category": "Anak",
+          "actual": 758796.0,
+          "remaining": 491204.0,
+          "row": 17,
+          "formula_output": "=M50+M61+M103"
+        },
+        {
+          "id": "0926_b_18",
+          "name": "SPP DAPI",
+          "budget": 169000.0,
+          "category": "Anak",
+          "actual": 169000.0,
+          "remaining": 0.0,
+          "row": 18,
+          "formula_output": "=M91"
+        },
+        {
+          "id": "0926_b_19",
+          "name": "BBM MOTOR",
+          "budget": 400000.0,
+          "category": "Transportasi",
+          "actual": 72750.0,
+          "remaining": 327250.0,
+          "row": 19,
+          "formula_output": "=M126"
+        },
+        {
+          "id": "0926_b_20",
+          "name": "BBM MOBIL",
+          "budget": 700000.0,
+          "category": "Transportasi",
+          "actual": 344420.0,
+          "remaining": 355580.0,
+          "row": 20,
+          "formula_output": "=M85"
+        },
+        {
+          "id": "0926_b_21",
+          "name": "TOL MOBIL",
+          "budget": 450000.0,
+          "category": "Transportasi",
+          "actual": 200000.0,
+          "remaining": 250000.0,
+          "row": 21,
+          "formula_output": "=M62+M102"
+        },
+        {
+          "id": "0926_b_22",
+          "name": "BELANJA",
+          "budget": 3000000.0,
+          "category": "Rumah",
+          "actual": 1228401.0,
+          "remaining": 1771599.0,
+          "row": 22,
+          "formula_output": "=M55+M67+M88+M94+M110+M111+M112+M123+M125+M131+M132+M137+M147+M148"
+        },
+        {
+          "id": "0926_b_23",
+          "name": "KEPERLUAN RUMAH",
+          "budget": 300000.0,
+          "category": "Rumah",
+          "actual": 239362.0,
+          "remaining": 60638.0,
+          "row": 23,
+          "formula_output": "=M64+M95"
+        },
+        {
+          "id": "0926_b_24",
+          "name": "NETFLIX",
+          "budget": 38000.0,
+          "category": "Rumah",
+          "actual": 152000.0,
+          "remaining": -114000.0,
+          "row": 24,
+          "formula_output": "=M69"
+        },
+        {
+          "id": "0926_b_25",
+          "name": "YOUTUBE",
+          "budget": 27000.0,
+          "category": "Rumah",
+          "actual": 28000.0,
+          "remaining": -1000.0,
+          "row": 25,
+          "formula_output": "=M71"
+        },
+        {
+          "id": "0926_b_26",
+          "name": "LAUNDRY",
+          "budget": 200000.0,
+          "category": "Rumah",
+          "actual": 76850.0,
+          "remaining": 123150.0,
+          "row": 26,
+          "formula_output": "=M87"
+        },
+        {
+          "id": "0926_b_27",
+          "name": "TABUNGAN",
+          "budget": 9026000.0,
+          "category": "Tabungan",
+          "actual": 9026000.0,
+          "remaining": 0.0,
+          "row": 27,
+          "formula_output": "=E27"
+        },
+        {
+          "id": "0926_b_28",
+          "name": "SANGU ABI",
+          "budget": 600000.0,
+          "category": "Lain-lain",
+          "actual": 534250.0,
+          "remaining": 65750.0,
+          "row": 28,
+          "formula_output": "=M41+M66+M78+M84+M97+M101+M108+M109+M116+M119+M122+M127+M139+M142"
+        },
+        {
+          "id": "0926_b_29",
+          "name": "SANGU MAMA",
+          "budget": 600000.0,
+          "category": "Lain-lain",
+          "actual": 598000.0,
+          "remaining": 2000.0,
+          "row": 29,
+          "formula_output": "=M39+M52+M53+M72+M80"
+        },
+        {
+          "id": "0926_b_30",
+          "name": "JALAN-JALAN",
+          "budget": 500000.0,
+          "category": "Lain-lain",
+          "actual": 196900.0,
+          "remaining": 303100.0,
+          "row": 30,
+          "formula_output": "=M128+M129+M130"
+        },
+        {
+          "id": "0926_b_31",
+          "name": "PRIBADI",
+          "budget": 500000.0,
+          "category": "Lain-lain",
+          "actual": 1834225.0,
+          "remaining": -1334225.0,
+          "row": 31,
+          "formula_output": "=M54+M81+M98+M118+M120+M133+M135+M140+M144+M146"
+        },
+        {
+          "id": "0926_b_32",
+          "name": "KREDIT TOKPED",
+          "budget": 700000.0,
+          "category": "Lain-lain",
+          "actual": 548088.0,
+          "remaining": 151912.0,
+          "row": 32,
+          "formula_output": "=M46+M76"
+        },
+        {
+          "id": "0926_b_33",
+          "name": "ADMIN BANK",
+          "budget": 50000.0,
+          "category": "Lain-lain",
+          "actual": 30079.01,
+          "remaining": 19920.99,
+          "row": 33,
+          "formula_output": "=M57+M43+M45+M47+M49+M51+M63+M65+M70+M73+M77+M82+M83+M89+M92+M99+M104+M106+M115+M117+M121+M136+M141+M145+M134"
+        },
+        {
+          "id": "0926_b_35",
+          "name": "LAIN-LAIN",
+          "budget": 0.0,
+          "category": "Lain-lain",
+          "actual": 941523.0,
+          "remaining": -941523.0,
+          "row": 35,
+          "formula_output": "=+M75+M48+M93+M143"
+        }
+      ],
+      "kpis": {
+        "Total Pemasukan": 24850000.0,
+        "Total Budget": 24850000.0,
+        "Total Pengeluaran": 22902239.01,
+        "Total Sisa": 1947760.99
+      },
+      "category_summaries": [
+        {
+          "category": "Wajib",
+          "budget": 4460000.0,
+          "actual": 4236260.0,
+          "remaining": 223740.0
+        },
+        {
+          "category": "Keluarga",
+          "budget": 1880000.0,
+          "actual": 1687335.0,
+          "remaining": 192665.0
+        },
+        {
+          "category": "Anak",
+          "budget": 1419000.0,
+          "actual": 927796.0,
+          "remaining": 491204.0
+        },
+        {
+          "category": "Transportasi",
+          "budget": 1550000.0,
+          "actual": 617170.0,
+          "remaining": 932830.0
+        },
+        {
+          "category": "Rumah",
+          "budget": 3565000.0,
+          "actual": 1724613.0,
+          "remaining": 1840387.0
+        },
+        {
+          "category": "Tabungan",
+          "budget": 9026000.0,
+          "actual": 9026000.0,
+          "remaining": 0.0
+        },
+        {
+          "category": "Lain-lain",
+          "budget": 2950000.0,
+          "actual": 4683065.01,
+          "remaining": -1733065.01
+        }
+      ],
+      "bank_balance": 3914528.0,
+      "discrepancy": null,
+      "transactions": [
+        {
+          "id": "0926_tx_39",
+          "date": "26 Agustus",
+          "entry_number": 1,
+          "description": "Tomoro",
+          "amount": 21000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 39
+        },
+        {
+          "id": "0926_tx_41",
+          "date": "27 Agustus",
+          "entry_number": 1,
+          "description": "Hisana",
+          "amount": 34500.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 41
+        },
+        {
+          "id": "0926_tx_42",
+          "date": "27 Agustus",
+          "entry_number": 2,
+          "description": "Myrepublic",
+          "amount": 234100.0,
+          "linked_budget_item": "WIFI ONSEN (MR)",
+          "row": 42
+        },
+        {
+          "id": "0926_tx_43",
+          "date": "27 Agustus",
+          "entry_number": 3,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 43
+        },
+        {
+          "id": "0926_tx_44",
+          "date": "27 Agustus",
+          "entry_number": 4,
+          "description": "Rumah PPS",
+          "amount": 3200000.0,
+          "linked_budget_item": "RUMAH PPS",
+          "row": 44
+        },
+        {
+          "id": "0926_tx_45",
+          "date": "27 Agustus",
+          "entry_number": 5,
+          "description": "Adm bank",
+          "amount": 2500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 45
+        },
+        {
+          "id": "0926_tx_46",
+          "date": "27 Agustus",
+          "entry_number": 6,
+          "description": "Kredit sepeda",
+          "amount": 128588.0,
+          "linked_budget_item": "KREDIT TOKPED",
+          "row": 46
+        },
+        {
+          "id": "0926_tx_47",
+          "date": "27 Agustus",
+          "entry_number": 7,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 47
+        },
+        {
+          "id": "0926_tx_48",
+          "date": "27 Agustus",
+          "entry_number": 8,
+          "description": "Pajak NMAX",
+          "amount": 354000.0,
+          "linked_budget_item": "LAIN-LAIN",
+          "row": 48
+        },
+        {
+          "id": "0926_tx_49",
+          "date": "27 Agustus",
+          "entry_number": 9,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 49
+        },
+        {
+          "id": "0926_tx_50",
+          "date": "27 Agustus",
+          "entry_number": 10,
+          "description": "Susu dapi",
+          "amount": 558596.0,
+          "linked_budget_item": "KEPERLUAN DAPI",
+          "row": 50
+        },
+        {
+          "id": "0926_tx_51",
+          "date": "27 Agustus",
+          "entry_number": 11,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 51
+        },
+        {
+          "id": "0926_tx_52",
+          "date": "27 Agustus",
+          "entry_number": 12,
+          "description": "Kopken",
+          "amount": 13000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 52
+        },
+        {
+          "id": "0926_tx_53",
+          "date": "27 Agustus",
+          "entry_number": 13,
+          "description": "Kopi kemari",
+          "amount": 14000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 53
+        },
+        {
+          "id": "0926_tx_54",
+          "date": "27 Agustus",
+          "entry_number": 14,
+          "description": "Garuda acc",
+          "amount": 188000.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 54
+        },
+        {
+          "id": "0926_tx_55",
+          "date": "27 Agustus",
+          "entry_number": 15,
+          "description": "Kmart",
+          "amount": 44300.0,
+          "linked_budget_item": "BELANJA",
+          "row": 55
+        },
+        {
+          "id": "0926_tx_56",
+          "date": "27 Agustus",
+          "entry_number": 16,
+          "description": "Nenek ai",
+          "amount": 1000000.0,
+          "linked_budget_item": "NENEK AI",
+          "row": 56
+        },
+        {
+          "id": "0926_tx_57",
+          "date": "27 Agustus",
+          "entry_number": 17,
+          "description": "Adm bank",
+          "amount": 2500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 57
+        },
+        {
+          "id": "0926_tx_59",
+          "date": "28 Agustus",
+          "entry_number": 1,
+          "description": "Iuran PPS",
+          "amount": 90000.0,
+          "linked_budget_item": "IURAN PPS",
+          "row": 59
+        },
+        {
+          "id": "0926_tx_60",
+          "date": "28 Agustus",
+          "entry_number": 2,
+          "description": "Arisan PPS",
+          "amount": 75000.0,
+          "linked_budget_item": "ARISAN PPS",
+          "row": 60
+        },
+        {
+          "id": "0926_tx_61",
+          "date": "28 Agustus",
+          "entry_number": 3,
+          "description": "Alat sholat dapi",
+          "amount": 70500.0,
+          "linked_budget_item": "KEPERLUAN DAPI",
+          "row": 61
+        },
+        {
+          "id": "0926_tx_62",
+          "date": "28 Agustus",
+          "entry_number": 4,
+          "description": "Etoll",
+          "amount": 100000.0,
+          "linked_budget_item": "TOL MOBIL",
+          "row": 62
+        },
+        {
+          "id": "0926_tx_63",
+          "date": "28 Agustus",
+          "entry_number": 5,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 63
+        },
+        {
+          "id": "0926_tx_64",
+          "date": "28 Agustus",
+          "entry_number": 6,
+          "description": "Sabun mobil",
+          "amount": 87512.0,
+          "linked_budget_item": "KEPERLUAN RUMAH",
+          "row": 64
+        },
+        {
+          "id": "0926_tx_65",
+          "date": "28 Agustus",
+          "entry_number": 7,
+          "description": "Adm bank",
+          "amount": 2500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 65
+        },
+        {
+          "id": "0926_tx_66",
+          "date": "28 Agustus",
+          "entry_number": 8,
+          "description": "Sangu abi",
+          "amount": 76500.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 66
+        },
+        {
+          "id": "0926_tx_67",
+          "date": "28 Agustus",
+          "entry_number": 9,
+          "description": "Tunai",
+          "amount": 300000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 67
+        },
+        {
+          "id": "0926_tx_69",
+          "date": "29 Agustus",
+          "entry_number": 1,
+          "description": "Netflix",
+          "amount": 152000.0,
+          "linked_budget_item": "NETFLIX",
+          "row": 69
+        },
+        {
+          "id": "0926_tx_70",
+          "date": "29 Agustus",
+          "entry_number": 2,
+          "description": "Adm bank",
+          "amount": 2500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 70
+        },
+        {
+          "id": "0926_tx_71",
+          "date": "29 Agustus",
+          "entry_number": 3,
+          "description": "Youtube",
+          "amount": 28000.0,
+          "linked_budget_item": "YOUTUBE",
+          "row": 71
+        },
+        {
+          "id": "0926_tx_72",
+          "date": "29 Agustus",
+          "entry_number": 4,
+          "description": "Shopee mama",
+          "amount": 100000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 72
+        },
+        {
+          "id": "0926_tx_73",
+          "date": "29 Agustus",
+          "entry_number": 5,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 73
+        },
+        {
+          "id": "0926_tx_74",
+          "date": "29 Agustus",
+          "entry_number": 6,
+          "description": "Listrik PPS",
+          "amount": 502600.0,
+          "linked_budget_item": "PLN PPS",
+          "row": 74
+        },
+        {
+          "id": "0926_tx_75",
+          "date": "29 Agustus",
+          "entry_number": 7,
+          "description": "Obat mama",
+          "amount": 112762.0,
+          "linked_budget_item": "LAIN-LAIN",
+          "row": 75
+        },
+        {
+          "id": "0926_tx_76",
+          "date": "29 Agustus",
+          "entry_number": 8,
+          "description": "Kredit sparepart mobil",
+          "amount": 419500.0,
+          "linked_budget_item": "KREDIT TOKPED",
+          "row": 76
+        },
+        {
+          "id": "0926_tx_77",
+          "date": "29 Agustus",
+          "entry_number": 9,
+          "description": "Adm bank",
+          "amount": 3000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 77
+        },
+        {
+          "id": "0926_tx_78",
+          "date": "29 Agustus",
+          "entry_number": 10,
+          "description": "Sangu abi",
+          "amount": 37500.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 78
+        },
+        {
+          "id": "0926_tx_80",
+          "date": "30 Agustus",
+          "entry_number": 1,
+          "description": "Sangu mama",
+          "amount": 450000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 80
+        },
+        {
+          "id": "0926_tx_81",
+          "date": "30 Agustus",
+          "entry_number": 2,
+          "description": "Pakaian dalam",
+          "amount": 417460.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 81
+        },
+        {
+          "id": "0926_tx_82",
+          "date": "30 Agustus",
+          "entry_number": 3,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 82
+        },
+        {
+          "id": "0926_tx_83",
+          "date": "30 Agustus",
+          "entry_number": 4,
+          "description": "Adm bank",
+          "amount": 6500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 83
+        },
+        {
+          "id": "0926_tx_84",
+          "date": "30 Agustus",
+          "entry_number": 5,
+          "description": "Tomoro coffee",
+          "amount": 26000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 84
+        },
+        {
+          "id": "0926_tx_85",
+          "date": "30 Agustus",
+          "entry_number": 6,
+          "description": "BBM mobil",
+          "amount": 344420.0,
+          "linked_budget_item": "BBM MOBIL",
+          "row": 85
+        },
+        {
+          "id": "0926_tx_87",
+          "date": "31 Agustus",
+          "entry_number": 1,
+          "description": "Laundry",
+          "amount": 76850.0,
+          "linked_budget_item": "LAUNDRY",
+          "row": 87
+        },
+        {
+          "id": "0926_tx_88",
+          "date": "31 Agustus",
+          "entry_number": 2,
+          "description": "Makan malam",
+          "amount": 27000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 88
+        },
+        {
+          "id": "0926_tx_89",
+          "date": "31 Agustus",
+          "entry_number": 3,
+          "description": "Adm bank",
+          "amount": -19420.99,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 89
+        },
+        {
+          "id": "0926_tx_91",
+          "date": "1 September",
+          "entry_number": 1,
+          "description": "SPP Dapi",
+          "amount": 169000.0,
+          "linked_budget_item": "SPP DAPI",
+          "row": 91
+        },
+        {
+          "id": "0926_tx_92",
+          "date": "1 September",
+          "entry_number": 2,
+          "description": "Adm bank",
+          "amount": 6500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 92
+        },
+        {
+          "id": "0926_tx_93",
+          "date": "1 September",
+          "entry_number": 3,
+          "description": "Klinik PPK",
+          "amount": 274761.0,
+          "linked_budget_item": "LAIN-LAIN",
+          "row": 93
+        },
+        {
+          "id": "0926_tx_94",
+          "date": "1 September",
+          "entry_number": 4,
+          "description": "Makan dapi",
+          "amount": 120901.0,
+          "linked_budget_item": "BELANJA",
+          "row": 94
+        },
+        {
+          "id": "0926_tx_95",
+          "date": "1 September",
+          "entry_number": 5,
+          "description": "Alat Rumah",
+          "amount": 151850.0,
+          "linked_budget_item": "KEPERLUAN RUMAH",
+          "row": 95
+        },
+        {
+          "id": "0926_tx_96",
+          "date": "1 September",
+          "entry_number": 6,
+          "description": "Listrik Onsen",
+          "amount": 453235.0,
+          "linked_budget_item": "PLN ONSEN",
+          "row": 96
+        },
+        {
+          "id": "0926_tx_97",
+          "date": "1 September",
+          "entry_number": 7,
+          "description": "Sangu abi",
+          "amount": 20000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 97
+        },
+        {
+          "id": "0926_tx_98",
+          "date": "1 September",
+          "entry_number": 8,
+          "description": "Liquid pot",
+          "amount": 41400.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 98
+        },
+        {
+          "id": "0926_tx_99",
+          "date": "1 September",
+          "entry_number": 9,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 99
+        },
+        {
+          "id": "0926_tx_101",
+          "date": "2 September",
+          "entry_number": 1,
+          "description": "Sangu abi",
+          "amount": 19000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 101
+        },
+        {
+          "id": "0926_tx_102",
+          "date": "2 September",
+          "entry_number": 2,
+          "description": "Etoll",
+          "amount": 100000.0,
+          "linked_budget_item": "TOL MOBIL",
+          "row": 102
+        },
+        {
+          "id": "0926_tx_103",
+          "date": "2 September",
+          "entry_number": 3,
+          "description": "Susu dapi",
+          "amount": 129700.0,
+          "linked_budget_item": "KEPERLUAN DAPI",
+          "row": 103
+        },
+        {
+          "id": "0926_tx_104",
+          "date": "2 September",
+          "entry_number": 4,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 104
+        },
+        {
+          "id": "0926_tx_105",
+          "date": "2 September",
+          "entry_number": 5,
+          "description": "FM",
+          "amount": 317460.0,
+          "linked_budget_item": "WIFI (PPS) FM",
+          "row": 105
+        },
+        {
+          "id": "0926_tx_106",
+          "date": "2 September",
+          "entry_number": 6,
+          "description": "Adm bank",
+          "amount": 2500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 106
+        },
+        {
+          "id": "0926_tx_108",
+          "date": "3 September",
+          "entry_number": 1,
+          "description": "Sangu abi",
+          "amount": 58000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 108
+        },
+        {
+          "id": "0926_tx_109",
+          "date": "3 September",
+          "entry_number": 2,
+          "description": "Sangu abi",
+          "amount": 100000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 109
+        },
+        {
+          "id": "0926_tx_110",
+          "date": "3 September",
+          "entry_number": 3,
+          "description": "Wakubi",
+          "amount": 12000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 110
+        },
+        {
+          "id": "0926_tx_111",
+          "date": "3 September",
+          "entry_number": 4,
+          "description": "Makan malam",
+          "amount": 38000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 111
+        },
+        {
+          "id": "0926_tx_112",
+          "date": "3 September",
+          "entry_number": 5,
+          "description": "Tunai",
+          "amount": 200000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 112
+        },
+        {
+          "id": "0926_tx_113",
+          "date": "3 September",
+          "entry_number": 6,
+          "description": "Telpon abi",
+          "amount": 51200.0,
+          "linked_budget_item": "TELPON ABI",
+          "row": 113
+        },
+        {
+          "id": "0926_tx_115",
+          "date": "4 September",
+          "entry_number": 1,
+          "description": "Adm bank",
+          "amount": 1500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 115
+        },
+        {
+          "id": "0926_tx_116",
+          "date": "4 September",
+          "entry_number": 2,
+          "description": "Sangu abi",
+          "amount": 20000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 116
+        },
+        {
+          "id": "0926_tx_117",
+          "date": "4 September",
+          "entry_number": 3,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 117
+        },
+        {
+          "id": "0926_tx_118",
+          "date": "4 September",
+          "entry_number": 4,
+          "description": "Kaos padel",
+          "amount": 157060.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 118
+        },
+        {
+          "id": "0926_tx_119",
+          "date": "4 September",
+          "entry_number": 5,
+          "description": "Sangu abi",
+          "amount": 5000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 119
+        },
+        {
+          "id": "0926_tx_120",
+          "date": "4 September",
+          "entry_number": 6,
+          "description": "Cartridge pod",
+          "amount": 90000.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 120
+        },
+        {
+          "id": "0926_tx_121",
+          "date": "4 September",
+          "entry_number": 7,
+          "description": "Adm bank",
+          "amount": 2500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 121
+        },
+        {
+          "id": "0926_tx_122",
+          "date": "4 September",
+          "entry_number": 8,
+          "description": "Sangu abi",
+          "amount": 7750.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 122
+        },
+        {
+          "id": "0926_tx_123",
+          "date": "4 September",
+          "entry_number": 9,
+          "description": "Mas budi",
+          "amount": 262000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 123
+        },
+        {
+          "id": "0926_tx_125",
+          "date": "5 September",
+          "entry_number": 1,
+          "description": "Makan malam",
+          "amount": 30000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 125
+        },
+        {
+          "id": "0926_tx_126",
+          "date": "5 September",
+          "entry_number": 2,
+          "description": "BBM motor",
+          "amount": 72750.0,
+          "linked_budget_item": "BBM MOTOR",
+          "row": 126
+        },
+        {
+          "id": "0926_tx_127",
+          "date": "5 September",
+          "entry_number": 3,
+          "description": "Sangu abi",
+          "amount": 36500.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 127
+        },
+        {
+          "id": "0926_tx_128",
+          "date": "5 September",
+          "entry_number": 4,
+          "description": "Rotiboy",
+          "amount": 36000.0,
+          "linked_budget_item": "JALAN-JALAN",
+          "row": 128
+        },
+        {
+          "id": "0926_tx_129",
+          "date": "5 September",
+          "entry_number": 5,
+          "description": "Azko",
+          "amount": 69900.0,
+          "linked_budget_item": "JALAN-JALAN",
+          "row": 129
+        },
+        {
+          "id": "0926_tx_130",
+          "date": "5 September",
+          "entry_number": 6,
+          "description": "Solaria",
+          "amount": 91000.0,
+          "linked_budget_item": "JALAN-JALAN",
+          "row": 130
+        },
+        {
+          "id": "0926_tx_131",
+          "date": "5 September",
+          "entry_number": 7,
+          "description": "Makan pagi",
+          "amount": 31200.0,
+          "linked_budget_item": "BELANJA",
+          "row": 131
+        },
+        {
+          "id": "0926_tx_132",
+          "date": "5 September",
+          "entry_number": 8,
+          "description": "Jajan",
+          "amount": 39000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 132
+        },
+        {
+          "id": "0926_tx_133",
+          "date": "5 September",
+          "entry_number": 9,
+          "description": "Ban dalam sepeda",
+          "amount": 203823.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 133
+        },
+        {
+          "id": "0926_tx_134",
+          "date": "5 September",
+          "entry_number": 10,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 134
+        },
+        {
+          "id": "0926_tx_135",
+          "date": "5 September",
+          "entry_number": 11,
+          "description": "Botol minum",
+          "amount": 78500.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 135
+        },
+        {
+          "id": "0926_tx_136",
+          "date": "5 September",
+          "entry_number": 12,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 136
+        },
+        {
+          "id": "0926_tx_137",
+          "date": "5 September",
+          "entry_number": 13,
+          "description": "Makan malam",
+          "amount": 22000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 137
+        },
+        {
+          "id": "0926_tx_139",
+          "date": "7 September",
+          "entry_number": 1,
+          "description": "Sangu abi",
+          "amount": 88500.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 139
+        },
+        {
+          "id": "0926_tx_140",
+          "date": "7 September",
+          "entry_number": 2,
+          "description": "Celana sepeda",
+          "amount": 519432.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 140
+        },
+        {
+          "id": "0926_tx_141",
+          "date": "7 September",
+          "entry_number": 3,
+          "description": "Adm bank",
+          "amount": 4000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 141
+        },
+        {
+          "id": "0926_tx_142",
+          "date": "7 September",
+          "entry_number": 4,
+          "description": "Sangu abi",
+          "amount": 5000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 142
+        },
+        {
+          "id": "0926_tx_143",
+          "date": "7 September",
+          "entry_number": 5,
+          "description": "TF mamoy",
+          "amount": 200000.0,
+          "linked_budget_item": "LAIN-LAIN",
+          "row": 143
+        },
+        {
+          "id": "0926_tx_144",
+          "date": "7 September",
+          "entry_number": 6,
+          "description": "Baju sepeda",
+          "amount": 114350.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 144
+        },
+        {
+          "id": "0926_tx_145",
+          "date": "7 September",
+          "entry_number": 7,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 145
+        },
+        {
+          "id": "0926_tx_146",
+          "date": "7 September",
+          "entry_number": 8,
+          "description": "Penutup lutut",
+          "amount": 24200.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 146
+        },
+        {
+          "id": "0926_tx_147",
+          "date": "7 September",
+          "entry_number": 9,
+          "description": "Makan malam",
+          "amount": 30000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 147
+        },
+        {
+          "id": "0926_tx_148",
+          "date": "7 September",
+          "entry_number": 10,
+          "description": "Bakso",
+          "amount": 72000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 148
+        }
+      ]
+    },
+    "1026": {
+      "sheet_name": "1026",
+      "title": "LAPORAN BULAN OKTOBER2026",
+      "is_mmyy": true,
+      "month": 10,
+      "year": 2026,
+      "incomes": [
+        {
+          "source": "ABI",
+          "amount": 14700000.0,
+          "row": 5
+        },
+        {
+          "source": "MAMA",
+          "amount": 7561625.9,
+          "row": 6
+        }
+      ],
+      "budget_items": [
+        {
+          "id": "1026_b_5",
+          "name": "PDAM PPS",
+          "budget": 100000.0,
+          "category": "Wajib",
+          "actual": 33200.0,
+          "remaining": 66800.0,
+          "row": 5,
+          "formula_output": "=M93"
+        },
+        {
+          "id": "1026_b_6",
+          "name": "PLN PPS",
+          "budget": 500000.0,
+          "category": "Wajib",
+          "actual": 500000.0,
+          "remaining": 0.0,
+          "row": 6,
+          "formula_output": "=M115"
+        },
+        {
+          "id": "1026_b_7",
+          "name": "WIFI (PPS) FM",
+          "budget": 300000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 300000.0,
+          "row": 7,
+          "formula_output": ""
+        },
+        {
+          "id": "1026_b_8",
+          "name": "TELPON ABI",
+          "budget": 75000.0,
+          "category": "Wajib",
+          "actual": 100000.0,
+          "remaining": -25000.0,
+          "row": 8,
+          "formula_output": "=M86+M113"
+        },
+        {
+          "id": "1026_b_9",
+          "name": "TELPON MAMA",
+          "budget": 120000.0,
+          "category": "Wajib",
+          "actual": 95000.0,
+          "remaining": 25000.0,
+          "row": 9,
+          "formula_output": "=M132"
+        },
+        {
+          "id": "1026_b_10",
+          "name": "RUMAH PPS",
+          "budget": 3200000.0,
+          "category": "Wajib",
+          "actual": 3550000.0,
+          "remaining": -350000.0,
+          "row": 10,
+          "formula_output": "=M72"
+        },
+        {
+          "id": "1026_b_11",
+          "name": "IURAN PPS",
+          "budget": 90000.0,
+          "category": "Wajib",
+          "actual": 90000.0,
+          "remaining": 0.0,
+          "row": 11,
+          "formula_output": "=M94"
+        },
+        {
+          "id": "1026_b_12",
+          "name": "ARISAN PPS",
+          "budget": 75000.0,
+          "category": "Wajib",
+          "actual": 75000.0,
+          "remaining": 0.0,
+          "row": 12,
+          "formula_output": "=M95"
+        },
+        {
+          "id": "1026_b_13",
+          "name": "WIFI ONSEN (MR)",
+          "budget": 260000.0,
+          "category": "Keluarga",
+          "actual": 233100.0,
+          "remaining": 26900.0,
+          "row": 13,
+          "formula_output": "=M69"
+        },
+        {
+          "id": "1026_b_14",
+          "name": "BPJS ONSEN",
+          "budget": 70000.0,
+          "category": "Keluarga",
+          "actual": 70000.0,
+          "remaining": 0.0,
+          "row": 14,
+          "formula_output": "=M92"
+        },
+        {
+          "id": "1026_b_15",
+          "name": "PLN ONSEN",
+          "budget": 550000.0,
+          "category": "Keluarga",
+          "actual": 539050.0,
+          "remaining": 10950.0,
+          "row": 15,
+          "formula_output": "=M91"
+        },
+        {
+          "id": "1026_b_16",
+          "name": "NENEK AI",
+          "budget": 1000000.0,
+          "category": "Keluarga",
+          "actual": 1000000.0,
+          "remaining": 0.0,
+          "row": 16,
+          "formula_output": "=M41"
+        },
+        {
+          "id": "1026_b_17",
+          "name": "KEPERLUAN DAPI",
+          "budget": 1250000.0,
+          "category": "Anak",
+          "actual": 843200.0,
+          "remaining": 406800.0,
+          "row": 17,
+          "formula_output": "=M54+M55+M56+M127"
+        },
+        {
+          "id": "1026_b_18",
+          "name": "SPP DAPI",
+          "budget": 169000.0,
+          "category": "Anak",
+          "actual": 169000.0,
+          "remaining": 0.0,
+          "row": 18,
+          "formula_output": "=M96"
+        },
+        {
+          "id": "1026_b_19",
+          "name": "BBM MOTOR",
+          "budget": 400000.0,
+          "category": "Transportasi",
+          "actual": 133610.0,
+          "remaining": 266390.0,
+          "row": 19,
+          "formula_output": "=M38+M108"
+        },
+        {
+          "id": "1026_b_20",
+          "name": "BBM MOBIL",
+          "budget": 700000.0,
+          "category": "Transportasi",
+          "actual": 0.0,
+          "remaining": 700000.0,
+          "row": 20,
+          "formula_output": ""
+        },
+        {
+          "id": "1026_b_21",
+          "name": "TOL MOBIL",
+          "budget": 450000.0,
+          "category": "Transportasi",
+          "actual": 300000.0,
+          "remaining": 150000.0,
+          "row": 21,
+          "formula_output": "=M59+M90+M124"
+        },
+        {
+          "id": "1026_b_22",
+          "name": "BELANJA",
+          "budget": 3500000.0,
+          "category": "Rumah",
+          "actual": 2286194.0,
+          "remaining": 1213806.0,
+          "row": 22,
+          "formula_output": "=M44+M45+M49+M50+M52+M46+M57+M64+M65+M66+M67+M78+M79+M80+M85+M98+M99+M106+M107+M110+M111+M118+M121+M123+M126+M128+M129"
+        },
+        {
+          "id": "1026_b_23",
+          "name": "NETFLIX",
+          "budget": 38000.0,
+          "category": "Rumah",
+          "actual": 0.0,
+          "remaining": 38000.0,
+          "row": 23,
+          "formula_output": ""
+        },
+        {
+          "id": "1026_b_24",
+          "name": "YOUTUBE",
+          "budget": 27000.0,
+          "category": "Rumah",
+          "actual": 0.0,
+          "remaining": 27000.0,
+          "row": 24,
+          "formula_output": ""
+        },
+        {
+          "id": "1026_b_25",
+          "name": "LAUNDRY",
+          "budget": 200000.0,
+          "category": "Rumah",
+          "actual": 126050.0,
+          "remaining": 73950.0,
+          "row": 25,
+          "formula_output": "=M53+M62"
+        },
+        {
+          "id": "1026_b_26",
+          "name": "TABUNGAN",
+          "budget": 6561055.9,
+          "category": "Tabungan",
+          "actual": 0.0,
+          "remaining": 6561055.9,
+          "row": 26,
+          "formula_output": ""
+        },
+        {
+          "id": "1026_b_27",
+          "name": "SANGU ABI",
+          "budget": 600000.0,
+          "category": "Lain-lain",
+          "actual": 650000.0,
+          "remaining": -50000.0,
+          "row": 27,
+          "formula_output": "=M42+M60+M89+M103+M125"
+        },
+        {
+          "id": "1026_b_28",
+          "name": "SANGU MAMA",
+          "budget": 600000.0,
+          "category": "Lain-lain",
+          "actual": 615480.0,
+          "remaining": -15480.0,
+          "row": 28,
+          "formula_output": "=M39+M61+M63+M77+M82+M88+M102+M104+M105+M133+M134+M135+M137+M138+M139"
+        },
+        {
+          "id": "1026_b_29",
+          "name": "JALAN-JALAN",
+          "budget": 500000.0,
+          "category": "Lain-lain",
+          "actual": 0.0,
+          "remaining": 500000.0,
+          "row": 29,
+          "formula_output": ""
+        },
+        {
+          "id": "1026_b_30",
+          "name": "PRIBADI",
+          "budget": 500000.0,
+          "category": "Lain-lain",
+          "actual": 841552.0,
+          "remaining": -341552.0,
+          "row": 30,
+          "formula_output": "=M48+M70+M84+M112+M120+M122"
+        },
+        {
+          "id": "1026_b_31",
+          "name": "KREDIT TOKPED",
+          "budget": 700000.0,
+          "category": "Lain-lain",
+          "actual": 583500.0,
+          "remaining": 116500.0,
+          "row": 31,
+          "formula_output": "=M73"
+        },
+        {
+          "id": "1026_b_32",
+          "name": "ADMIN BANK",
+          "budget": 50000.0,
+          "category": "Lain-lain",
+          "actual": 40200.0,
+          "remaining": 9800.0,
+          "row": 32,
+          "formula_output": "=M40+M47+M71+M83+M97+M101+M114+M117+M131"
+        },
+        {
+          "id": "1026_b_34",
+          "name": "LAIN-LAIN",
+          "budget": 0.0,
+          "category": "Lain-lain",
+          "actual": 3466750.0,
+          "remaining": -3466750.0,
+          "row": 34,
+          "formula_output": "=M74+M75+M76"
+        }
+      ],
+      "kpis": {
+        "Total Pemasukan": 22261625.9,
+        "Total Budget": 22585055.9,
+        "Total Pengeluaran": 16340886.0,
+        "Total Sisa": 6244169.9
+      },
+      "category_summaries": [
+        {
+          "category": "Wajib",
+          "budget": 4460000.0,
+          "actual": 4443200.0,
+          "remaining": 16800.0
+        },
+        {
+          "category": "Keluarga",
+          "budget": 1880000.0,
+          "actual": 1842150.0,
+          "remaining": 37850.0
+        },
+        {
+          "category": "Anak",
+          "budget": 1419000.0,
+          "actual": 1012200.0,
+          "remaining": 406800.0
+        },
+        {
+          "category": "Transportasi",
+          "budget": 1550000.0,
+          "actual": 433610.0,
+          "remaining": 1116390.0
+        },
+        {
+          "category": "Rumah",
+          "budget": 3765000.0,
+          "actual": 2412244.0,
+          "remaining": 1352756.0
+        },
+        {
+          "category": "Tabungan",
+          "budget": 6561055.9,
+          "actual": 0.0,
+          "remaining": 6561055.9
+        },
+        {
+          "category": "Lain-lain",
+          "budget": 2950000.0,
+          "actual": 6197482.0,
+          "remaining": -3247482.0
+        }
+      ],
+      "bank_balance": 6244170.0,
+      "discrepancy": -0.1000000015,
+      "transactions": [
+        {
+          "id": "1026_tx_38",
+          "date": "25 Agustus",
+          "entry_number": 1,
+          "description": "BBM motor",
+          "amount": 75760.0,
+          "linked_budget_item": "BBM MOTOR",
+          "row": 38
+        },
+        {
+          "id": "1026_tx_39",
+          "date": "25 Agustus",
+          "entry_number": 2,
+          "description": "Sangu mama",
+          "amount": 3000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 39
+        },
+        {
+          "id": "1026_tx_40",
+          "date": "25 Agustus",
+          "entry_number": 3,
+          "description": "Adm bank",
+          "amount": 6000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 40
+        },
+        {
+          "id": "1026_tx_41",
+          "date": "25 Agustus",
+          "entry_number": 4,
+          "description": "Mama Ai",
+          "amount": 1000000.0,
+          "linked_budget_item": "NENEK AI",
+          "row": 41
+        },
+        {
+          "id": "1026_tx_42",
+          "date": "25 Agustus",
+          "entry_number": 5,
+          "description": "Sangu abi",
+          "amount": 100000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 42
+        },
+        {
+          "id": "1026_tx_44",
+          "date": "26 Agustus",
+          "entry_number": 1,
+          "description": "Nasi padang",
+          "amount": 33000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 44
+        },
+        {
+          "id": "1026_tx_45",
+          "date": "26 Agustus",
+          "entry_number": 2,
+          "description": "Pentol",
+          "amount": 10000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 45
+        },
+        {
+          "id": "1026_tx_46",
+          "date": "26 Agustus",
+          "entry_number": 3,
+          "description": "Gopay abi",
+          "amount": 50000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 46
+        },
+        {
+          "id": "1026_tx_47",
+          "date": "26 Agustus",
+          "entry_number": 4,
+          "description": "Adm bank",
+          "amount": 1200.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 47
+        },
+        {
+          "id": "1026_tx_48",
+          "date": "26 Agustus",
+          "entry_number": 5,
+          "description": "Sociolla",
+          "amount": 160200.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 48
+        },
+        {
+          "id": "1026_tx_49",
+          "date": "26 Agustus",
+          "entry_number": 6,
+          "description": "Richeese",
+          "amount": 79500.0,
+          "linked_budget_item": "BELANJA",
+          "row": 49
+        },
+        {
+          "id": "1026_tx_50",
+          "date": "26 Agustus",
+          "entry_number": 7,
+          "description": "Burger bangor",
+          "amount": 118000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 50
+        },
+        {
+          "id": "1026_tx_52",
+          "date": "27 Agustus",
+          "entry_number": 1,
+          "description": "Tarik tunai",
+          "amount": 200000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 52
+        },
+        {
+          "id": "1026_tx_53",
+          "date": "27 Agustus",
+          "entry_number": 2,
+          "description": "Laundry",
+          "amount": 68100.0,
+          "linked_budget_item": "LAUNDRY",
+          "row": 53
+        },
+        {
+          "id": "1026_tx_54",
+          "date": "27 Agustus",
+          "entry_number": 3,
+          "description": "Susu dapi",
+          "amount": 340000.0,
+          "linked_budget_item": "KEPERLUAN DAPI",
+          "row": 54
+        },
+        {
+          "id": "1026_tx_55",
+          "date": "27 Agustus",
+          "entry_number": 4,
+          "description": "Popok dapi",
+          "amount": 143000.0,
+          "linked_budget_item": "KEPERLUAN DAPI",
+          "row": 55
+        },
+        {
+          "id": "1026_tx_56",
+          "date": "27 Agustus",
+          "entry_number": 5,
+          "description": "Skincare dapi",
+          "amount": 160200.0,
+          "linked_budget_item": "KEPERLUAN DAPI",
+          "row": 56
+        },
+        {
+          "id": "1026_tx_57",
+          "date": "27 Agustus",
+          "entry_number": 6,
+          "description": "Keperluan rumah",
+          "amount": 377900.0,
+          "linked_budget_item": "BELANJA",
+          "row": 57
+        },
+        {
+          "id": "1026_tx_59",
+          "date": "28 Agustus",
+          "entry_number": 1,
+          "description": "Etoll mobil",
+          "amount": 100000.0,
+          "linked_budget_item": "TOL MOBIL",
+          "row": 59
+        },
+        {
+          "id": "1026_tx_60",
+          "date": "28 Agustus",
+          "entry_number": 2,
+          "description": "Sangu abi",
+          "amount": 150000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 60
+        },
+        {
+          "id": "1026_tx_61",
+          "date": "28 Agustus",
+          "entry_number": 3,
+          "description": "Sangu mama",
+          "amount": 16550.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 61
+        },
+        {
+          "id": "1026_tx_62",
+          "date": "28 Agustus",
+          "entry_number": 4,
+          "description": "Laundry",
+          "amount": 57950.0,
+          "linked_budget_item": "LAUNDRY",
+          "row": 62
+        },
+        {
+          "id": "1026_tx_63",
+          "date": "28 Agustus",
+          "entry_number": 5,
+          "description": "Sangu mama",
+          "amount": 27000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 63
+        },
+        {
+          "id": "1026_tx_64",
+          "date": "28 Agustus",
+          "entry_number": 6,
+          "description": "Lele tempong",
+          "amount": 22000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 64
+        },
+        {
+          "id": "1026_tx_65",
+          "date": "28 Agustus",
+          "entry_number": 7,
+          "description": "Bebek rahayu",
+          "amount": 30000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 65
+        },
+        {
+          "id": "1026_tx_66",
+          "date": "28 Agustus",
+          "entry_number": 8,
+          "description": "HIsana",
+          "amount": 17500.0,
+          "linked_budget_item": "BELANJA",
+          "row": 66
+        },
+        {
+          "id": "1026_tx_67",
+          "date": "28 Agustus",
+          "entry_number": 9,
+          "description": "Jasuke",
+          "amount": 14000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 67
+        },
+        {
+          "id": "1026_tx_69",
+          "date": "29 Agustus",
+          "entry_number": 1,
+          "description": "Myrepublic",
+          "amount": 233100.0,
+          "linked_budget_item": "WIFI ONSEN (MR)",
+          "row": 69
+        },
+        {
+          "id": "1026_tx_70",
+          "date": "29 Agustus",
+          "entry_number": 2,
+          "description": "Kopi meratus",
+          "amount": 97080.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 70
+        },
+        {
+          "id": "1026_tx_71",
+          "date": "29 Agustus",
+          "entry_number": 3,
+          "description": "Adm bank",
+          "amount": 10500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 71
+        },
+        {
+          "id": "1026_tx_72",
+          "date": "29 Agustus",
+          "entry_number": 4,
+          "description": "Rumah PPS",
+          "amount": 3550000.0,
+          "linked_budget_item": "RUMAH PPS",
+          "row": 72
+        },
+        {
+          "id": "1026_tx_73",
+          "date": "29 Agustus",
+          "entry_number": 5,
+          "description": "Kredit sparepart",
+          "amount": 583500.0,
+          "linked_budget_item": "KREDIT TOKPED",
+          "row": 73
+        },
+        {
+          "id": "1026_tx_74",
+          "date": "29 Agustus",
+          "entry_number": 6,
+          "description": "Cyclocomp",
+          "amount": 2996000.0,
+          "linked_budget_item": "LAIN-LAIN",
+          "row": 74
+        },
+        {
+          "id": "1026_tx_75",
+          "date": "29 Agustus",
+          "entry_number": 7,
+          "description": "Heart rate monitor sepeda",
+          "amount": 373750.0,
+          "linked_budget_item": "LAIN-LAIN",
+          "row": 75
+        },
+        {
+          "id": "1026_tx_76",
+          "date": "29 Agustus",
+          "entry_number": 8,
+          "description": "Mounting cyclocomp",
+          "amount": 97000.0,
+          "linked_budget_item": "LAIN-LAIN",
+          "row": 76
+        },
+        {
+          "id": "1026_tx_77",
+          "date": "29 Agustus",
+          "entry_number": 9,
+          "description": "Sangu mama",
+          "amount": 158380.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 77
+        },
+        {
+          "id": "1026_tx_78",
+          "date": "29 Agustus",
+          "entry_number": 10,
+          "description": "Point coffee",
+          "amount": 25000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 78
+        },
+        {
+          "id": "1026_tx_79",
+          "date": "29 Agustus",
+          "entry_number": 11,
+          "description": "Tarik tunai",
+          "amount": 100000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 79
+        },
+        {
+          "id": "1026_tx_80",
+          "date": "29 Agustus",
+          "entry_number": 12,
+          "description": "Jajan rumah",
+          "amount": 139200.0,
+          "linked_budget_item": "BELANJA",
+          "row": 80
+        },
+        {
+          "id": "1026_tx_82",
+          "date": "30 Agustus",
+          "entry_number": 1,
+          "description": "Sangu mama",
+          "amount": 33000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 82
+        },
+        {
+          "id": "1026_tx_83",
+          "date": "30 Agustus",
+          "entry_number": 2,
+          "description": "Adm bank",
+          "amount": 8500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 83
+        },
+        {
+          "id": "1026_tx_84",
+          "date": "30 Agustus",
+          "entry_number": 3,
+          "description": "Tilik bayi",
+          "amount": 100000.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 84
+        },
+        {
+          "id": "1026_tx_85",
+          "date": "30 Agustus",
+          "entry_number": 4,
+          "description": "Ayam peci",
+          "amount": 100000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 85
+        },
+        {
+          "id": "1026_tx_86",
+          "date": "30 Agustus",
+          "entry_number": 5,
+          "description": "Telpon Abi",
+          "amount": 50000.0,
+          "linked_budget_item": "TELPON ABI",
+          "row": 86
+        },
+        {
+          "id": "1026_tx_88",
+          "date": "1  Oktober",
+          "entry_number": 1,
+          "description": "Sangu mama",
+          "amount": 21000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 88
+        },
+        {
+          "id": "1026_tx_89",
+          "date": "1  Oktober",
+          "entry_number": 2,
+          "description": "Sangu abi",
+          "amount": 100000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 89
+        },
+        {
+          "id": "1026_tx_90",
+          "date": "1  Oktober",
+          "entry_number": 3,
+          "description": "Etoll",
+          "amount": 100000.0,
+          "linked_budget_item": "TOL MOBIL",
+          "row": 90
+        },
+        {
+          "id": "1026_tx_91",
+          "date": "1  Oktober",
+          "entry_number": 4,
+          "description": "PLN Onsen",
+          "amount": 539050.0,
+          "linked_budget_item": "PLN ONSEN",
+          "row": 91
+        },
+        {
+          "id": "1026_tx_92",
+          "date": "1  Oktober",
+          "entry_number": 5,
+          "description": "BPJS Onsen",
+          "amount": 70000.0,
+          "linked_budget_item": "BPJS ONSEN",
+          "row": 92
+        },
+        {
+          "id": "1026_tx_93",
+          "date": "1  Oktober",
+          "entry_number": 6,
+          "description": "PDAM PPS",
+          "amount": 33200.0,
+          "linked_budget_item": "PDAM PPS",
+          "row": 93
+        },
+        {
+          "id": "1026_tx_94",
+          "date": "1  Oktober",
+          "entry_number": 7,
+          "description": "Iuran PPS",
+          "amount": 90000.0,
+          "linked_budget_item": "IURAN PPS",
+          "row": 94
+        },
+        {
+          "id": "1026_tx_95",
+          "date": "1  Oktober",
+          "entry_number": 8,
+          "description": "Arisan PPS",
+          "amount": 75000.0,
+          "linked_budget_item": "ARISAN PPS",
+          "row": 95
+        },
+        {
+          "id": "1026_tx_96",
+          "date": "1  Oktober",
+          "entry_number": 9,
+          "description": "SPP Dafi",
+          "amount": 169000.0,
+          "linked_budget_item": "SPP DAPI",
+          "row": 96
+        },
+        {
+          "id": "1026_tx_97",
+          "date": "1  Oktober",
+          "entry_number": 10,
+          "description": "Adm bank",
+          "amount": 3500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 97
+        },
+        {
+          "id": "1026_tx_98",
+          "date": "1  Oktober",
+          "entry_number": 11,
+          "description": "Mie ayam",
+          "amount": 19000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 98
+        },
+        {
+          "id": "1026_tx_99",
+          "date": "1  Oktober",
+          "entry_number": 12,
+          "description": "Shopee",
+          "amount": 80144.0,
+          "linked_budget_item": "BELANJA",
+          "row": 99
+        },
+        {
+          "id": "1026_tx_101",
+          "date": "2  Oktober",
+          "entry_number": 1,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 101
+        },
+        {
+          "id": "1026_tx_102",
+          "date": "2  Oktober",
+          "entry_number": 2,
+          "description": "Sangu mama",
+          "amount": 100000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 102
+        },
+        {
+          "id": "1026_tx_103",
+          "date": "2  Oktober",
+          "entry_number": 3,
+          "description": "Sangu abi",
+          "amount": 100000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 103
+        },
+        {
+          "id": "1026_tx_104",
+          "date": "2  Oktober",
+          "entry_number": 4,
+          "description": "Sangu mama",
+          "amount": 33000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 104
+        },
+        {
+          "id": "1026_tx_105",
+          "date": "2  Oktober",
+          "entry_number": 5,
+          "description": "Sangu mama",
+          "amount": 51600.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 105
+        },
+        {
+          "id": "1026_tx_106",
+          "date": "2  Oktober",
+          "entry_number": 6,
+          "description": "Jchicken",
+          "amount": 107000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 106
+        },
+        {
+          "id": "1026_tx_107",
+          "date": "2  Oktober",
+          "entry_number": 7,
+          "description": "Jchicken",
+          "amount": 30000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 107
+        },
+        {
+          "id": "1026_tx_108",
+          "date": "2  Oktober",
+          "entry_number": 8,
+          "description": "BBM Motor",
+          "amount": 57850.0,
+          "linked_budget_item": "BBM MOTOR",
+          "row": 108
+        },
+        {
+          "id": "1026_tx_110",
+          "date": "3  Oktober",
+          "entry_number": 1,
+          "description": "Tarik tunai",
+          "amount": 200000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 110
+        },
+        {
+          "id": "1026_tx_111",
+          "date": "3  Oktober",
+          "entry_number": 2,
+          "description": "Toko watu ireng",
+          "amount": 83000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 111
+        },
+        {
+          "id": "1026_tx_112",
+          "date": "3  Oktober",
+          "entry_number": 3,
+          "description": "Sunny baby",
+          "amount": 160000.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 112
+        },
+        {
+          "id": "1026_tx_113",
+          "date": "3  Oktober",
+          "entry_number": 4,
+          "description": "Telpon Abi",
+          "amount": 50000.0,
+          "linked_budget_item": "TELPON ABI",
+          "row": 113
+        },
+        {
+          "id": "1026_tx_114",
+          "date": "3  Oktober",
+          "entry_number": 5,
+          "description": "Adm bank",
+          "amount": 3500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 114
+        },
+        {
+          "id": "1026_tx_115",
+          "date": "3  Oktober",
+          "entry_number": 6,
+          "description": "PLN PPS",
+          "amount": 500000.0,
+          "linked_budget_item": "PLN PPS",
+          "row": 115
+        },
+        {
+          "id": "1026_tx_117",
+          "date": "4  Oktober",
+          "entry_number": 1,
+          "description": "Adm bank",
+          "amount": 4000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 117
+        },
+        {
+          "id": "1026_tx_118",
+          "date": "4  Oktober",
+          "entry_number": 2,
+          "description": "Kopag abi",
+          "amount": 104650.0,
+          "linked_budget_item": "BELANJA",
+          "row": 118
+        },
+        {
+          "id": "1026_tx_120",
+          "date": "5  Oktober",
+          "entry_number": 1,
+          "description": "Obat",
+          "amount": 235575.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 120
+        },
+        {
+          "id": "1026_tx_121",
+          "date": "5  Oktober",
+          "entry_number": 2,
+          "description": "Tarik tunai",
+          "amount": 100000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 121
+        },
+        {
+          "id": "1026_tx_122",
+          "date": "5  Oktober",
+          "entry_number": 3,
+          "description": "Klinik PPS",
+          "amount": 88697.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 122
+        },
+        {
+          "id": "1026_tx_123",
+          "date": "5  Oktober",
+          "entry_number": 4,
+          "description": "Pecel pincuk",
+          "amount": 28000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 123
+        },
+        {
+          "id": "1026_tx_124",
+          "date": "5  Oktober",
+          "entry_number": 5,
+          "description": "Etoll",
+          "amount": 100000.0,
+          "linked_budget_item": "TOL MOBIL",
+          "row": 124
+        },
+        {
+          "id": "1026_tx_125",
+          "date": "5  Oktober",
+          "entry_number": 6,
+          "description": "Sangu abi",
+          "amount": 200000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 125
+        },
+        {
+          "id": "1026_tx_126",
+          "date": "5  Oktober",
+          "entry_number": 7,
+          "description": "Jajan",
+          "amount": 93300.0,
+          "linked_budget_item": "BELANJA",
+          "row": 126
+        },
+        {
+          "id": "1026_tx_127",
+          "date": "5  Oktober",
+          "entry_number": 8,
+          "description": "Kado temen dapi",
+          "amount": 200000.0,
+          "linked_budget_item": "KEPERLUAN DAPI",
+          "row": 127
+        },
+        {
+          "id": "1026_tx_128",
+          "date": "5  Oktober",
+          "entry_number": 9,
+          "description": "Jajan",
+          "amount": 100000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 128
+        },
+        {
+          "id": "1026_tx_129",
+          "date": "5  Oktober",
+          "entry_number": 10,
+          "description": "Point coffee",
+          "amount": 25000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 129
+        },
+        {
+          "id": "1026_tx_131",
+          "date": "6  Oktober",
+          "entry_number": 1,
+          "description": "Adm bank",
+          "amount": 2000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 131
+        },
+        {
+          "id": "1026_tx_132",
+          "date": "6  Oktober",
+          "entry_number": 2,
+          "description": "Telpon mama",
+          "amount": 95000.0,
+          "linked_budget_item": "TELPON MAMA",
+          "row": 132
+        },
+        {
+          "id": "1026_tx_133",
+          "date": "6  Oktober",
+          "entry_number": 3,
+          "description": "Sangu mama",
+          "amount": 19500.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 133
+        },
+        {
+          "id": "1026_tx_134",
+          "date": "6  Oktober",
+          "entry_number": 4,
+          "description": "Sangu mama",
+          "amount": 32400.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 134
+        },
+        {
+          "id": "1026_tx_135",
+          "date": "6  Oktober",
+          "entry_number": 5,
+          "description": "Sangu mama",
+          "amount": 19000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 135
+        },
+        {
+          "id": "1026_tx_137",
+          "date": "7  Oktober",
+          "entry_number": 1,
+          "description": "Sangu mama",
+          "amount": 13250.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 137
+        },
+        {
+          "id": "1026_tx_138",
+          "date": "7  Oktober",
+          "entry_number": 2,
+          "description": "Sangu mama",
+          "amount": 23800.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 138
+        },
+        {
+          "id": "1026_tx_139",
+          "date": "7  Oktober",
+          "entry_number": 3,
+          "description": "Sangu mama",
+          "amount": 64000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 139
+        }
+      ]
+    },
+    "1126": {
+      "sheet_name": "1126",
+      "title": "LAPORAN BULAN NOVEMBER 2026",
+      "is_mmyy": true,
+      "month": 11,
+      "year": 2026,
+      "incomes": [
+        {
+          "source": "ABI",
+          "amount": 16500000.0,
+          "row": 5
+        },
+        {
+          "source": "MAMA",
+          "amount": 7476912.0,
+          "row": 6
+        }
+      ],
+      "budget_items": [
+        {
+          "id": "1126_b_5",
+          "name": "PDAM PPS",
+          "budget": 100000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 100000.0,
+          "row": 5,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_6",
+          "name": "PLN PPS",
+          "budget": 500000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 500000.0,
+          "row": 6,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_7",
+          "name": "WIFI (PPS) FM",
+          "budget": 300000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 300000.0,
+          "row": 7,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_8",
+          "name": "TELPON ABI",
+          "budget": 75000.0,
+          "category": "Wajib",
+          "actual": 50000.0,
+          "remaining": 25000.0,
+          "row": 8,
+          "formula_output": "=M70"
+        },
+        {
+          "id": "1126_b_9",
+          "name": "TELPON MAMA",
+          "budget": 120000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 120000.0,
+          "row": 9,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_10",
+          "name": "RUMAH PPS",
+          "budget": 3200000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 3200000.0,
+          "row": 10,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_11",
+          "name": "IURAN PPS",
+          "budget": 90000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 90000.0,
+          "row": 11,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_12",
+          "name": "ARISAN PPS",
+          "budget": 75000.0,
+          "category": "Wajib",
+          "actual": 0.0,
+          "remaining": 75000.0,
+          "row": 12,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_13",
+          "name": "WIFI ONSEN (MR)",
+          "budget": 260000.0,
+          "category": "Keluarga",
+          "actual": 0.0,
+          "remaining": 260000.0,
+          "row": 13,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_14",
+          "name": "BPJS ONSEN",
+          "budget": 70000.0,
+          "category": "Keluarga",
+          "actual": 0.0,
+          "remaining": 70000.0,
+          "row": 14,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_15",
+          "name": "PLN ONSEN",
+          "budget": 550000.0,
+          "category": "Keluarga",
+          "actual": 0.0,
+          "remaining": 550000.0,
+          "row": 15,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_16",
+          "name": "NENEK AI",
+          "budget": 1000000.0,
+          "category": "Keluarga",
+          "actual": 0.0,
+          "remaining": 1000000.0,
+          "row": 16,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_17",
+          "name": "KEPERLUAN DAPI",
+          "budget": 1250000.0,
+          "category": "Anak",
+          "actual": 0.0,
+          "remaining": 1250000.0,
+          "row": 17,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_18",
+          "name": "SPP DAPI",
+          "budget": 169000.0,
+          "category": "Anak",
+          "actual": 0.0,
+          "remaining": 169000.0,
+          "row": 18,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_19",
+          "name": "BBM MOTOR",
+          "budget": 400000.0,
+          "category": "Transportasi",
+          "actual": 0.0,
+          "remaining": 400000.0,
+          "row": 19,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_20",
+          "name": "BBM MOBIL",
+          "budget": 700000.0,
+          "category": "Transportasi",
+          "actual": 0.0,
+          "remaining": 700000.0,
+          "row": 20,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_21",
+          "name": "TOL MOBIL",
+          "budget": 450000.0,
+          "category": "Transportasi",
+          "actual": 100000.0,
+          "remaining": 350000.0,
+          "row": 21,
+          "formula_output": "=M68"
+        },
+        {
+          "id": "1126_b_22",
+          "name": "BELANJA",
+          "budget": 3500000.0,
+          "category": "Rumah",
+          "actual": 175971.0,
+          "remaining": 3324029.0,
+          "row": 22,
+          "formula_output": "=M39+M41+M54+M40+M38"
+        },
+        {
+          "id": "1126_b_23",
+          "name": "NETFLIX",
+          "budget": 38000.0,
+          "category": "Rumah",
+          "actual": 0.0,
+          "remaining": 38000.0,
+          "row": 23,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_24",
+          "name": "YOUTUBE",
+          "budget": 27000.0,
+          "category": "Rumah",
+          "actual": 0.0,
+          "remaining": 27000.0,
+          "row": 24,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_25",
+          "name": "LAUNDRY",
+          "budget": 200000.0,
+          "category": "Rumah",
+          "actual": 0.0,
+          "remaining": 200000.0,
+          "row": 25,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_26",
+          "name": "TABUNGAN",
+          "budget": 6561055.9,
+          "category": "Tabungan",
+          "actual": 0.0,
+          "remaining": 6561055.9,
+          "row": 26,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_27",
+          "name": "SANGU ABI",
+          "budget": 600000.0,
+          "category": "Lain-lain",
+          "actual": 200000.0,
+          "remaining": 400000.0,
+          "row": 27,
+          "formula_output": "=M52"
+        },
+        {
+          "id": "1126_b_28",
+          "name": "SANGU MAMA",
+          "budget": 600000.0,
+          "category": "Lain-lain",
+          "actual": 298000.0,
+          "remaining": 302000.0,
+          "row": 28,
+          "formula_output": "=M50+M59+M60+M62+M69+M49+M77+M78+M79"
+        },
+        {
+          "id": "1126_b_29",
+          "name": "JALAN-JALAN",
+          "budget": 500000.0,
+          "category": "Lain-lain",
+          "actual": 179200.0,
+          "remaining": 320800.0,
+          "row": 29,
+          "formula_output": "=M43+M71+M80"
+        },
+        {
+          "id": "1126_b_30",
+          "name": "PRIBADI",
+          "budget": 500000.0,
+          "category": "Lain-lain",
+          "actual": 100000.0,
+          "remaining": 400000.0,
+          "row": 30,
+          "formula_output": "=M42"
+        },
+        {
+          "id": "1126_b_31",
+          "name": "KREDIT TOKPED",
+          "budget": 700000.0,
+          "category": "Lain-lain",
+          "actual": 0.0,
+          "remaining": 700000.0,
+          "row": 31,
+          "formula_output": ""
+        },
+        {
+          "id": "1126_b_32",
+          "name": "ADMIN BANK",
+          "budget": 50000.0,
+          "category": "Lain-lain",
+          "actual": 6700.0,
+          "remaining": 43300.0,
+          "row": 32,
+          "formula_output": "=M44+M51+M61+M81"
+        },
+        {
+          "id": "1126_b_34",
+          "name": "LAIN-LAIN",
+          "budget": 0.0,
+          "category": "Lain-lain",
+          "actual": 266918.0,
+          "remaining": -266918.0,
+          "row": 34,
+          "formula_output": "=M53"
+        }
+      ],
+      "kpis": {
+        "Total Pemasukan": 23976912.0,
+        "Total Budget": 22585055.9,
+        "Total Pengeluaran": 1376789.0,
+        "Total Sisa": 21208266.9
+      },
+      "category_summaries": [
+        {
+          "category": "Wajib",
+          "budget": 4460000.0,
+          "actual": 50000.0,
+          "remaining": 4410000.0
+        },
+        {
+          "category": "Keluarga",
+          "budget": 1880000.0,
+          "actual": 0.0,
+          "remaining": 1880000.0
+        },
+        {
+          "category": "Anak",
+          "budget": 1419000.0,
+          "actual": 0.0,
+          "remaining": 1419000.0
+        },
+        {
+          "category": "Transportasi",
+          "budget": 1550000.0,
+          "actual": 100000.0,
+          "remaining": 1450000.0
+        },
+        {
+          "category": "Rumah",
+          "budget": 3765000.0,
+          "actual": 175971.0,
+          "remaining": 3589029.0
+        },
+        {
+          "category": "Tabungan",
+          "budget": 6561055.9,
+          "actual": 0.0,
+          "remaining": 6561055.9
+        },
+        {
+          "category": "Lain-lain",
+          "budget": 2950000.0,
+          "actual": 1050818.0,
+          "remaining": 1899182.0
+        }
+      ],
+      "bank_balance": 6100122.9,
+      "discrepancy": 16500000.1,
+      "transactions": [
+        {
+          "id": "1126_tx_38",
+          "date": "25 Oktober",
+          "entry_number": 1,
+          "description": "Sisa",
+          "amount": -361229.0,
+          "linked_budget_item": "BELANJA",
+          "row": 38
+        },
+        {
+          "id": "1126_tx_39",
+          "date": "25 Oktober",
+          "entry_number": 2,
+          "description": "Tarik tunai",
+          "amount": 200000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 39
+        },
+        {
+          "id": "1126_tx_40",
+          "date": "25 Oktober",
+          "entry_number": 3,
+          "description": "Bubur",
+          "amount": 6000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 40
+        },
+        {
+          "id": "1126_tx_41",
+          "date": "25 Oktober",
+          "entry_number": 4,
+          "description": "Tarik tunai",
+          "amount": 200000.0,
+          "linked_budget_item": "BELANJA",
+          "row": 41
+        },
+        {
+          "id": "1126_tx_42",
+          "date": "25 Oktober",
+          "entry_number": 5,
+          "description": "Dramabox",
+          "amount": 100000.0,
+          "linked_budget_item": "PRIBADI",
+          "row": 42
+        },
+        {
+          "id": "1126_tx_43",
+          "date": "25 Oktober",
+          "entry_number": 6,
+          "description": "Sandys beads",
+          "amount": 48000.0,
+          "linked_budget_item": "JALAN-JALAN",
+          "row": 43
+        },
+        {
+          "id": "1126_tx_44",
+          "date": "25 Oktober",
+          "entry_number": 7,
+          "description": "Adm bank",
+          "amount": 2000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 44
+        },
+        {
+          "id": "1126_tx_49",
+          "date": "26 Oktober",
+          "entry_number": 1,
+          "description": "Tomoro coffee",
+          "amount": 21000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 49
+        },
+        {
+          "id": "1126_tx_50",
+          "date": "26 Oktober",
+          "entry_number": 2,
+          "description": "Sangu mama",
+          "amount": 100000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 50
+        },
+        {
+          "id": "1126_tx_51",
+          "date": "26 Oktober",
+          "entry_number": 3,
+          "description": "Adm bank",
+          "amount": 1000.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 51
+        },
+        {
+          "id": "1126_tx_52",
+          "date": "26 Oktober",
+          "entry_number": 4,
+          "description": "Sangu abi",
+          "amount": 200000.0,
+          "linked_budget_item": "SANGU ABI",
+          "row": 52
+        },
+        {
+          "id": "1126_tx_53",
+          "date": "26 Oktober",
+          "entry_number": 5,
+          "description": "Klinik dapi",
+          "amount": 266918.0,
+          "linked_budget_item": "LAIN-LAIN",
+          "row": 53
+        },
+        {
+          "id": "1126_tx_54",
+          "date": "26 Oktober",
+          "entry_number": 6,
+          "description": "Alfamidi",
+          "amount": 131200.0,
+          "linked_budget_item": "BELANJA",
+          "row": 54
+        },
+        {
+          "id": "1126_tx_59",
+          "date": "27 Oktober",
+          "entry_number": 1,
+          "description": "Donattour",
+          "amount": 22000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 59
+        },
+        {
+          "id": "1126_tx_60",
+          "date": "27 Oktober",
+          "entry_number": 2,
+          "description": "Jchicken",
+          "amount": 42000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 60
+        },
+        {
+          "id": "1126_tx_61",
+          "date": "27 Oktober",
+          "entry_number": 3,
+          "description": "Adm bank",
+          "amount": 2500.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 61
+        },
+        {
+          "id": "1126_tx_62",
+          "date": "27 Oktober",
+          "entry_number": 4,
+          "description": "Bikang",
+          "amount": 38000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 62
+        },
+        {
+          "id": "1126_tx_68",
+          "date": "28 Oktober",
+          "entry_number": 1,
+          "description": "Etoll",
+          "amount": 100000.0,
+          "linked_budget_item": "TOL MOBIL",
+          "row": 68
+        },
+        {
+          "id": "1126_tx_69",
+          "date": "28 Oktober",
+          "entry_number": 2,
+          "description": "Kmart",
+          "amount": 15100.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 69
+        },
+        {
+          "id": "1126_tx_70",
+          "date": "28 Oktober",
+          "entry_number": 3,
+          "description": "Telpon abi",
+          "amount": 50000.0,
+          "linked_budget_item": "TELPON ABI",
+          "row": 70
+        },
+        {
+          "id": "1126_tx_71",
+          "date": "28 Oktober",
+          "entry_number": 4,
+          "description": "Gojek",
+          "amount": 31200.0,
+          "linked_budget_item": "JALAN-JALAN",
+          "row": 71
+        },
+        {
+          "id": "1126_tx_77",
+          "date": "29 Oktober",
+          "entry_number": 1,
+          "description": "Tomoro coffee",
+          "amount": 21000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 77
+        },
+        {
+          "id": "1126_tx_78",
+          "date": "29 Oktober",
+          "entry_number": 2,
+          "description": "Bakso",
+          "amount": 15000.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 78
+        },
+        {
+          "id": "1126_tx_79",
+          "date": "29 Oktober",
+          "entry_number": 3,
+          "description": "Kmart",
+          "amount": 23900.0,
+          "linked_budget_item": "SANGU MAMA",
+          "row": 79
+        },
+        {
+          "id": "1126_tx_80",
+          "date": "29 Oktober",
+          "entry_number": 4,
+          "description": "Gopay mama",
+          "amount": 100000.0,
+          "linked_budget_item": "JALAN-JALAN",
+          "row": 80
+        },
+        {
+          "id": "1126_tx_81",
+          "date": "29 Oktober",
+          "entry_number": 5,
+          "description": "Adm bank",
+          "amount": 1200.0,
+          "linked_budget_item": "ADMIN BANK",
+          "row": 81
+        },
+        {
+          "id": "1126_tx_82",
+          "date": "29 Oktober",
+          "entry_number": 6,
+          "description": "Sangu abi",
+          "amount": 100000.0,
+          "linked_budget_item": null,
+          "row": 82
+        },
+        {
+          "id": "1126_tx_83",
+          "date": "29 Oktober",
+          "entry_number": 7,
+          "description": "Alfamidi",
+          "amount": 91035.0,
+          "linked_budget_item": null,
+          "row": 83
+        },
+        {
+          "id": "1126_tx_84",
+          "date": "29 Oktober",
+          "entry_number": 8,
+          "description": "Kuma",
+          "amount": 20000.0,
+          "linked_budget_item": null,
+          "row": 84
+        },
+        {
+          "id": "1126_tx_85",
+          "date": "29 Oktober",
+          "entry_number": 9,
+          "description": "Alfamudi",
+          "amount": 35800.0,
+          "linked_budget_item": null,
+          "row": 85
+        },
+        {
+          "id": "1126_tx_86",
+          "date": "29 Oktober",
+          "entry_number": 10,
+          "description": "Tarik tunai",
+          "amount": 100000.0,
+          "linked_budget_item": null,
+          "row": 86
+        },
+        {
+          "id": "1126_tx_87",
+          "date": "29 Oktober",
+          "entry_number": 11,
+          "description": "BBM motor",
+          "amount": 55100.0,
+          "linked_budget_item": null,
+          "row": 87
+        },
+        {
+          "id": "1126_tx_88",
+          "date": "29 Oktober",
+          "entry_number": 12,
+          "description": "Sangu abi",
+          "amount": 101200.0,
+          "linked_budget_item": null,
+          "row": 88
+        },
+        {
+          "id": "1126_tx_89",
+          "date": "29 Oktober",
+          "entry_number": 13,
+          "description": "Sangu abi",
+          "amount": 95500.0,
+          "linked_budget_item": null,
+          "row": 89
+        }
+      ]
+    }
+  }
+}
