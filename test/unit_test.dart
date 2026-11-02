@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dapoy_wallet/core/formatting/currency_formatter.dart';
+import 'package:dapoy_wallet/core/formatting/date_formatter.dart';
 import 'package:dapoy_wallet/features/budget/domain/models.dart';
 
 void main() {
@@ -165,6 +166,34 @@ void main() {
       expect(edited.description, 'BBM Pertamax Turbo');
       expect(edited.amount, 75000);
       expect(edited.linkedBudgetItem, 'BBM MOBIL');
+    });
+  });
+
+  group('DateFormatter tests', () {
+    test('Parses various Indonesian date strings and sorts chronologically', () {
+      final d1 = DateFormatter.parseIndonesianDate('25 Agustus', referenceYear: 2026, referenceMonth: 10);
+      final d2 = DateFormatter.parseIndonesianDate('30 September', referenceYear: 2026, referenceMonth: 10);
+      final d3 = DateFormatter.parseIndonesianDate('1  Oktober', referenceYear: 2026, referenceMonth: 10);
+      final d4 = DateFormatter.parseIndonesianDate('7 Oktober', referenceYear: 2026, referenceMonth: 10);
+      final d5 = DateFormatter.parseIndonesianDate('29 Oktober 2026', referenceYear: 2026, referenceMonth: 10);
+
+      expect(d1, DateTime(2026, 8, 25));
+      expect(d2, DateTime(2026, 9, 30));
+      expect(d3, DateTime(2026, 10, 1));
+      expect(d4, DateTime(2026, 10, 7));
+      expect(d5, DateTime(2026, 10, 29));
+
+      final dates = [d3, d1, d5, d2, d4]..sort();
+      expect(dates, [d1, d2, d3, d4, d5]);
+
+      // Reversed sort (newest first)
+      final newestFirst = [d3, d1, d5, d2, d4]..sort((a, b) => b.compareTo(a));
+      expect(newestFirst, [d5, d4, d3, d2, d1]);
+    });
+
+    test('Cleans extra whitespace in date string', () {
+      expect(DateFormatter.cleanDateString('1  Oktober'), '1 Oktober');
+      expect(DateFormatter.cleanDateString('  25   Agustus  '), '25 Agustus');
     });
   });
 }

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/responsive/responsive_layout.dart';
 import '../../../../app/theme/app_theme.dart';
 import '../../../../core/formatting/currency_formatter.dart';
+import '../../../../core/formatting/date_formatter.dart';
 import '../../budget/data/budget_repository.dart';
 import '../../budget/domain/models.dart';
 import 'quick_add_transaction_dialog.dart';
@@ -17,6 +18,7 @@ class TransactionsScreen extends ConsumerStatefulWidget {
 class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
   String searchQuery = '';
   String selectedFilterCategory = 'Semua';
+  bool _sortNewestFirst = true; // true: terbaru ke terlama, false: terlama ke terbaru
 
   void _showAddDialog() {
     showDialog(
@@ -81,11 +83,38 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
       return matchesSearch;
     }).toList();
 
-    // Group by Date
-    final Map<String, List<DailyExpense>> groupedByDate = {};
-    for (final tx in filtered.reversed) {
-      final dateKey = tx.date.isNotEmpty ? tx.date : 'Tanpa Tanggal';
-      groupedByDate.putIfAbsent(dateKey, () => []).add(tx);
+    final refYear = overview.month.year ?? 2026;
+    final refMonth = overview.month.month ?? 10;
+
+    // Group transactions by parsed date (chronological sorting)
+    final Map<DateTime, String> dateLabels = {};
+    final Map<DateTime, List<DailyExpense>> groupedByDate = {};
+
+    for (final tx in filtered) {
+      final cleanDate = DateFormatter.cleanDateString(tx.date);
+      final parsedDate = DateFormatter.parseIndonesianDate(
+        cleanDate,
+        referenceYear: refYear,
+        referenceMonth: refMonth,
+      );
+
+      dateLabels.putIfAbsent(parsedDate, () => cleanDate.isNotEmpty ? cleanDate : 'Tanpa Tanggal');
+      groupedByDate.putIfAbsent(parsedDate, () => []).add(tx);
+    }
+
+    // Sort the dates strictly chronologically
+    final sortedDates = groupedByDate.keys.toList()
+      ..sort((a, b) => _sortNewestFirst ? b.compareTo(a) : a.compareTo(b));
+
+    // Inside each date group, sort transactions by entryNumber
+    for (final date in sortedDates) {
+      groupedByDate[date]!.sort((a, b) {
+        if (_sortNewestFirst) {
+          return b.entryNumber.compareTo(a.entryNumber);
+        } else {
+          return a.entryNumber.compareTo(b.entryNumber);
+        }
+      });
     }
 
     final totalFilteredSpending = filtered.fold(0.0, (s, t) => s + t.amount);
@@ -94,6 +123,19 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
       appBar: AppBar(
         title: const Text('Catatan Pengeluaran', style: TextStyle(fontWeight: FontWeight.bold)),
         actions: [
+          IconButton(
+            tooltip: _sortNewestFirst ? 'Urutan: Tanggal Terbaru' : 'Urutan: Tanggal Terlama',
+            icon: Icon(_sortNewestFirst ? Icons.arrow_downward : Icons.arrow_upward),
+            onPressed: () {
+              setState(() => _sortNewestFirst = !_sortNewestFirst);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  duration: const Duration(milliseconds: 1000),
+                  content: Text(_sortNewestFirst ? 'Urutan: Tanggal Terbaru ke Terlama' : 'Urutan: Tanggal Terlama ke Terbaru'),
+                ),
+              );
+            },
+          ),
           IconButton(
             tooltip: 'Tambah Transaksi',
             icon: const Icon(Icons.add_circle_outline),
@@ -202,13 +244,14 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
 
           // Grouped List
           Expanded(
-            child: groupedByDate.isEmpty
+            child: sortedDates.isEmpty
                 ? const Center(child: Text('Tidak ada transaksi yang cocok'))
                 : ListView.builder(
                     padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 8),
-                    itemCount: groupedByDate.keys.length,
+                    itemCount: sortedDates.length,
                     itemBuilder: (context, dateIndex) {
-                      final date = groupedByDate.keys.elementAt(dateIndex);
+                      final date = sortedDates[dateIndex];
+                      final dateLabel = dateLabels[date] ?? 'Tanpa Tanggal';
                       final txsForDate = groupedByDate[date]!;
                       final subtotal = txsForDate.fold(0.0, (s, t) => s + t.amount);
 
@@ -226,7 +269,7 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                                     const Icon(Icons.calendar_today_outlined, size: 14, color: AppTheme.primaryGreen),
                                     const SizedBox(width: 6),
                                     Text(
-                                      date,
+                                      dateLabel,
                                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                                     ),
                                   ],

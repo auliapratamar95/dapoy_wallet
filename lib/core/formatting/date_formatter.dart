@@ -40,5 +40,49 @@ class DateFormatter {
     }
     return code;
   }
+
+  /// Parses an Indonesian date string (e.g. "25 Agustus", "1  Oktober", "29 Oktober 2026")
+  /// into a DateTime given a reference year/month.
+  static DateTime parseIndonesianDate(
+    String dateStr, {
+    int referenceYear = 2026,
+    int referenceMonth = 10,
+  }) {
+    final clean = dateStr.replaceAll(RegExp(r'\s+'), ' ').trim();
+    if (clean.isEmpty) return DateTime(referenceYear, referenceMonth, 1);
+
+    final parts = clean.split(' ');
+    final day = int.tryParse(parts[0]) ?? 1;
+    int month = referenceMonth;
+    int year = referenceYear;
+
+    if (parts.length >= 2) {
+      final monthNameLower = parts[1].toLowerCase();
+      for (int i = 0; i < indonesianMonths.length; i++) {
+        if (indonesianMonths[i].toLowerCase() == monthNameLower) {
+          month = i + 1;
+          break;
+        }
+      }
+    }
+
+    if (parts.length >= 3) {
+      final y = int.tryParse(parts[2]);
+      if (y != null) {
+        year = y < 100 ? 2000 + y : y;
+      }
+    } else {
+      if (month > referenceMonth + 6) {
+        year = referenceYear - 1;
+      }
+    }
+
+    return DateTime(year, month, day);
+  }
+
+  /// Cleans extra whitespaces in date string (e.g. "1  Oktober" -> "1 Oktober")
+  static String cleanDateString(String dateStr) {
+    return dateStr.replaceAll(RegExp(r'\s+'), ' ').trim();
+  }
 }
 
