@@ -18,7 +18,8 @@ class _CategoryPieChartState extends State<CategoryPieChart> {
 
   @override
   Widget build(BuildContext context) {
-    final validSummaries = widget.summaries.where((s) => s.actual > 0).toList();
+    final validSummaries = widget.summaries.where((s) => s.actual > 0).toList()
+      ..sort((a, b) => AppTheme.getCategorySortIndex(a.category).compareTo(AppTheme.getCategorySortIndex(b.category)));
     final totalSpent = validSummaries.fold(0.0, (sum, s) => sum + s.actual);
 
     if (validSummaries.isEmpty || totalSpent <= 0) {

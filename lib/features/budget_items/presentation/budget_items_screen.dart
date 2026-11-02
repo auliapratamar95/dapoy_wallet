@@ -24,16 +24,6 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
   String sortBy = 'category'; // 'category', 'name', 'budget', 'actual', 'remaining', 'utilization'
   String? _newlyAddedItemId;
 
-  static const List<String> _categoryOrder = [
-    'Wajib',
-    'Keluarga',
-    'Anak',
-    'Transportasi',
-    'Rumah',
-    'Tabungan',
-    'Lain-lain',
-  ];
-
   @override
   Widget build(BuildContext context) {
     final budgetState = ref.watch(budgetProvider);
@@ -45,7 +35,9 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
       return const Scaffold(body: Center(child: Text('Data anggaran tidak tersedia')));
     }
 
-    final categories = ['Semua', ...overview.categorySummaries.map((c) => c.category)];
+    final rawCats = overview.categorySummaries.map((c) => c.category).toSet().toList()
+      ..sort((a, b) => AppTheme.getCategorySortIndex(a).compareTo(AppTheme.getCategorySortIndex(b)));
+    final categories = ['Semua', ...rawCats];
 
     // Filter and sort items
     var items = overview.budgetItems.where((item) {
@@ -64,14 +56,12 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
 
       switch (sortBy) {
         case 'category':
-          final catA = _categoryOrder.indexOf(a.category);
-          final catB = _categoryOrder.indexOf(b.category);
-          final orderA = catA == -1 ? 999 : catA;
-          final orderB = catB == -1 ? 999 : catB;
+          final orderA = AppTheme.getCategorySortIndex(a.category);
+          final orderB = AppTheme.getCategorySortIndex(b.category);
           if (orderA != orderB) {
             return orderA.compareTo(orderB);
           }
-          return a.name.compareTo(b.name);
+          return a.name.toLowerCase().compareTo(b.name.toLowerCase());
         case 'budget':
           return b.budget.compareTo(a.budget);
         case 'actual':
@@ -139,19 +129,33 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
                   child: Row(
                     children: categories.map((cat) {
                       final isSelected = selectedCategory == cat;
+                      final isSemua = cat == 'Semua';
+                      final catColor = isSemua ? AppTheme.primaryGreen : AppTheme.getCategoryColor(cat);
+                      final catIcon = isSemua ? Icons.grid_view_rounded : AppTheme.getCategoryIcon(cat);
+
                       return Padding(
                         padding: const EdgeInsets.only(right: 6.0),
                         child: FilterChip(
+                          avatar: Icon(
+                            catIcon,
+                            size: 14,
+                            color: isSelected ? Colors.white : catColor,
+                          ),
                           label: Text(cat),
                           selected: isSelected,
                           onSelected: (sel) {
                             setState(() => selectedCategory = sel ? cat : 'Semua');
                           },
-                          selectedColor: AppTheme.primaryGreen.withOpacity(0.2),
+                          selectedColor: catColor,
+                          backgroundColor: catColor.withValues(alpha: 0.1),
+                          side: BorderSide(
+                            color: isSelected ? catColor : catColor.withValues(alpha: 0.3),
+                            width: 1,
+                          ),
                           labelStyle: TextStyle(
                             fontSize: 12,
-                            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                            color: isSelected ? AppTheme.primaryGreen : null,
+                            fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                            color: isSelected ? Colors.white : (isDark ? Colors.grey.shade300 : catColor),
                           ),
                         ),
                       );

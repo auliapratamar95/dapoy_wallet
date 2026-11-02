@@ -28,6 +28,7 @@ class _QuickAddTransactionDialogState extends ConsumerState<QuickAddTransactionD
   late TextEditingController _amountController;
   BudgetItem? _selectedBudgetItem;
   bool _isSaving = false;
+  String _selectedFilterCategory = 'Semua';
 
   @override
   void initState() {
@@ -145,13 +146,43 @@ class _QuickAddTransactionDialogState extends ConsumerState<QuickAddTransactionD
     final budgetState = ref.watch(budgetProvider);
     final overview = budgetState.currentOverview;
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final isEditing = widget.expenseToEdit != null;
 
     if (overview == null) {
       return const SizedBox.shrink();
     }
 
-    final items = overview.budgetItems;
+    final sortedItems = List<BudgetItem>.from(overview.budgetItems)
+      ..sort((a, b) {
+        final catA = AppTheme.getCategorySortIndex(a.category);
+        final catB = AppTheme.getCategorySortIndex(b.category);
+        if (catA != catB) return catA.compareTo(catB);
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      });
+
+    final availableCategories = ['Semua'];
+    for (final cat in AppTheme.categoryOrder) {
+      if (sortedItems.any((i) => i.category == cat)) {
+        availableCategories.add(cat);
+      }
+    }
+    for (final item in sortedItems) {
+      if (!availableCategories.contains(item.category)) {
+        availableCategories.add(item.category);
+      }
+    }
+
+    final List<BudgetItem> dropdownItems;
+    if (_selectedFilterCategory == 'Semua') {
+      dropdownItems = sortedItems;
+    } else {
+      final filtered = sortedItems.where((i) => i.category == _selectedFilterCategory).toList();
+      if (_selectedBudgetItem != null && !filtered.any((i) => i.id == _selectedBudgetItem!.id)) {
+        filtered.insert(0, _selectedBudgetItem!);
+      }
+      dropdownItems = filtered;
+    }
 
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -244,40 +275,295 @@ class _QuickAddTransactionDialogState extends ConsumerState<QuickAddTransactionD
                   ),
                   const SizedBox(height: 14),
 
+                  // Category Filter Chips
+                  Row(
+                    children: [
+                      const Icon(Icons.tune_rounded, size: 15, color: Colors.grey),
+                      const SizedBox(width: 6),
+                      Text(
+                        'Pilih Kategori:',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: isDark ? Colors.grey.shade400 : Colors.grey.shade700,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: availableCategories.map((cat) {
+                        final isSelected = _selectedFilterCategory == cat;
+                        final isSemua = cat == 'Semua';
+                        final catColor = isSemua ? AppTheme.safeGreen : AppTheme.getCategoryColor(cat);
+                        final catIcon = isSemua ? Icons.grid_view_rounded : AppTheme.getCategoryIcon(cat);
+
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 6.0),
+                          child: FilterChip(
+                            avatar: Icon(
+                              catIcon,
+                              size: 13,
+                              color: isSelected ? Colors.white : catColor,
+                            ),
+                            label: Text(cat),
+                            selected: isSelected,
+                            onSelected: (selected) {
+                              setState(() {
+                                _selectedFilterCategory = selected ? cat : 'Semua';
+                              });
+                            },
+                            selectedColor: catColor,
+                            backgroundColor: catColor.withValues(alpha: 0.1),
+                            checkmarkColor: Colors.white,
+                            side: BorderSide(
+                              color: isSelected ? catColor : catColor.withValues(alpha: 0.3),
+                              width: 1,
+                            ),
+                            labelStyle: TextStyle(
+                              fontSize: 11,
+                              fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                              color: isSelected ? Colors.white : (isDark ? Colors.grey.shade200 : catColor),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+
                   // Budget Item Dropdown
                   DropdownButtonFormField<BudgetItem>(
-                    initialValue: _selectedBudgetItem,
+                    value: _selectedBudgetItem,
+                    isExpanded: true,
+                    menuMaxHeight: 380,
+                    borderRadius: BorderRadius.circular(16),
+                    dropdownColor: isDark ? const Color(0xFF1E293B) : Colors.white,
                     decoration: InputDecoration(
-                      labelText: 'Pilih Pos Anggaran',
-                      prefixIcon: const Icon(Icons.category_outlined, size: 20),
+                      labelText: 'Pilih Pos Anggaran *',
+                      prefixIcon: Icon(
+                        _selectedBudgetItem != null
+                            ? AppTheme.getCategoryIcon(_selectedBudgetItem!.category)
+                            : Icons.category_outlined,
+                        size: 20,
+                        color: _selectedBudgetItem != null
+                            ? AppTheme.getCategoryColor(_selectedBudgetItem!.category)
+                            : null,
+                      ),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                     ),
-                    items: items.map((i) {
-                      return DropdownMenuItem(
-                        value: i,
-                        child: Text('${i.name} (${i.category})', overflow: TextOverflow.ellipsis),
+                    items: dropdownItems.map((item) {
+                      final catColor = AppTheme.getCategoryColor(item.category);
+                      final catIcon = AppTheme.getCategoryIcon(item.category);
+                      final isOver = item.remaining < 0;
+
+                      return DropdownMenuItem<BudgetItem>(
+                        value: item,
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                color: catColor.withValues(alpha: 0.16),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(color: catColor.withValues(alpha: 0.35)),
+                              ),
+                              child: Icon(catIcon, size: 16, color: catColor),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    item.name,
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(height: 1),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Sisa: ',
+                                        style: TextStyle(
+                                          fontSize: 10.5,
+                                          color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                        ),
+                                      ),
+                                      Text(
+                                        CurrencyFormatter.formatRupiah(item.remaining, compact: true),
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.bold,
+                                          color: isOver ? AppTheme.dangerNeon : AppTheme.safeGreen,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                              decoration: BoxDecoration(
+                                color: catColor.withValues(alpha: 0.14),
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(color: catColor.withValues(alpha: 0.3)),
+                              ),
+                              child: Text(
+                                item.category,
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  color: catColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       );
                     }).toList(),
+                    selectedItemBuilder: (context) {
+                      return dropdownItems.map((item) {
+                        final catColor = AppTheme.getCategoryColor(item.category);
+                        final catIcon = AppTheme.getCategoryIcon(item.category);
+                        return Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                color: catColor.withValues(alpha: 0.16),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Icon(catIcon, size: 14, color: catColor),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                item.name,
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: catColor.withValues(alpha: 0.14),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                item.category,
+                                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: catColor),
+                              ),
+                            ),
+                          ],
+                        );
+                      }).toList();
+                    },
                     onChanged: (val) {
-                      setState(() => _selectedBudgetItem = val);
+                      setState(() {
+                        _selectedBudgetItem = val;
+                      });
                     },
                   ),
 
                   if (_selectedBudgetItem != null) ...[
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 10),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: AppTheme.getCategoryColor(_selectedBudgetItem!.category).withOpacity(0.12),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        'Kategori: ${_selectedBudgetItem!.category} • Sisa Anggaran: ${CurrencyFormatter.formatRupiah(_selectedBudgetItem!.remaining)}',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: AppTheme.getCategoryColor(_selectedBudgetItem!.category),
-                          fontWeight: FontWeight.w600,
+                        color: AppTheme.getCategoryColor(_selectedBudgetItem!.category).withValues(alpha: 0.10),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: AppTheme.getCategoryColor(_selectedBudgetItem!.category).withValues(alpha: 0.35),
                         ),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: AppTheme.getCategoryColor(_selectedBudgetItem!.category).withValues(alpha: 0.2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              AppTheme.getCategoryIcon(_selectedBudgetItem!.category),
+                              size: 20,
+                              color: AppTheme.getCategoryColor(_selectedBudgetItem!.category),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      _selectedBudgetItem!.name,
+                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        color: AppTheme.getCategoryColor(_selectedBudgetItem!.category).withValues(alpha: 0.2),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: Text(
+                                        _selectedBudgetItem!.category,
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppTheme.getCategoryColor(_selectedBudgetItem!.category),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Sisa Anggaran: ',
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                      ),
+                                    ),
+                                    Text(
+                                      CurrencyFormatter.formatRupiah(_selectedBudgetItem!.remaining),
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        color: _selectedBudgetItem!.remaining < 0
+                                            ? AppTheme.dangerNeon
+                                            : AppTheme.safeGreen,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    Text(
+                                      'Budget: ${CurrencyFormatter.formatRupiah(_selectedBudgetItem!.budget, compact: true)}',
+                                      style: TextStyle(
+                                        fontSize: 10.5,
+                                        color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

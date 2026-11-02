@@ -282,6 +282,28 @@ class _ManageIncomesDialogState extends ConsumerState<ManageIncomesDialog> {
                           ),
                           validator: (v) => (v == null || v.trim().isEmpty) ? 'Nama tidak boleh kosong' : null,
                         ),
+                        const SizedBox(height: 6),
+                        Wrap(
+                          spacing: 6,
+                          runSpacing: 4,
+                          children: [
+                            ('Gaji Abi', Icons.work_outline),
+                            ('Gaji Mama', Icons.work_outline),
+                            ('Bonus / THR', Icons.card_giftcard),
+                            ('Investasi', Icons.trending_up),
+                            ('Side Job', Icons.storefront_outlined),
+                          ].map((preset) {
+                            return ActionChip(
+                              avatar: Icon(preset.$2, size: 13, color: AppTheme.safeGreen),
+                              label: Text(preset.$1, style: const TextStyle(fontSize: 11)),
+                              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+                              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              onPressed: () {
+                                setState(() => _sourceController.text = preset.$1);
+                              },
+                            );
+                          }).toList(),
+                        ),
                         const SizedBox(height: 10),
                         TextFormField(
                           controller: _amountController,

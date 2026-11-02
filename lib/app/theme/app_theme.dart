@@ -37,6 +37,43 @@ class AppTheme {
     'Lain-lain': Color(0xFFE11D48),    // Crimson Alert
   };
 
+  /// Canonical logical order of financial categories
+  static const List<String> categoryOrder = [
+    'Wajib',
+    'Keluarga',
+    'Anak',
+    'Transportasi',
+    'Rumah',
+    'Tabungan',
+    'Lain-lain',
+  ];
+
+  static int getCategorySortIndex(String? category) {
+    if (category == null) return 999;
+    final idx = categoryOrder.indexOf(category);
+    return idx == -1 ? 999 : idx;
+  }
+
+  static IconData getCategoryIcon(String? category) {
+    switch (category) {
+      case 'Wajib':
+        return Icons.assignment_late_rounded;
+      case 'Keluarga':
+        return Icons.diversity_1_rounded;
+      case 'Anak':
+        return Icons.child_care_rounded;
+      case 'Transportasi':
+        return Icons.directions_car_rounded;
+      case 'Rumah':
+        return Icons.home_rounded;
+      case 'Tabungan':
+        return Icons.savings_rounded;
+      case 'Lain-lain':
+      default:
+        return Icons.category_rounded;
+    }
+  }
+
   static Color getCategoryColor(String? category) {
     if (category == null) return const Color(0xFF6B7280);
     return categoryColors[category] ?? const Color(0xFFF43F5E);

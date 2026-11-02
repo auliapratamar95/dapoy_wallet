@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:dapoy_wallet/app/theme/app_theme.dart';
 import 'package:dapoy_wallet/core/formatting/currency_formatter.dart';
 import 'package:dapoy_wallet/core/formatting/date_formatter.dart';
 import 'package:dapoy_wallet/features/budget/domain/models.dart';
@@ -194,6 +195,31 @@ void main() {
     test('Cleans extra whitespace in date string', () {
       expect(DateFormatter.cleanDateString('1  Oktober'), '1 Oktober');
       expect(DateFormatter.cleanDateString('  25   Agustus  '), '25 Agustus');
+    });
+  });
+
+  group('Category order and icon tests', () {
+    test('Categories sort in canonical financial order', () {
+      final unsorted = ['Lain-lain', 'Rumah', 'Wajib', 'Tabungan', 'Keluarga', 'Anak', 'Transportasi'];
+      unsorted.sort((a, b) => AppTheme.getCategorySortIndex(a).compareTo(AppTheme.getCategorySortIndex(b)));
+
+      expect(unsorted, [
+        'Wajib',
+        'Keluarga',
+        'Anak',
+        'Transportasi',
+        'Rumah',
+        'Tabungan',
+        'Lain-lain',
+      ]);
+    });
+
+    test('Provides distinct category icons and colors', () {
+      for (final cat in AppTheme.categoryOrder) {
+        expect(AppTheme.getCategoryIcon(cat), isNotNull);
+        expect(AppTheme.getCategoryColor(cat), isNotNull);
+      }
+      expect(AppTheme.getCategorySortIndex('Unknown'), 999);
     });
   });
 }

@@ -25,15 +25,7 @@ class _EditBudgetItemDialogState extends ConsumerState<EditBudgetItemDialog> {
   late String _selectedCategory;
   bool _isLoading = false;
 
-  final List<String> _categories = [
-    'Wajib',
-    'Keluarga',
-    'Anak',
-    'Transportasi',
-    'Rumah',
-    'Tabungan',
-    'Lain-lain',
-  ];
+  final List<String> _categories = List<String>.from(AppTheme.categoryOrder);
 
   @override
   void initState() {
@@ -197,17 +189,28 @@ class _EditBudgetItemDialogState extends ConsumerState<EditBudgetItemDialog> {
                   children: _categories.map((cat) {
                     final isSelected = _selectedCategory == cat;
                     final catColor = AppTheme.getCategoryColor(cat);
+                    final catIcon = AppTheme.getCategoryIcon(cat);
                     return ChoiceChip(
+                      avatar: Icon(
+                        catIcon,
+                        size: 14,
+                        color: isSelected ? Colors.white : catColor,
+                      ),
                       label: Text(cat),
                       selected: isSelected,
                       onSelected: (val) {
                         if (val) setState(() => _selectedCategory = cat);
                       },
-                      selectedColor: catColor.withValues(alpha: 0.25),
+                      selectedColor: catColor,
+                      backgroundColor: catColor.withValues(alpha: 0.1),
+                      side: BorderSide(
+                        color: isSelected ? catColor : catColor.withValues(alpha: 0.3),
+                        width: 1,
+                      ),
                       labelStyle: TextStyle(
                         fontSize: 12,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                        color: isSelected ? catColor : (isDark ? Colors.grey.shade300 : Colors.black87),
+                        fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                        color: isSelected ? Colors.white : (isDark ? Colors.grey.shade300 : catColor),
                       ),
                     );
                   }).toList(),
