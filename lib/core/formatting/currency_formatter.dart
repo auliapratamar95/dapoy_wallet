@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class CurrencyFormatter {
@@ -48,5 +49,34 @@ class CurrencyFormatter {
   static double parseRupiah(String input) {
     final cleaned = input.replaceAll(RegExp(r'[^0-9,-]'), '').replaceAll(',', '.');
     return double.tryParse(cleaned) ?? 0.0;
+  }
+}
+
+/// Auto-formats numeric input into Indonesian Rupiah thousands format (e.g., 50.000, 1.500.000)
+class RupiahInputFormatter extends TextInputFormatter {
+  static final NumberFormat _thousandsFormat = NumberFormat('#,###', 'id_ID');
+
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    if (newValue.text.isEmpty) {
+      return newValue.copyWith(text: '');
+    }
+
+    // Only allow digits
+    final digits = newValue.text.replaceAll(RegExp(r'[^0-9]'), '');
+    if (digits.isEmpty) {
+      return newValue.copyWith(text: '');
+    }
+
+    final number = int.tryParse(digits) ?? 0;
+    final formatted = _thousandsFormat.format(number);
+
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: formatted.length),
+    );
   }
 }

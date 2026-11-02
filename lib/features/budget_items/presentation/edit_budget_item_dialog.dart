@@ -40,7 +40,12 @@ class _EditBudgetItemDialogState extends ConsumerState<EditBudgetItemDialog> {
     super.initState();
     _nameController = TextEditingController(text: widget.item?.name ?? '');
     _budgetController = TextEditingController(
-      text: widget.item != null ? widget.item!.budget.toInt().toString() : '',
+      text: widget.item != null
+          ? RupiahInputFormatter().formatEditUpdate(
+              TextEditingValue.empty,
+              TextEditingValue(text: widget.item!.budget.toInt().toString()),
+            ).text
+          : '',
     );
     _selectedCategory = widget.item?.category ?? 'Wajib';
     if (!_categories.contains(_selectedCategory)) {
@@ -65,6 +70,7 @@ class _EditBudgetItemDialogState extends ConsumerState<EditBudgetItemDialog> {
     final budget = double.tryParse(rawBudget) ?? 0.0;
     final notifier = ref.read(budgetProvider.notifier);
 
+    String? createdId;
     if (widget.item != null) {
       await notifier.updateBudgetItem(
         id: widget.item!.id,
@@ -73,8 +79,9 @@ class _EditBudgetItemDialogState extends ConsumerState<EditBudgetItemDialog> {
         budget: budget,
         oldName: widget.item!.name,
       );
+      createdId = widget.item!.id;
     } else {
-      await notifier.addBudgetItem(
+      createdId = await notifier.addBudgetItem(
         name: name,
         category: _selectedCategory,
         budget: budget,
@@ -82,7 +89,7 @@ class _EditBudgetItemDialogState extends ConsumerState<EditBudgetItemDialog> {
     }
 
     if (mounted) {
-      Navigator.of(context).pop(true);
+      Navigator.of(context).pop(createdId ?? true);
     }
   }
 
@@ -211,7 +218,10 @@ class _EditBudgetItemDialogState extends ConsumerState<EditBudgetItemDialog> {
                 TextFormField(
                   controller: _budgetController,
                   keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    RupiahInputFormatter(),
+                  ],
                   onChanged: (_) => setState(() {}),
                   decoration: InputDecoration(
                     labelText: 'Alokasi Anggaran (Rp)',

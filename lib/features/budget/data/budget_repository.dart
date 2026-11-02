@@ -127,7 +127,9 @@ class BudgetNotifier extends StateNotifier<BudgetState> {
 
             final totalIncome = incomes.fold<double>(0.0, (s, i) => s + i.amount);
             final totalBudget = budgetItems.fold<double>(0.0, (s, b) => s + b.budget);
-            final totalActual = budgetItems.fold<double>(0.0, (s, b) => s + b.actual);
+            final totalActual = transactions.isNotEmpty
+                ? transactions.fold<double>(0.0, (s, t) => s + t.amount)
+                : budgetItems.fold<double>(0.0, (s, b) => s + b.actual);
             final totalRemaining = totalBudget - totalActual;
 
             final bankBalance = (m['bank_balance'] as num?)?.toDouble();
@@ -209,8 +211,10 @@ class BudgetNotifier extends StateNotifier<BudgetState> {
             incomes.fold<double>(0.0, (sum, i) => sum + i.amount);
         final double totalBudget = (kpis['Total Budget'] as num?)?.toDouble() ??
             budgetItems.fold<double>(0.0, (sum, b) => sum + b.budget);
-        final double totalActual = (kpis['Total Pengeluaran'] as num?)?.toDouble() ??
-            budgetItems.fold<double>(0.0, (sum, b) => sum + b.actual);
+        final double totalActual = transactions.isNotEmpty
+            ? transactions.fold<double>(0.0, (sum, t) => sum + t.amount)
+            : (kpis['Total Pengeluaran'] as num?)?.toDouble() ??
+                budgetItems.fold<double>(0.0, (sum, b) => sum + b.actual);
         final double totalRemaining = (kpis['Total Sisa'] as num?)?.toDouble() ??
             (totalBudget - totalActual);
 
@@ -398,6 +402,76 @@ class BudgetNotifier extends StateNotifier<BudgetState> {
     );
   }
 
+  Future<void> updateTransaction({
+    required String id,
+    required String date,
+    required String description,
+    required double amount,
+    required String? linkedBudgetItem,
+  }) async {
+    final current = state.currentOverview;
+    if (current == null) return;
+
+    final updatedTransactions = current.transactions.map((tx) {
+      if (tx.id == id) {
+        return tx.copyWith(
+          date: date,
+          description: description,
+          amount: amount,
+          linkedBudgetItem: linkedBudgetItem,
+        );
+      }
+      return tx;
+    }).toList();
+
+    final updated = _recalculateTotals(
+      current,
+      transactions: updatedTransactions,
+    );
+
+    // Save to Supabase Cloud if online
+    final client = _supabase;
+    if (client != null && state.isUsingSupabase) {
+      try {
+        await client.from('daily_expenses').update({
+          'date': date,
+          'description': description,
+          'amount': amount,
+          'linked_budget_item': linkedBudgetItem,
+          'updated_at': DateTime.now().toIso8601String(),
+        }).eq('id', id);
+
+        // Also update budget item actual in Supabase
+        if (linkedBudgetItem != null && linkedBudgetItem.isNotEmpty) {
+          final matched = updated.budgetItems.firstWhere(
+            (b) => b.name == linkedBudgetItem,
+            orElse: () => updated.budgetItems.first,
+          );
+          await client.from('budget_items').update({
+            'actual': matched.actual,
+            'remaining': matched.remaining,
+            'updated_at': DateTime.now().toIso8601String(),
+          }).eq('id', matched.id);
+        }
+      } catch (e) {
+        debugPrint('Supabase update tx note: $e');
+      }
+    }
+
+    // Save locally
+    final prefs = await SharedPreferences.getInstance();
+    final key = '$_kLocalExpensesPrefix${current.month.sheetName}';
+    await prefs.setString(key, jsonEncode(updatedTransactions.map((e) => e.toJson()).toList()));
+
+    final newOverviews = Map<String, MonthlyOverview>.from(state.allOverviews);
+    newOverviews[current.month.sheetName] = updated;
+
+    state = state.copyWith(
+      currentOverview: updated,
+      allOverviews: newOverviews,
+    );
+  }
+
   // ==========================================
   // INCOME MANAGEMENT (PEMASUKAN)
   // ==========================================
@@ -546,13 +620,13 @@ class BudgetNotifier extends StateNotifier<BudgetState> {
   // BUDGET MANAGEMENT (POS ANGGARAN)
   // ==========================================
 
-  Future<void> addBudgetItem({
+  Future<String?> addBudgetItem({
     required String name,
     required String category,
     required double budget,
   }) async {
     final current = state.currentOverview;
-    if (current == null) return;
+    if (current == null) return null;
 
     final newId = '${current.month.sheetName}_b_${DateTime.now().millisecondsSinceEpoch}';
     final newItem = BudgetItem(
@@ -596,6 +670,8 @@ class BudgetNotifier extends StateNotifier<BudgetState> {
       currentOverview: updated,
       allOverviews: newOverviews,
     );
+
+    return newId;
   }
 
   Future<void> updateBudgetItem({
@@ -745,7 +821,9 @@ class BudgetNotifier extends StateNotifier<BudgetState> {
 
     final totalIncome = finalIncomes.fold<double>(0.0, (s, i) => s + i.amount);
     final totalBudget = finalItems.fold<double>(0.0, (s, b) => s + b.budget);
-    final totalActual = finalItems.fold<double>(0.0, (s, b) => s + b.actual);
+    final totalActual = finalTxs.isNotEmpty
+        ? finalTxs.fold<double>(0.0, (s, t) => s + t.amount)
+        : finalItems.fold<double>(0.0, (s, b) => s + b.actual);
     final totalRemaining = totalBudget - totalActual;
 
     return overview.copyWith(

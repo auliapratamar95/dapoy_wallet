@@ -56,18 +56,47 @@ class AnalyticsScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Perbandingan Antar Bulan (Month-to-Month)',
-                      style: theme.textTheme.titleSmall
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'Perbandingan Antar Bulan (Month-to-Month)',
+                            style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 10,
+                              height: 10,
+                              decoration: const BoxDecoration(
+                                color: AppTheme.safeGreen,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(width: 4),
+                            const Text('Pemasukan', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                            const SizedBox(width: 10),
+                            Container(
+                              width: 10,
+                              height: 10,
+                              decoration: const BoxDecoration(
+                                color: AppTheme.dangerNeon,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(width: 4),
+                            const Text('Pengeluaran', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 16),
-                    _buildMonthComparisonBarChart(
-                        availableMonths, allOverviews),
+                    _buildMonthComparisonBarChart(availableMonths, allOverviews),
                     const SizedBox(height: 16),
                     // Comparison Table
-                    _buildComparisonTable(
-                        context, availableMonths, allOverviews),
+                    _buildComparisonTable(context, availableMonths, allOverviews),
                   ],
                 ),
               ),
@@ -276,22 +305,37 @@ class AnalyticsScreen extends ConsumerWidget {
     final maxVal = months.fold(0.0, (m, mo) {
       final ov = overviews[mo.sheetName];
       if (ov == null) return m;
-      final high =
-          ov.totalBudget > ov.totalActual ? ov.totalBudget : ov.totalActual;
+      final high = ov.totalIncome > ov.totalActual ? ov.totalIncome : ov.totalActual;
       return high > m ? high : m;
     });
 
     return SizedBox(
-      height: 220,
+      height: 250,
       child: BarChart(
         BarChartData(
           alignment: BarChartAlignment.spaceAround,
-          maxY: maxVal * 1.15,
+          maxY: maxVal > 0 ? maxVal * 1.30 : 1000000,
+          barTouchData: BarTouchData(
+            enabled: false,
+            touchTooltipData: BarTouchTooltipData(
+              getTooltipColor: (_) => Colors.transparent,
+              tooltipPadding: EdgeInsets.zero,
+              tooltipMargin: 4,
+              getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                return BarTooltipItem(
+                  CurrencyFormatter.formatRupiah(rod.toY, compact: true),
+                  TextStyle(
+                    color: rod.color,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 9,
+                  ),
+                );
+              },
+            ),
+          ),
           titlesData: FlTitlesData(
-            topTitles:
-                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            rightTitles:
-                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
@@ -309,11 +353,10 @@ class AnalyticsScreen extends ConsumerWidget {
                   final i = v.toInt();
                   if (i >= 0 && i < months.length) {
                     return Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
+                      padding: const EdgeInsets.only(top: 6.0),
                       child: Text(
                         months[i].displayName.split(' ').first,
-                        style: const TextStyle(
-                            fontSize: 10, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
                       ),
                     );
                   }
@@ -325,31 +368,29 @@ class AnalyticsScreen extends ConsumerWidget {
           gridData: FlGridData(
             show: true,
             drawVerticalLine: false,
-            getDrawingHorizontalLine: (v) =>
-                FlLine(color: Colors.grey.withOpacity(0.15)),
+            getDrawingHorizontalLine: (v) => FlLine(color: Colors.grey.withOpacity(0.15)),
           ),
           borderData: FlBorderData(show: false),
           barGroups: List.generate(months.length, (i) {
             final ov = overviews[months[i].sheetName];
-            final budget = ov?.totalBudget ?? 0.0;
+            final income = ov?.totalIncome ?? 0.0;
             final actual = ov?.totalActual ?? 0.0;
 
             return BarChartGroupData(
               x: i,
+              showingTooltipIndicators: [0, 1],
               barRods: [
                 BarChartRodData(
-                  toY: budget,
-                  color: AppTheme.safeCyan.withValues(alpha: 0.7),
+                  toY: income,
+                  color: AppTheme.safeGreen,
                   width: 14,
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(6)),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(6)),
                 ),
                 BarChartRodData(
                   toY: actual,
                   color: AppTheme.dangerNeon,
                   width: 14,
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(6)),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(6)),
                 ),
               ],
             );
@@ -368,33 +409,29 @@ class AnalyticsScreen extends ConsumerWidget {
       scrollDirection: Axis.horizontal,
       child: DataTable(
         columns: const [
-          DataColumn(
-              label:
-                  Text('Bulan', style: TextStyle(fontWeight: FontWeight.bold))),
-          DataColumn(
-              label: Text('Budget',
-                  style: TextStyle(fontWeight: FontWeight.bold))),
-          DataColumn(
-              label: Text('Realisasi',
-                  style: TextStyle(fontWeight: FontWeight.bold))),
-          DataColumn(
-              label:
-                  Text('Sisa', style: TextStyle(fontWeight: FontWeight.bold))),
+          DataColumn(label: Text('Bulan', style: TextStyle(fontWeight: FontWeight.bold))),
+          DataColumn(label: Text('Pemasukan', style: TextStyle(fontWeight: FontWeight.bold))),
+          DataColumn(label: Text('Pengeluaran', style: TextStyle(fontWeight: FontWeight.bold))),
+          DataColumn(label: Text('Sisa / Hemat', style: TextStyle(fontWeight: FontWeight.bold))),
         ],
         rows: months.map((m) {
           final ov = overviews[m.sheetName];
+          final sisa = (ov?.totalIncome ?? 0.0) - (ov?.totalActual ?? 0.0);
           return DataRow(
             cells: [
               DataCell(Text(m.displayName)),
-              DataCell(Text(CurrencyFormatter.formatRupiah(ov?.totalBudget,
-                  compact: true))),
-              DataCell(Text(CurrencyFormatter.formatRupiah(ov?.totalActual,
-                  compact: true))),
               DataCell(Text(
-                CurrencyFormatter.formatRupiah(ov?.totalRemaining,
-                    compact: true),
+                CurrencyFormatter.formatRupiah(ov?.totalIncome, compact: true),
+                style: const TextStyle(color: AppTheme.safeGreen, fontWeight: FontWeight.bold),
+              )),
+              DataCell(Text(
+                CurrencyFormatter.formatRupiah(ov?.totalActual, compact: true),
+                style: const TextStyle(color: AppTheme.dangerNeon, fontWeight: FontWeight.bold),
+              )),
+              DataCell(Text(
+                CurrencyFormatter.formatRupiah(sisa, compact: true),
                 style: TextStyle(
-                  color: (ov?.totalRemaining ?? 0) < 0 ? Colors.red : null,
+                  color: sisa < 0 ? AppTheme.dangerNeon : AppTheme.safeGreen,
                   fontWeight: FontWeight.w600,
                 ),
               )),

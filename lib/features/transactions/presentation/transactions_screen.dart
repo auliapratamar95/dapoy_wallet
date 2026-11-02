@@ -25,6 +25,13 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
     );
   }
 
+  void _showEditDialog(DailyExpense expense) {
+    showDialog(
+      context: context,
+      builder: (_) => QuickAddTransactionDialog(expenseToEdit: expense),
+    );
+  }
+
   void _confirmDelete(DailyExpense expense) {
     showDialog(
       context: context,
@@ -246,6 +253,7 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                               itemBuilder: (context, i) {
                                 final tx = txsForDate[i];
                                 return ListTile(
+                                  onTap: () => _showEditDialog(tx),
                                   leading: CircleAvatar(
                                     radius: 16,
                                     backgroundColor: AppTheme.dangerPrimary.withValues(alpha: 0.15),
@@ -287,7 +295,13 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                                         ),
                                       ),
                                       IconButton(
+                                        icon: const Icon(Icons.edit_outlined, size: 18, color: Colors.blueGrey),
+                                        tooltip: 'Edit Transaksi',
+                                        onPressed: () => _showEditDialog(tx),
+                                      ),
+                                      IconButton(
                                         icon: const Icon(Icons.delete_outline, size: 18, color: Colors.grey),
+                                        tooltip: 'Hapus Transaksi',
                                         onPressed: () => _confirmDelete(tx),
                                       ),
                                     ],

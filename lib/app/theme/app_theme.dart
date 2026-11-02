@@ -77,10 +77,31 @@ class AppTheme {
     }
   }
 
+  static TextTheme _buildTextTheme(TextTheme base) {
+    return base.copyWith(
+      displayLarge: base.displayLarge?.copyWith(fontSize: (base.displayLarge?.fontSize ?? 57) - 2),
+      displayMedium: base.displayMedium?.copyWith(fontSize: (base.displayMedium?.fontSize ?? 45) - 2),
+      displaySmall: base.displaySmall?.copyWith(fontSize: (base.displaySmall?.fontSize ?? 36) - 2),
+      headlineLarge: base.headlineLarge?.copyWith(fontSize: (base.headlineLarge?.fontSize ?? 32) - 2),
+      headlineMedium: base.headlineMedium?.copyWith(fontSize: (base.headlineMedium?.fontSize ?? 28) - 2),
+      headlineSmall: base.headlineSmall?.copyWith(fontSize: (base.headlineSmall?.fontSize ?? 24) - 2),
+      titleLarge: base.titleLarge?.copyWith(fontSize: (base.titleLarge?.fontSize ?? 22) - 2),
+      titleMedium: base.titleMedium?.copyWith(fontSize: (base.titleMedium?.fontSize ?? 16) - 2),
+      titleSmall: base.titleSmall?.copyWith(fontSize: (base.titleSmall?.fontSize ?? 14) - 2),
+      bodyLarge: base.bodyLarge?.copyWith(fontSize: (base.bodyLarge?.fontSize ?? 16) - 2),
+      bodyMedium: base.bodyMedium?.copyWith(fontSize: (base.bodyMedium?.fontSize ?? 14) - 2),
+      bodySmall: base.bodySmall?.copyWith(fontSize: (base.bodySmall?.fontSize ?? 12) - 2),
+      labelLarge: base.labelLarge?.copyWith(fontSize: (base.labelLarge?.fontSize ?? 14) - 2),
+      labelMedium: base.labelMedium?.copyWith(fontSize: (base.labelMedium?.fontSize ?? 12) - 2),
+      labelSmall: base.labelSmall?.copyWith(fontSize: (base.labelSmall?.fontSize ?? 11) - 2),
+    );
+  }
+
   // === LIGHT THEME (High-Contrast Clean Hazard) ===
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
+    textTheme: _buildTextTheme(ThemeData.light().textTheme),
     colorScheme: ColorScheme.fromSeed(
       seedColor: dangerPrimary,
       brightness: Brightness.light,
@@ -111,6 +132,7 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
+    textTheme: _buildTextTheme(ThemeData.dark().textTheme),
     colorScheme: ColorScheme.fromSeed(
       seedColor: dangerNeon,
       brightness: Brightness.dark,

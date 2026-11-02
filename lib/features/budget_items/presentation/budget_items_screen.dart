@@ -21,7 +21,18 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
   String searchQuery = '';
   String selectedCategory = 'Semua';
   BudgetStatus? selectedStatus;
-  String sortBy = 'name'; // 'name', 'budget', 'actual', 'remaining', 'utilization'
+  String sortBy = 'category'; // 'category', 'name', 'budget', 'actual', 'remaining', 'utilization'
+  String? _newlyAddedItemId;
+
+  static const List<String> _categoryOrder = [
+    'Wajib',
+    'Keluarga',
+    'Anak',
+    'Transportasi',
+    'Rumah',
+    'Tabungan',
+    'Lain-lain',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +56,22 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
     }).toList();
 
     items.sort((a, b) {
+      // Newly added item goes straight to the top with priority
+      if (_newlyAddedItemId != null) {
+        if (a.id == _newlyAddedItemId && b.id != _newlyAddedItemId) return -1;
+        if (b.id == _newlyAddedItemId && a.id != _newlyAddedItemId) return 1;
+      }
+
       switch (sortBy) {
+        case 'category':
+          final catA = _categoryOrder.indexOf(a.category);
+          final catB = _categoryOrder.indexOf(b.category);
+          final orderA = catA == -1 ? 999 : catA;
+          final orderB = catB == -1 ? 999 : catB;
+          if (orderA != orderB) {
+            return orderA.compareTo(orderB);
+          }
+          return a.name.compareTo(b.name);
         case 'budget':
           return b.budget.compareTo(a.budget);
         case 'actual':
@@ -71,6 +97,7 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
             tooltip: 'Urutkan',
             onSelected: (val) => setState(() => sortBy = val),
             itemBuilder: (context) => [
+              const PopupMenuItem(value: 'category', child: Text('Urutkan: Kategori')),
               const PopupMenuItem(value: 'name', child: Text('Urutkan: Nama (A-Z)')),
               const PopupMenuItem(value: 'budget', child: Text('Urutkan: Anggaran Tertinggi')),
               const PopupMenuItem(value: 'actual', child: Text('Urutkan: Realisasi Terbesar')),
@@ -161,11 +188,16 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
     );
   }
 
-  void _openEditBudgetItem(BuildContext context, BudgetItem? item) {
-    showDialog(
+  Future<void> _openEditBudgetItem(BuildContext context, BudgetItem? item) async {
+    final result = await showDialog(
       context: context,
       builder: (ctx) => EditBudgetItemDialog(item: item),
     );
+    if (result is String && mounted && item == null) {
+      setState(() {
+        _newlyAddedItemId = result;
+      });
+    }
   }
 
   Widget _buildBudgetItemCard(BuildContext context, BudgetItem item, MonthlyOverview overview) {
@@ -226,6 +258,33 @@ class _BudgetItemsScreenState extends ConsumerState<BudgetItemsScreen> {
                   ),
                   Row(
                     children: [
+                      if (item.id == _newlyAddedItemId) ...[
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.withValues(alpha: 0.22),
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: Colors.amber, width: 1.2),
+                          ),
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(Icons.stars, color: Colors.amber, size: 11),
+                              SizedBox(width: 3),
+                              Text(
+                                'NEW',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.amber,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                      ],
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(

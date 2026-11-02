@@ -127,5 +127,45 @@ void main() {
       expect(updated.id, 'inc_1');
     });
   });
+
+  group('RupiahInputFormatter & Transaction editing tests', () {
+    test('RupiahInputFormatter auto-formats digits with Indonesian thousand separator', () {
+      final formatter = RupiahInputFormatter();
+      final res1 = formatter.formatEditUpdate(
+        TextEditingValue.empty,
+        const TextEditingValue(text: '50000'),
+      );
+      expect(res1.text, '50.000');
+
+      final res2 = formatter.formatEditUpdate(
+        TextEditingValue.empty,
+        const TextEditingValue(text: '15000000'),
+      );
+      expect(res2.text, '15.000.000');
+    });
+
+    test('DailyExpense copyWith updates transaction fields accurately', () {
+      const tx = DailyExpense(
+        id: 'tx_1',
+        date: '25 Oktober',
+        entryNumber: 1,
+        description: 'BBM',
+        amount: 50000,
+        linkedBudgetItem: 'BBM MOTOR',
+        row: 1,
+      );
+
+      final edited = tx.copyWith(
+        description: 'BBM Pertamax Turbo',
+        amount: 75000,
+        linkedBudgetItem: 'BBM MOBIL',
+      );
+
+      expect(edited.id, 'tx_1');
+      expect(edited.description, 'BBM Pertamax Turbo');
+      expect(edited.amount, 75000);
+      expect(edited.linkedBudgetItem, 'BBM MOBIL');
+    });
+  });
 }
 

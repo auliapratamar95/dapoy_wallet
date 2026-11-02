@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_theme.dart';
 import '../../../../core/formatting/currency_formatter.dart';
@@ -8,8 +9,13 @@ import '../../budget/domain/models.dart';
 
 class QuickAddTransactionDialog extends ConsumerStatefulWidget {
   final BudgetItem? preselectedItem;
+  final DailyExpense? expenseToEdit;
 
-  const QuickAddTransactionDialog({super.key, this.preselectedItem});
+  const QuickAddTransactionDialog({
+    super.key,
+    this.preselectedItem,
+    this.expenseToEdit,
+  });
 
   @override
   ConsumerState<QuickAddTransactionDialog> createState() => _QuickAddTransactionDialogState();
@@ -26,10 +32,36 @@ class _QuickAddTransactionDialogState extends ConsumerState<QuickAddTransactionD
   @override
   void initState() {
     super.initState();
-    _selectedDate = DateTime.now();
-    _descController = TextEditingController();
-    _amountController = TextEditingController();
-    _selectedBudgetItem = widget.preselectedItem;
+    final expense = widget.expenseToEdit;
+    if (expense != null) {
+      _selectedDate = DateTime.now();
+      _descController = TextEditingController(text: expense.description);
+      _amountController = TextEditingController(
+        text: RupiahInputFormatter().formatEditUpdate(
+          TextEditingValue.empty,
+          TextEditingValue(text: expense.amount.toInt().toString()),
+        ).text,
+      );
+    } else {
+      _selectedDate = DateTime.now();
+      _descController = TextEditingController();
+      _amountController = TextEditingController();
+      _selectedBudgetItem = widget.preselectedItem;
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (widget.expenseToEdit != null && _selectedBudgetItem == null) {
+      final overview = ref.read(budgetProvider).currentOverview;
+      if (overview != null && widget.expenseToEdit!.linkedBudgetItem != null) {
+        final matches = overview.budgetItems.where((b) => b.name == widget.expenseToEdit!.linkedBudgetItem);
+        if (matches.isNotEmpty) {
+          _selectedBudgetItem = matches.first;
+        }
+      }
+    }
   }
 
   @override
@@ -66,12 +98,24 @@ class _QuickAddTransactionDialogState extends ConsumerState<QuickAddTransactionD
 
     try {
       final dateFormatted = '${_selectedDate.day} ${DateFormatter.indonesianMonths[_selectedDate.month - 1]}';
-      await ref.read(budgetProvider.notifier).addTransaction(
-        date: dateFormatted,
-        description: _descController.text.trim(),
-        amount: amount,
-        linkedBudgetItem: _selectedBudgetItem?.name,
-      );
+      final isEditing = widget.expenseToEdit != null;
+
+      if (isEditing) {
+        await ref.read(budgetProvider.notifier).updateTransaction(
+          id: widget.expenseToEdit!.id,
+          date: dateFormatted,
+          description: _descController.text.trim(),
+          amount: amount,
+          linkedBudgetItem: _selectedBudgetItem?.name,
+        );
+      } else {
+        await ref.read(budgetProvider.notifier).addTransaction(
+          date: dateFormatted,
+          description: _descController.text.trim(),
+          amount: amount,
+          linkedBudgetItem: _selectedBudgetItem?.name,
+        );
+      }
 
       if (mounted) {
         Navigator.of(context).pop();
@@ -79,7 +123,9 @@ class _QuickAddTransactionDialogState extends ConsumerState<QuickAddTransactionD
           SnackBar(
             backgroundColor: AppTheme.primaryGreen,
             content: Text(
-              'Transaksi ${CurrencyFormatter.formatRupiah(amount)} berhasil disimpan!',
+              isEditing
+                  ? 'Perubahan transaksi berhasil disimpan!'
+                  : 'Transaksi ${CurrencyFormatter.formatRupiah(amount)} berhasil disimpan!',
             ),
           ),
         );
@@ -99,6 +145,7 @@ class _QuickAddTransactionDialogState extends ConsumerState<QuickAddTransactionD
     final budgetState = ref.watch(budgetProvider);
     final overview = budgetState.currentOverview;
     final theme = Theme.of(context);
+    final isEditing = widget.expenseToEdit != null;
 
     if (overview == null) {
       return const SizedBox.shrink();
@@ -123,7 +170,7 @@ class _QuickAddTransactionDialogState extends ConsumerState<QuickAddTransactionD
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Tambah Pengeluaran',
+                        isEditing ? 'Edit Transaksi' : 'Tambah Pengeluaran',
                         style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       IconButton(
@@ -171,13 +218,18 @@ class _QuickAddTransactionDialogState extends ConsumerState<QuickAddTransactionD
                   ),
                   const SizedBox(height: 14),
 
-                  // Amount
+                  // Amount with RupiahInputFormatter
                   TextFormField(
                     controller: _amountController,
                     keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      RupiahInputFormatter(),
+                    ],
                     decoration: InputDecoration(
                       labelText: 'Jumlah Nominal (Rp) *',
-                      hintText: 'Contoh: 50000',
+                      prefixText: 'Rp ',
+                      hintText: 'Contoh: 50.000',
                       prefixIcon: const Icon(Icons.payments_outlined, size: 20),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                     ),
@@ -275,7 +327,7 @@ class _QuickAddTransactionDialogState extends ConsumerState<QuickAddTransactionD
                                   height: 20,
                                   child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                                 )
-                              : const Text('Simpan'),
+                              : Text(isEditing ? 'Simpan Perubahan' : 'Simpan'),
                         ),
                       ),
                     ],

@@ -42,7 +42,10 @@ class _ManageIncomesDialogState extends ConsumerState<ManageIncomesDialog> {
       _isAddingNew = false;
       _editingItem = item;
       _sourceController.text = item.source;
-      _amountController.text = item.amount.toInt().toString();
+      _amountController.text = RupiahInputFormatter().formatEditUpdate(
+        TextEditingValue.empty,
+        TextEditingValue(text: item.amount.toInt().toString()),
+      ).text;
     });
   }
 
@@ -283,7 +286,10 @@ class _ManageIncomesDialogState extends ConsumerState<ManageIncomesDialog> {
                         TextFormField(
                           controller: _amountController,
                           keyboardType: TextInputType.number,
-                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            RupiahInputFormatter(),
+                          ],
                           decoration: InputDecoration(
                             labelText: 'Nominal (Rp)',
                             prefixText: 'Rp ',

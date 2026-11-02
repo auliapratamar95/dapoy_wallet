@@ -1626,6 +1626,16 @@
           "amount": 72000.0,
           "linked_budget_item": "BELANJA",
           "row": 148
+        },
+        {
+          "id": "0926_tx_tabungan",
+          "month_id": "0926",
+          "date": "30 September",
+          "entry_number": 99,
+          "description": "Alokasi Tabungan",
+          "amount": 9026000.0,
+          "linked_budget_item": "TABUNGAN",
+          "row_number": 999
         }
       ]
     },
@@ -2968,8 +2978,8 @@
           "name": "BBM MOTOR",
           "budget": 400000.0,
           "category": "Transportasi",
-          "actual": 0.0,
-          "remaining": 400000.0,
+          "actual": 55100.0,
+          "remaining": 344900.0,
           "row": 19,
           "formula_output": ""
         },
@@ -2998,8 +3008,8 @@
           "name": "BELANJA",
           "budget": 3500000.0,
           "category": "Rumah",
-          "actual": 175971.0,
-          "remaining": 3324029.0,
+          "actual": 322806.0,
+          "remaining": 3177194.0,
           "row": 22,
           "formula_output": "=M39+M41+M54+M40+M38"
         },
@@ -3048,8 +3058,8 @@
           "name": "SANGU ABI",
           "budget": 600000.0,
           "category": "Lain-lain",
-          "actual": 200000.0,
-          "remaining": 400000.0,
+          "actual": 496700.0,
+          "remaining": 103300.0,
           "row": 27,
           "formula_output": "=M52"
         },
@@ -3108,8 +3118,8 @@
           "name": "LAIN-LAIN",
           "budget": 0.0,
           "category": "Lain-lain",
-          "actual": 266918.0,
-          "remaining": -266918.0,
+          "actual": 366918.0,
+          "remaining": -366918.0,
           "row": 34,
           "formula_output": "=M53"
         }
@@ -3407,7 +3417,7 @@
           "entry_number": 6,
           "description": "Sangu abi",
           "amount": 100000.0,
-          "linked_budget_item": null,
+          "linked_budget_item": "SANGU ABI",
           "row": 82
         },
         {
@@ -3416,7 +3426,7 @@
           "entry_number": 7,
           "description": "Alfamidi",
           "amount": 91035.0,
-          "linked_budget_item": null,
+          "linked_budget_item": "BELANJA",
           "row": 83
         },
         {
@@ -3425,7 +3435,7 @@
           "entry_number": 8,
           "description": "Kuma",
           "amount": 20000.0,
-          "linked_budget_item": null,
+          "linked_budget_item": "BELANJA",
           "row": 84
         },
         {
@@ -3434,7 +3444,7 @@
           "entry_number": 9,
           "description": "Alfamudi",
           "amount": 35800.0,
-          "linked_budget_item": null,
+          "linked_budget_item": "BELANJA",
           "row": 85
         },
         {
@@ -3443,7 +3453,7 @@
           "entry_number": 10,
           "description": "Tarik tunai",
           "amount": 100000.0,
-          "linked_budget_item": null,
+          "linked_budget_item": "LAIN-LAIN",
           "row": 86
         },
         {
@@ -3452,7 +3462,7 @@
           "entry_number": 11,
           "description": "BBM motor",
           "amount": 55100.0,
-          "linked_budget_item": null,
+          "linked_budget_item": "BBM MOTOR",
           "row": 87
         },
         {
@@ -3461,7 +3471,7 @@
           "entry_number": 12,
           "description": "Sangu abi",
           "amount": 101200.0,
-          "linked_budget_item": null,
+          "linked_budget_item": "SANGU ABI",
           "row": 88
         },
         {
@@ -3470,7 +3480,7 @@
           "entry_number": 13,
           "description": "Sangu abi",
           "amount": 95500.0,
-          "linked_budget_item": null,
+          "linked_budget_item": "SANGU ABI",
           "row": 89
         }
       ]
